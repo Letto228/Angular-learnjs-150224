@@ -2,6 +2,6 @@
     "useTabs": false,
     "tabWidth": 4,
     "semi": true,
-    "singleQoute": true,
+    "singleQuote": true,
     "printWidth": 100
 }
