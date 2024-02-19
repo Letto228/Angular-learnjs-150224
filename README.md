@@ -1,1 +1,1 @@
-# Angular-learnjs-150224
+# Angular-learnjs
