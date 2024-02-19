@@ -5,5 +5,6 @@ import {Component} from '@angular/core'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {}
-export let title: string = ''
+export class AppComponent {
+  title = 'Angular-learnjs-150224';
+}
