@@ -1,0 +1,16 @@
+{
+    "extends": [
+        "@tinkoff/eslint-config/app",
+        "@tinkoff/eslint-config-angular",
+        "@tinkoff/eslint-config-angular/rxjs",
+        "@tinkoff/eslint-config-angular/promise",
+        "@tinkoff/eslint-config-angular/imports",
+        "@tinkoff/eslint-config-angular/unicorn",
+        "@tinkoff/eslint-config-angular/html-eslint",
+        "@tinkoff/eslint-config-angular/file-progress",
+        "@tinkoff/eslint-config-angular/line-statements",
+        "@tinkoff/eslint-config-angular/member-ordering",
+        "@tinkoff/eslint-config-angular/decorator-position",
+        "@tinkoff/eslint-config-angular/function-return-type",
+    ]
+}
