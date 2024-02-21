@@ -6,8 +6,8 @@ describe('AppComponent', () => {
     beforeEach(() =>
         TestBed.configureTestingModule({
             imports: [RouterTestingModule],
-            declarations: [AppComponent],
-        }),
+            declarations: [AppComponent]
+        })
     );
 
     it('should create the app', () => {
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
         expect(compiled.querySelector('.content span')?.textContent).toContain(
-            'Angular-learnjs-150224 app is running!',
+            'Angular-learnjs-150224 app is running!'
         );
     });
 });
