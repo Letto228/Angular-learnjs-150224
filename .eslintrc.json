@@ -10,6 +10,7 @@
                 "plugin:@angular-eslint/recommended",
                 "plugin:@angular-eslint/template/process-inline-templates"
             ],
+            "plugins": ["@tinkoff/eslint-plugin"],
             "rules": {
                 "@angular-eslint/directive-selector": [
                     "error",
@@ -26,7 +27,9 @@
                         "prefix": "app",
                         "style": "kebab-case"
                     }
-                ]
+                ],
+                "semi": ["error", "always"],
+                "indent": ["error", 4]
             }
         },
         {
