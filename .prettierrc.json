@@ -1,7 +1,19 @@
 {
+    "plugins": ["prettier-plugin-organize-attributes"],
+    "attributeGroups": [
+        "^class$", 
+        "^(id|name)$", 
+        "$DEFAULT", 
+        "^aria-",
+        "$ANGULAR_OUTPUT",
+        "$ANGULAR_TWO_WAY_BINDING",
+        "$ANGULAR_INPUT",
+        "$ANGULAR_STRUCTURAL_DIRECTIVE"
+      ],
     "useTabs": false,
     "tabWidth": 4,
     "semi": true,
     "singleQuote": true,
-    "printWidth": 100
+    "printWidth": 100,
+    "trailingComma": "es5"
 }
