@@ -10,7 +10,14 @@
                 "plugin:@angular-eslint/recommended",
                 "plugin:@angular-eslint/template/process-inline-templates"
             ],
+            "plugins": [
+              "@tinkoff/eslint-plugin"
+            ],
             "rules": {
+                "no-alert": "off",
+                "no-useless-return": "error",
+                "no-var": "error",
+                "prefer-const": "error",
                 "@angular-eslint/directive-selector": [
                     "error",
                     {
