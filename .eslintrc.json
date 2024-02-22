@@ -5,10 +5,14 @@
         {
             "files": ["*.ts"],
             "extends": [
-                "eslint:recommended",
-                "plugin:@typescript-eslint/recommended",
-                "plugin:@angular-eslint/recommended",
-                "plugin:@angular-eslint/template/process-inline-templates"
+                  "plugin:@angular-eslint/recommended",
+                  "plugin:@angular-eslint/template/process-inline-templates",
+                  "airbnb",
+                  "eslint:recommended",
+                  "plugin:import/recommended",
+                  "plugin:prettier/recommended",
+                  "prettier",
+                  "plugin:@typescript-eslint/recommended"
             ],
             "rules": {
                 "@angular-eslint/directive-selector": [
