@@ -28,11 +28,11 @@ module.exports = {
     overrides: [
         {
             files: ['*.html'],
-            options: { parser: 'html' },
+            options: {parser: 'html'},
         },
         {
             files: ['*.component.html', '*.template.html'],
-            options: { parser: 'angular' },
+            options: {parser: 'angular'},
         },
     ],
 };
