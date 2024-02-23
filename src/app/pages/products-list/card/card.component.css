@@ -1,0 +1,30 @@
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.example-card__price {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 15px;
+    margin-top: 10px;
+    text-align: right;
+    color: #3d97e5;
+}
+.example-card__actions {
+    justify-content: space-between;
+    padding: 12px;
+}
+.example-card__product-rating {
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: right;
+}
+.example-card__product-rating span {
+    color: blue;
+    font-size: 1.2rem;
+}
