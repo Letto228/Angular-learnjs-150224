@@ -9,7 +9,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
     styleUrls: ['./app.component.css'],
     // template: `<h1>Hello word</h1>`,
     // styles: [''],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.Emulated,
     interpolation: ['{{', '}}'],
 })
 export class AppComponent {
