@@ -1,0 +1,6 @@
+{
+  "*.{ts,js}": ["npx eslint --fix", "npx prettier -w"],
+  "*.{json,md}": "prettier -w",
+  "*.html": ["npx eslint --fix", "npx prettier -w"],
+  "*.{css, scss}": "prettier -w"
+}
