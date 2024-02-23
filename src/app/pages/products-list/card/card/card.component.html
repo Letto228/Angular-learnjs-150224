@@ -1,1 +1,16 @@
-<p>card works!</p>
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>{{ cardName }}</mat-card-title>
+        <mat-card-subtitle>${{ cardPrice }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{ firstCardImage }}" alt="{{ cardName }}" />
+    <mat-card-content>
+        <p>
+            This product has received a {{ cardRating }} star rating from
+            {{ cardFeedbacksCount }} users.
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="console()">CLICK ME FOR CONSOLE LOG</button>
+    </mat-card-actions>
+</mat-card>
