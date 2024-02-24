@@ -1,1 +1,15 @@
-<p>card works!</p>
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{ product.subCategory }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="product.images[0].url" />
+    <mat-card-content>
+        <p>Price: {{ product.price }}$</p>
+        <p>Rating: {{ product.rating }}</p>
+        <p>Number of ratings: {{ product.feedbacksCount }}</p>
+    </mat-card-content>
+    <mat-card-actions class="example-buttons">
+        <button (click)="getOrder()" mat-button color="primary">Order</button>
+    </mat-card-actions>
+</mat-card>
