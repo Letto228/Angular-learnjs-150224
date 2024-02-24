@@ -1,0 +1,8 @@
+.product-card {
+    max-width: 460px;
+}
+
+.product-card__actions {
+    display: flex;
+    justify-content: flex-end;
+}
