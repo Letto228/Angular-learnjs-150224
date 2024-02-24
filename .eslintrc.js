@@ -137,7 +137,7 @@ module.exports = {
                 '@typescript-eslint/consistent-type-imports': 'off',
                 'no-param-reassign': 'off',
                 'no-case-declarations': 'error',
-                'no-console': ['error', {allow: ['info', 'assert', 'warn', 'error']}],
+                // 'no-console': ['error', {allow: ['info', 'assert', 'warn', 'error']}],
                 'no-implicit-coercion': ['error', {allow: ['!!']}],
                 'no-return-assign': ['error', 'always'],
                 'no-useless-rename': [
@@ -157,16 +157,10 @@ module.exports = {
                 '@typescript-eslint/no-useless-constructor': ['error'],
                 '@typescript-eslint/no-inferrable-types': ['error', {ignoreParameters: true}],
                 '@typescript-eslint/prefer-readonly': ['error'],
-                '@typescript-eslint/explicit-member-accessibility': [
-                    'error',
-                    {accessibility: 'no-public'},
-                ],
+                '@typescript-eslint/explicit-member-accessibility': ['error', {accessibility: 'no-public'}],
                 'no-unused-vars': 'off',
                 '@typescript-eslint/no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
-                '@typescript-eslint/array-type': [
-                    'error',
-                    {default: 'array-simple', readonly: 'array-simple'},
-                ],
+                '@typescript-eslint/array-type': ['error', {default: 'array-simple', readonly: 'array-simple'}],
                 '@angular-eslint/directive-selector': [
                     'error',
                     {
@@ -298,10 +292,7 @@ module.exports = {
                 '@html-eslint/no-obsolete-tags': 'error',
                 '@html-eslint/no-target-blank': 'error',
                 '@html-eslint/require-button-type': 'off',
-                '@html-eslint/require-closing-tags': [
-                    'error',
-                    {selfClosing: 'always', allowSelfClosingCustom: false},
-                ],
+                '@html-eslint/require-closing-tags': ['error', {selfClosing: 'always', allowSelfClosingCustom: false}],
                 '@html-eslint/require-li-container': 'error',
                 '@html-eslint/no-multiple-h1': 'error',
                 '@html-eslint/require-lang': 'error',

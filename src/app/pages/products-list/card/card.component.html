@@ -1,4 +1,4 @@
-<mat-card class="example-card" (click)="logToConsole('Card click')">
+<mat-card class="example-card" (click)="logToConsole($event, 'Card click')">
     <mat-card-header>
         <!--    <div mat-card-avatar class="example-header-image"></div>-->
         <mat-card-title>{{ product.name }}</mat-card-title>
@@ -15,7 +15,7 @@
         </p>
     </mat-card-content>
     <mat-card-actions class="example-card__actions">
-        <button mat-flat-button (click)="logToConsole('Btn click')">BUY NOW</button>
+        <button mat-flat-button (click)="logToConsole($event, 'Btn click')">BUY NOW</button>
         <button mat-mini-fab aria-label="Example mini fab with a heart icon">
             <mat-icon>favorite</mat-icon>
         </button>

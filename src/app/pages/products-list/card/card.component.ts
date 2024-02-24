@@ -11,7 +11,8 @@ import {productMock} from '../../../shared/products/product.mock';
 export class CardComponent {
     product: IProduct = productMock;
 
-    logToConsole(message?: string) {
+    logToConsole(event: any, message?: string) {
+        event.stopPropagation();
         console.log(message);
     }
 }
