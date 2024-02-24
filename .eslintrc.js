@@ -92,7 +92,14 @@ module.exports = {
                 ecmaVersion: 6,
                 project: 'tsconfig.json',
             },
-            plugins: ['@typescript-eslint', 'rxjs', 'unicorn', 'import', 'eslint-plugin-import',"@tinkoff/eslint-plugin"],
+            plugins: [
+                '@typescript-eslint',
+                'rxjs',
+                'unicorn',
+                'import',
+                'eslint-plugin-import',
+                '@tinkoff/eslint-plugin',
+            ],
             extends: [
                 'eslint:recommended',
                 'plugin:@typescript-eslint/recommended',
@@ -183,8 +190,8 @@ module.exports = {
                         style: 'kebab-case',
                     },
                 ],
-                "semi": ["error", "always"],
-                "indent": ["error", 4],
+                semi: ['error', 'always'],
+                indent: ['error', 4],
                 'lines-between-class-members': 'off',
                 '@typescript-eslint/lines-between-class-members': [
                     'error',
