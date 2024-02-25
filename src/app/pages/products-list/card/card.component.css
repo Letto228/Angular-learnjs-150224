@@ -1,0 +1,12 @@
+.product-card {
+    max-width: 320px;
+    padding: 6px;
+}
+
+.product-card-img {
+    margin-bottom: 8px;
+}
+
+.product-card-buttons {
+    padding: 0 16px;
+}
