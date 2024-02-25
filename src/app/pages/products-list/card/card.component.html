@@ -1,10 +1,9 @@
 <mat-card class="example-card">
     <mat-card-header>
-        <!-- <div mat-card-avatar class="example-header-image"></div> -->
         <mat-card-title>{{ card.name }}</mat-card-title>
         <mat-card-subtitle>{{ card.subCategory }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{ card.images[0].url }}" alt="Photo of a Shiba Inu" />
+    <img mat-card-image src="{{ card.images[0].url }}" alt="{{ card.name }}" />
     <mat-card-content>
         <mat-card-title>Price: {{ card.price }}$</mat-card-title>
         <mat-card-subtitle>Rating: {{ card.rating }}</mat-card-subtitle>
