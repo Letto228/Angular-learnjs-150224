@@ -7,11 +7,9 @@ import {productMock} from '../../../../shared/products/product.mock';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    cardName = productMock.name;
-    cardRating = productMock.rating;
-    cardFeedbacksCount = productMock.feedbacksCount;
-    cardPrice = productMock.price;
-    firstCardImage = productMock.images[0].url;
-    // eslint-disable-next-line no-console
-    console = () => console.log('YOU CLICKED ME');
+    product = productMock;
+    console() {
+        // eslint-disable-next-line no-console
+        console.log('YOU CLICKED ME');
+    }
 }

@@ -1,13 +1,13 @@
 <mat-card class="example-card">
     <mat-card-header>
-        <mat-card-title>{{ cardName }}</mat-card-title>
-        <mat-card-subtitle>${{ cardPrice }}</mat-card-subtitle>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>${{ product.price }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{ firstCardImage }}" alt="{{ cardName }}" />
+    <img mat-card-image src="{{ product.images[0].url }}" alt="{{ product.name }}" />
     <mat-card-content>
         <p>
-            This product has received a {{ cardRating }} star rating from
-            {{ cardFeedbacksCount }} users.
+            This product has received a {{ product.rating }} star rating from
+            {{ product.feedbacksCount }} users.
         </p>
     </mat-card-content>
     <mat-card-actions>
