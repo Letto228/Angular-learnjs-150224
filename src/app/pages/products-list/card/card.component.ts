@@ -10,7 +10,8 @@ import {IProduct} from 'src/app/shared/products/product.interface';
 export class CardComponent {
     product: IProduct = productMock;
 
-    getOrder() {
+    addToCart(event: Event) {
+        event.stopPropagation();
         console.log('Order');
     }
 }
