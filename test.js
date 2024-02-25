@@ -1,4 +1,2 @@
 test
-// test
-//test 2
-//333
+//открытие в lecture-0
