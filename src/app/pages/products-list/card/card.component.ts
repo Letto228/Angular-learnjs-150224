@@ -11,8 +11,9 @@ import {productMock} from '../../../shared/products/product.mock';
 export class CardComponent {
     product: IProduct = productMock;
 
-    order(): void {
-        /* eslint-disable no-console */
+    order(e: Event): void {
+        e.stopPropagation();
+        // eslint-disable-next-line
         console.log('order');
     }
 }
