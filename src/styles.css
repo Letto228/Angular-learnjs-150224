@@ -8,3 +8,9 @@ body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.containert {
+    max-width: 1630px;
+    margin: 0 auto;
+    padding: 15px;
+}
