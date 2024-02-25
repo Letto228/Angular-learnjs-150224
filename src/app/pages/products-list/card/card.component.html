@@ -1,0 +1,22 @@
+<mat-card class="product-card">
+    <mat-card-header>
+        <mat-card-title>{{ cardInfo.name }}</mat-card-title>
+        <mat-card-subtitle>${{ cardInfo.price }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img
+        mat-card-image
+        src="{{ cardInfo.images[1].url }}"
+        alt="Фотография товара: {{ cardInfo.name }}"
+    />
+
+    <mat-card-content>
+        <p>Рейтинг: {{ cardInfo.rating }} ★</p>
+        <p>Отзывы: {{ cardInfo.feedbacksCount }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="buyNow()">БЫСТРАЯ ПОКУПКА</button>
+        <button mat-button color="accent" (click)="addToCart()">В КОРЗИНУ</button>
+    </mat-card-actions>
+</mat-card>

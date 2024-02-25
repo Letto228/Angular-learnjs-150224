@@ -1,12 +1,7 @@
-:host {
-    background-color: aqua;
-    display: block;
-}
+main {
+    padding: 10px;
 
-h2 {
-    color: red;
-}
-
-span {
-    color: blue;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
