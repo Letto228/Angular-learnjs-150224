@@ -1,0 +1,15 @@
+<mat-card class="product-card">
+    <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{ product.subCategory }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image alt="Photo product" [src]="product.images[0].url" />
+    <mat-card-content>
+        <div>Цена: {{ product.price }} руб.</div>
+        <div>Рейтинг: {{ product.rating }}</div>
+        <div>Отзывов: {{ product.feedbacksCount }}</div>
+    </mat-card-content>
+    <mat-card-actions class="product-actions">
+        <button color="primary" mat-button (click)="clickCallback($event)">Купить</button>
+    </mat-card-actions>
+</mat-card>
