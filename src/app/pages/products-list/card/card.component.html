@@ -1,6 +1,5 @@
 <mat-card class="example-card" (click)="logToConsole($event, 'Card click')">
     <mat-card-header>
-        <!--    <div mat-card-avatar class="example-header-image"></div>-->
         <mat-card-title>{{ product.name }}</mat-card-title>
         <mat-card-subtitle class="example-card__product-rating">
             RATING
@@ -8,7 +7,7 @@
             <span>{{ product.rating }}</span>
         </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image alt="Photo of a Shiba Inu" [src]="product.images[0].url" />
+    <img mat-card-image [alt]="product.name" [src]="product.images[0].url" />
     <mat-card-content class="example-card__price">
         <p>
             {{ product.price | currency }}

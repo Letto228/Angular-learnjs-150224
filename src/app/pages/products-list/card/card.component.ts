@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {Component} from '@angular/core';
 import {IProduct} from '../../../shared/products/product.interface';
 import {productMock} from '../../../shared/products/product.mock';
@@ -11,8 +10,9 @@ import {productMock} from '../../../shared/products/product.mock';
 export class CardComponent {
     product: IProduct = productMock;
 
-    logToConsole(event: any, message?: string) {
+    logToConsole(event: MouseEvent, message?: string) {
         event.stopPropagation();
+        // eslint-disable-next-line no-console
         console.log(message);
     }
 }
