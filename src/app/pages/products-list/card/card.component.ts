@@ -10,10 +10,13 @@ import {productMock} from 'src/app/shared/products/product.mock';
 export class CardComponent {
     product: IProduct = productMock;
 
-    onClickBuy(id: string) {
-        if (id) {
-            /* eslint-disable no-console */
-            console.log(id);
-        }
+    getPriceProduct(price: number): string {
+        return price ? `$${price}` : '-';
+    }
+
+    onClickBuy(e: MouseEvent, id: string) {
+        e.stopPropagation();
+        // eslint-disable-next-line
+        console.log(id);
     }
 }

@@ -6,9 +6,11 @@
     <img mat-card-image src="{{ product.images[0].url }}" alt="{{ product.name }}" />
     <mat-card-content>
         <p>Черный планшет</p>
-        <span>Цена: {{ product.price ? '$' + product.price : '-' }}</span>
+        <span>Цена: {{ getPriceProduct(product.price) }}</span>
     </mat-card-content>
     <mat-card-actions class="product-card__actions">
-        <button mat-raised-button color="primary" (click)="onClickBuy(product._id)">Купить</button>
+        <button mat-raised-button color="primary" (click)="onClickBuy($event, product._id)">
+            Купить
+        </button>
     </mat-card-actions>
 </mat-card>
