@@ -1,6 +1,10 @@
 {
     "root": true,
     "ignorePatterns": ["projects/**/*"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
     "overrides": [
         {
             "files": ["*.ts"],
@@ -8,9 +12,12 @@
                 "eslint:recommended",
                 "plugin:@typescript-eslint/recommended",
                 "plugin:@angular-eslint/recommended",
-                "plugin:@angular-eslint/template/process-inline-templates"
+                "plugin:@angular-eslint/template/process-inline-templates",
+                "@tinkoff/eslint-config/app",
+                "@tinkoff/eslint-config-angular"
             ],
-            "plugins": ["@tinkoff/eslint-plugin"],
+            "plugins": ["@typescript-eslint"],
+
             "rules": {
                 "@angular-eslint/directive-selector": [
                     "error",
