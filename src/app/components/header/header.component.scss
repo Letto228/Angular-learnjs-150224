@@ -1,0 +1,34 @@
+@import '../../scss/variables';
+
+:host {
+  position: fixed;
+  display: block;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.header {
+  height: $header-height;
+  padding: 0 12px 0 4px;
+  border-bottom: 1px solid $border;
+  background: #fff;
+
+  .header__hamburger {
+    font-size: 0;
+    line-height: 0;
+  }
+
+  .header__logo {
+    margin-left: 16px;
+  }
+}
+
+.header-logo {
+  &__logo {
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
