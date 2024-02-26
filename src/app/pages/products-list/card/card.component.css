@@ -1,0 +1,20 @@
+.example-card {
+    width: 300px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+mat-card-content p {
+    margin-top: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.mat-button {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-button button {
+    margin-top: 20px;
+}
