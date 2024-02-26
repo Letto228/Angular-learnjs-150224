@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {applicationConfigMock} from '../../shared/application-config/application-config.mock';
 
 @Component({
     selector: 'app-header',
@@ -6,5 +7,5 @@ import {Component} from '@angular/core';
     styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-    title = 'Angular-learnjs-150224';
+    readonly applicationConfig = applicationConfigMock;
 }
