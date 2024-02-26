@@ -1,0 +1,14 @@
+@import "scss/variables";
+
+.wrapper {
+  overflow: hidden;
+  padding-top: $header-height;
+
+  .wrapper__content {
+    position: relative;
+    padding-left: 0;
+    z-index: 1;
+    transition: $transition-time padding-left;
+    transition-delay: $transition-time;
+  }
+}
