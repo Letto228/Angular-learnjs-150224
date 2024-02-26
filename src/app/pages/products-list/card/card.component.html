@@ -1,0 +1,16 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>Стоимость: ${{ product.price }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{ product.images[0].url }}" alt="{{ product.name }}" />
+    <mat-card-content>
+        <p>
+            {{ product.name }} имеет оценку {{ product.rating }} на основании
+            {{ product.feedbacksCount }} отзывов
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button color="primary" (click)="printInfo()">Добавить в корзину</button>
+    </mat-card-actions>
+</mat-card>
