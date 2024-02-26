@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core'
+import {Component} from '@angular/core'
 import {APP_CONFIG} from '../../app.constants'
 import {IAppConfig} from '../../shared/interfaces/app.interfaces'
 
