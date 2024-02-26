@@ -8,10 +8,7 @@ import {productMock} from '../../../shared/products/product.mock';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    product: IProduct;
-    constructor() {
-        this.product = productMock;
-    }
+    product: IProduct = productMock;
 
     clickCallback(event: MouseEvent): void {
         event.stopPropagation();
