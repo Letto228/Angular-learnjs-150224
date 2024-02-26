@@ -1,12 +1,5 @@
-/* :host {
-    background-color: aqua;
-    display: block;
+:host {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
-
-h2 {
-    color: red;
-}
-
-span {
-    color: blue;
-} */

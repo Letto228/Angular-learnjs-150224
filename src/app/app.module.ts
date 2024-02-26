@@ -7,20 +7,8 @@ import {AppComponent} from './app.component';
 import {HeaderModule} from './components/header/header.module';
 import {ProductsListModule} from './pages/products-list/products-list.module';
 
-// @NgModule({
-//     declarations: [HeaderComponent],
-//     exports: [HeaderComponent],
-// })
-// export class HeaderModule {}
-
-// declarations ~ const ...
-// exports ~ module.export = {...}
-// imports ~ import {...} from 'module';
-
 @NgModule({
-    declarations: [AppComponent], // const ...
-    // exports: [AppComponent], // module.export = {...}
-    // imports: [HeaderModule], // import {...} from 'module';
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
