@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {productMock} from '../../../shared/products/product.mock';
+import {productsMock} from '../../../shared/products/products.mock';
 
 // const user: User = {
 
@@ -11,7 +11,7 @@ import {productMock} from '../../../shared/products/product.mock';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    readonly product = productMock;
+    readonly product = productsMock[0];
     // user: {name: string} = {name: 'Alex'};
     // user = user;
 
