@@ -1,0 +1,8 @@
+.example-card {
+    max-width: 400px;
+    margin: 25px;
+}
+.button-action {
+    display: flex;
+    justify-content: space-around;
+}

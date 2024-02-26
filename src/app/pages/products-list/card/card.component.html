@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>{{ plane.name }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{ plane.images[0].url }}" alt="Photo of a Shiba Inu" />
+    <mat-card-content>
+        <p>
+            <span>
+                <b>Цена:</b>
+            </span>
+            {{ plane.price }}
+        </p>
+    </mat-card-content>
+    <mat-card-actions class="button-action">
+        <button mat-raised-button color="primary" (click)="clickCallback()">Купить</button>
+    </mat-card-actions>
+</mat-card>
