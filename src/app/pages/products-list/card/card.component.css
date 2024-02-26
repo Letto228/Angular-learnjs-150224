@@ -1,0 +1,43 @@
+:host {
+    width: 300px;
+    height: 500px;
+    display: block;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.card mat-card-subtitle {
+    text-align: right;
+}
+
+.raiting {
+    display: flex;
+    align-items: center;
+}
+
+.star-active {
+    color: #ff0;
+    text-shadow: 0 0 2px black;
+}
+
+.galerey {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.galerey img {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    margin: 0 8px;
+}
