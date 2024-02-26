@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import {productMock} from '../../../shared/products/product.mock';
 
+// const user: User = {
+
+// }
+
 @Component({
     selector: 'app-card',
     templateUrl: './card.component.html',
@@ -8,6 +12,12 @@ import {productMock} from '../../../shared/products/product.mock';
 })
 export class CardComponent {
     readonly product = productMock;
+    // user: {name: string} = {name: 'Alex'};
+    // user = user;
+
+    // constructor() {
+    //     this.user = null;
+    // }
 
     onProductBuy(event: Event) {
         event.stopPropagation();
