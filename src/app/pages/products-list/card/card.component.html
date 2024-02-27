@@ -1,0 +1,14 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>{{ productInfo.name }}</mat-card-title>
+        <mat-card-subtitle>Цена: {{ productInfo.price }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image alt="Tablet" [src]="productInfo.images[0].url" />
+    <mat-card-content class="mat-card-content">
+        <p>Отзывы: {{ productInfo.feedbacksCount }}</p>
+        <p>Рейтинг: {{ productInfo.rating }}</p>
+    </mat-card-content>
+    <mat-card-actions class="mat-card-actions">
+        <button (click)="buyBtnClick(); ($event.stopPropagation)">BUY</button>
+    </mat-card-actions>
+</mat-card>

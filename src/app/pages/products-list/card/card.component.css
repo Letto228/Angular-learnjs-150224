@@ -1,0 +1,13 @@
+.example-card {
+    max-width: 400px;
+}
+
+.mat-card-content {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.mat-card-actions {
+    margin: 0 auto;
+}
