@@ -7,22 +7,15 @@ import {productsMock} from '../../shared/products/products.mock';
     styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent {
-    isProductBought = false;
-
-    changeProductStatus() {
-        this.isProductBought = !this.isProductBought;
-        // eslint-disable-next-line no-console
-        console.log(this.isProductBought);
-    }
+    isProductBoughtParent = false;
 
     readonly product = productsMock[0];
 
     buyProduct() {
-        this.changeProductStatus();
+        this.isProductBoughtParent = !this.isProductBoughtParent;
     }
 
     onCardClick() {
-        // eslint-disable-next-line no-console
-        console.log('Card click');
+        this.buyProduct();
     }
 }

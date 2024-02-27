@@ -10,14 +10,14 @@ export class CardComponent {
     @Input()
     product?: Product;
 
-    @Output()
-    isBought = new EventEmitter<boolean>();
+    @Input()
+    isProductBought = false;
 
-    buyProduct(event: Event) {
-        event.stopPropagation();
-        this.isBought.emit();
-        // eslint-disable-next-line no-console
-        console.log('Buy product');
+    @Output()
+    readonly isProductBoughtChange = new EventEmitter<boolean>();
+
+    buyProduct() {
+        this.isProductBoughtChange.emit(!this.isProductBought);
     }
 
     isStarActive(starIndex: number): boolean {
