@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from 'src/app/shared/products/product.interface';
 
 @Component({
@@ -9,11 +9,19 @@ import {Product} from 'src/app/shared/products/product.interface';
 export class CardComponent {
     @Input() product: Product | null;
 
+    @Output() productPurchased = new EventEmitter<Product | string>();
+
+    isProductPurchased = false;
+
     onProductBuy(event: Event) {
         event.stopPropagation();
+        this.isProductPurchased = !this.isProductPurchased;
 
-        // eslint-disable-next-line no-console
-        console.log('Buy product');
+        if (this.product !== null) {
+            this.isProductPurchased
+                ? this.productPurchased.emit(this.product)
+                : this.productPurchased.emit(this.product._id);
+        }
     }
 
     isStarActive(starIndex: number): boolean {
