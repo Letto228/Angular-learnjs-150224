@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
-import {productMock} from 'src/app/shared/products/product.mock';
-import {IProduct} from 'src/app/shared/products/product.interface';
+import {Component, Input} from '@angular/core';
+import {Product} from 'src/app/shared/products/product.interface';
 
 @Component({
     selector: 'app-card',
@@ -8,10 +7,16 @@ import {IProduct} from 'src/app/shared/products/product.interface';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    product: IProduct = productMock;
+    @Input() product: Product | null;
 
-    addToCart(event: Event) {
+    onProductBuy(event: Event) {
         event.stopPropagation();
-        console.log('Order');
+
+        // eslint-disable-next-line no-console
+        console.log('Buy product');
+    }
+
+    isStarActive(starIndex: number): boolean {
+        return this.product === null ? false : this.product.rating >= starIndex;
     }
 }
