@@ -1,12 +1,12 @@
 <mat-card class="example-card">
     <mat-card-header>
-        <mat-card-title>{{ name }}</mat-card-title>
-        <mat-card-subtitle>Рейтинг: {{ rating }}</mat-card-subtitle>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>Рейтинг: {{ product.rating }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{ imageUrl }}" alt="tablet" />
+    <img mat-card-image src="{{ product.images[0].url }}" alt="tablet" />
     <mat-card-content>
         <div>Цена</div>
-        <p>{{ price }} $.</p>
+        <p>{{ product.price }} $.</p>
     </mat-card-content>
     <mat-card-actions>
         <button mat-button color="primary" (click)="buy()">Купить</button>
