@@ -1,1 +1,11 @@
-<p>card works!</p>
+<mat-card class="product-card" (click)="onCardClick()">
+    <mat-card-header>
+        <mat-card-title class="title">{{ product.name }}</mat-card-title>
+    </mat-card-header>
+
+    <img mat-card-image alt="Product" [src]="product.images[0].url" />
+
+    <mat-card-actions class="buttons">
+        <button mat-raised-button color="primary" (click)="onBuyClick($event)">Купить</button>
+    </mat-card-actions>
+</mat-card>
