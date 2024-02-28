@@ -1,4 +1,4 @@
-import {Component, EventEmitter} from '@angular/core'
+import {Component} from '@angular/core'
 import {IProduct} from '../../shared/interfaces/products/product.interface'
 import {ProductService} from '../../services/products/product.service'
 
