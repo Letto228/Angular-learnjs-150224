@@ -1,36 +1,74 @@
-<mat-card class="product-card">
-  <mat-card-header>
-    <mat-card-title class="product-card_title">
-      {{ productCard.name }}
-    </mat-card-title>
-  </mat-card-header>
-  <img
-    class="product-card_image p-3"
-    mat-card-image
-    [src]="productCard.images[0].url"
-    [alt]="productCard.images[0].url" />
+<div class="row">
+  <div class="col-6 offset-3">
+    <mat-card class="product d-flex flex-column gap-3 justify-content-between">
+      <mat-card-header>
+        <mat-card-title class="product_title">
+          {{ productCard.name }}
+        </mat-card-title>
+        <mat-card-subtitle class="product_price">
+          Price: <span>{{ productCard.price }} $</span>
+        </mat-card-subtitle>
+      </mat-card-header>
 
-  <mat-card-content class="product-card_price mt-3">
-    <p>Prices: {{ productCard.price }} $</p>
-  </mat-card-content>
+      <div class="slider d-flex flex-column justify-content-end flex-grow-1">
+        <ng-container
+          class=""
+          *ngFor="let image of productCard.images; let imageIndex = index">
+          <div
+            class="slider_slide flex-grow-1"
+            *ngIf="imageIndex === currentSLide">
+            <img
+              class="slider_image w-100"
+              [src]="image.url"
+              [alt]="image.source" />
+          </div>
+        </ng-container>
 
-  <mat-card-actions class="d-flex justify-content-between gap-3 mt-4">
-    <button
-      mat-button
-      mat-stroked-button
-      color="accent"
-      class="w-50"
-      (click)="buyFavorite(productCard._id)">
-      <mat-icon>favorite</mat-icon>
-      Add Favorite
-    </button>
-    <button
-      mat-stroked-button
-      mat-button
-      color="primary"
-      class="w-50"
-      (click)="buyProduct(productCard._id)">
-      Buy now
-    </button>
-  </mat-card-actions>
-</mat-card>
+        <div class="slider_actions">
+          <button
+            mat-icon-button
+            (click)="prevSlide()"
+            [disabled]="currentSLide <= 1">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="nextSlide()"
+            [disabled]="currentSLide === productCard.images.length - 1">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+        <div class="slider_rate">
+          <p>Отзывы: {{ productCard.feedbacksCount }}</p>
+          <div class="slider_rate-stars">
+            Рейтинг:
+            <mat-icon [class.star-active]="isStarActive(1)">star</mat-icon>
+            <mat-icon [class.star-active]="isStarActive(2)">star</mat-icon>
+            <mat-icon [class.star-active]="isStarActive(3)">star</mat-icon>
+            <mat-icon [class.star-active]="isStarActive(4)">star</mat-icon>
+            <mat-icon [class.star-active]="isStarActive(5)">star</mat-icon>
+          </div>
+        </div>
+      </div>
+      <mat-card-actions class="d-flex justify-content-between gap-3">
+        <button
+          mat-button
+          mat-stroked-button
+          color="accent"
+          class="w-50"
+          (click)="buyFavorite(productCard._id)">
+          <mat-icon>favorite</mat-icon>
+          Add Favorite
+        </button>
+        <button
+          mat-stroked-button
+          mat-button
+          color="primary"
+          class="w-50"
+          (click)="buyProduct(productCard._id)">
+          Buy now
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

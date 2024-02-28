@@ -1,5 +1,5 @@
-import {Component} from '@angular/core'
-import {product} from '../../../services/products/product.mock'
+import {Component, EventEmitter, Input, Output} from '@angular/core'
+import {IProduct} from '../../../shared/interfaces/products/product.interface'
 
 @Component({
   selector: 'app-product-card',
@@ -7,13 +7,28 @@ import {product} from '../../../services/products/product.mock'
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  readonly productCard = product
+  @Input({required: true}) productCard!: IProduct
+  @Output() itemToCart = new EventEmitter<string>()
+  @Output() itemToFavorite = new EventEmitter<string>()
+  currentSLide = 0
 
-  buyProduct(productId: number | string): void {
-    console.log('product ID', productId)
+  buyProduct(productId: string): void {
+    this.itemToCart.emit(productId)
   }
 
-  buyFavorite(productId: number | string): void {
-    console.log('product  ID to favorite', productId)
+  buyFavorite(productId: string): void {
+    this.itemToFavorite.emit(productId)
+  }
+
+  isStarActive(starIndex: number): boolean {
+    return this.productCard.rating >= starIndex
+  }
+
+  nextSlide(): void {
+    this.currentSLide = ++this.currentSLide % this.productCard.images.length
+  }
+
+  prevSlide(): void {
+    this.currentSLide = --this.currentSLide % this.productCard.images.length
   }
 }

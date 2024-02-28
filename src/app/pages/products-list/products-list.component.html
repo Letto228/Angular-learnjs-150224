@@ -1,1 +1,4 @@
-<app-product-card></app-product-card>
+<app-product-card
+  [productCard]="currentProduct"
+  (itemToCart)="productToCart($event)"
+  (itemToFavorite)="getFavoriteProduct($event)"></app-product-card>

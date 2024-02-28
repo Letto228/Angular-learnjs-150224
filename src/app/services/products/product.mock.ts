@@ -1,6 +1,6 @@
 import {IProduct} from '../../shared/interfaces/products/product.interface'
 
-export const product: IProduct = {
+export const productMock: IProduct = {
   _id: '96-planset-dexp-ursus-s290-32-gb-3g-cernyj',
   feedbacksCount: 2,
   subCategory: 'planshety-elektronnye-knigi',
