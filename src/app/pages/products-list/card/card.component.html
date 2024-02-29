@@ -1,7 +1,8 @@
 <mat-card class="example-card">
-    <img mat-card-image alt="Photo of a Shiba Inu" [src]="promoProduct" />
+    <img mat-card-image alt="Photo of a Shiba Inu" [src]="productInfo.images[0].url" />
     <mat-card-content>
-        <p>Цена: {{ productPrice }}</p>
+        <p>{{ this.productInfo.name }}</p>
+        <p>Цена: {{ this.productInfo.price }}</p>
     </mat-card-content>
     <mat-card-actions class="mat-button">
         <button mat-button (click)="shopItem()">КУПИТЬ</button>

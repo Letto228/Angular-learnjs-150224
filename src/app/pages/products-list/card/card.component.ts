@@ -11,11 +11,6 @@ export class CardComponent {
     promoProduct!: string;
     productPrice!: number;
 
-    constructor() {
-        this.promoProduct = this.productInfo.images[0].url;
-        this.productPrice = this.productInfo.price;
-    }
-
     shopItem() {
         // eslint-disable-next-line no-console
         // console.log('Товар добавлен в корзину');
