@@ -8,16 +8,17 @@ import {productsMock} from '../../shared/products/products.mock';
 })
 export class ProductsListComponent {
     readonly product = productsMock[0];
-
-    goodsInBasket: string[] = [''];
+    goodsInBasket: string[] = [];
     onCardClick() {
         // eslint-disable-next-line no-console
         console.log('Card click');
     }
 
-    onCardBuyClick() {
+    onCardBuyClick(id: string) {
         // eslint-disable-next-line no-console
         console.log(`Buy click click in ProductList`);
+        // eslint-disable-next-line no-console
+        this.goodsInBasket.push(id);
         // eslint-disable-next-line no-console
         console.log(this.goodsInBasket);
     }

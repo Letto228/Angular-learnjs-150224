@@ -1,6 +1,5 @@
 <app-card
     [product]="product"
-    [goodsInBasket]="goodsInBasket"
+    (placeGoods)="onCardBuyClick(product._id)"
     (click)="onCardClick()"
-    (goodsInBasketChange)="onCardBuyClick()"
 ></app-card>
