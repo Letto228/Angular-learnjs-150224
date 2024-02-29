@@ -1,11 +1,7 @@
 import {
     Component,
     ContentChild,
-    ElementRef,
-    EventEmitter,
-    Input,
     OnInit,
-    Output,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
@@ -18,69 +14,24 @@ import {MatDrawer} from '@angular/material/sidenav';
     styleUrls: ['./sidenav.component.css'],
 })
 export class SidenavComponent implements OnInit {
-    @Input() isSidenavOpened = false;
-    // @Input() navigationTemplate: TemplateRef<unknown> | null = null;
-    // @Input() set navigationTemplate(template: TemplateRef<unknown>) {
-    //     this.viewportContainer?.clear();
-    //     this.viewportContainer?.createEmbeddedView(template);
-    //     // const view = this.viewportContainer?.createEmbeddedView(template);
+    /* eslint-disable @typescript-eslint/prefer-readonly */
 
-    //     // console.log(view?.destroy());
+    @ViewChild(MatDrawer)
+    private drawer: MatDrawer | undefined;
 
-    //     // this.viewportContainer?.clear();
+    @ViewChild('viewport', {read: ViewContainerRef, static: true})
+    private viewportContainer: ViewContainerRef | undefined;
 
-    //     // this.viewportContainer?.createEmbeddedView(template);
-    //     // this.viewportContainer?.createEmbeddedView(template);
-    //     // setInterval(() => {
-    //     //     this.viewportContainer?.createEmbeddedView(template);
-    //     // }, 2000);
-    // }
+    @ContentChild('navigationTemplate', {static: true})
+    private navigationTemplate: TemplateRef<unknown> | undefined;
 
-    @Output() readonly isSidenavOpenedChange = new EventEmitter<boolean>();
+    /* eslint-enable @typescript-eslint/prefer-readonly */
 
     ngOnInit(): void {
         this.insertNavigation();
     }
 
-    /* eslint-disable @typescript-eslint/prefer-readonly */
-    // @ViewChild('drawer')
-    @ViewChild(MatDrawer)
-    private drawer: MatDrawer | undefined;
-
-    // @ViewChild(MatDrawer, {read: ElementRef})
-    // private set drawerElement(elementRef: ElementRef | undefined) {
-    //     console.log(elementRef?.nativeElement);
-    // };
-
-    // @ViewChild(MatDrawer, {read: ViewContainerRef})
-    // private drawerViewContainer: ViewContainerRef | undefined;
-
-    @ViewChild('viewport', {read: ViewContainerRef, static: true})
-    private viewportContainer: ViewContainerRef | undefined;
-
-    @ContentChild('p', {read: ElementRef, descendants: false})
-    private set checkContent(elementRef: ElementRef | undefined) {
-        // eslint-disable-next-line no-console
-        console.log(elementRef);
-    }
-
-    @ContentChild('navigationTemplate', {static: true})
-    private navigationTemplate: TemplateRef<unknown> | undefined;
-    /* eslint-enable @typescript-eslint/prefer-readonly */
-
-    // constructor() {
-    //     console.log(this.drawer);
-    // }
-
-    // toggleIsSidenavOpened() {
-    //     this.isSidenavOpenedChange.emit(!this.isSidenavOpened);
-    // }
-
     toggle() {
-        // drawer.toggle()
-
-        // console.log(this.drawer, this.drawerElement, this.drawerViewContainer);
-
         this.drawer?.toggle();
     }
 

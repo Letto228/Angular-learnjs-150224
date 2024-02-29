@@ -1,14 +1,6 @@
-<!-- <app-header
-    [applicationConfig]="applicationConfigMock"
-    (menuClick)="toggleParentIsSidenavOpened();"
-></app-header> -->
 <app-header [applicationConfig]="applicationConfigMock" (menuClick)="sidenav.toggle()"></app-header>
 
-<!-- <app-sidenav #sidenav [navigationTemplate]="navigationTemplate"></app-sidenav> -->
 <app-sidenav #sidenav>
-    <div #div>
-        <p #p>Hello</p>
-    </div>
     <ng-template #navigationTemplate>
         {{ applicationConfigMock.title }}
         <mat-list role="list">
@@ -18,13 +10,3 @@
         </mat-list>
     </ng-template>
 </app-sidenav>
-<!-- <app-products-list></app-products-list> -->
-
-<ng-template #navigationTemplate>
-    {{ applicationConfigMock.title }}
-    <mat-list role="list">
-        <mat-list-item role="listitem">Item 1</mat-list-item>
-        <mat-list-item role="listitem">Item 2</mat-list-item>
-        <mat-list-item role="listitem">Item 3</mat-list-item>
-    </mat-list>
-</ng-template>
