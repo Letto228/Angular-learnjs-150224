@@ -1,7 +1,1 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# npm run prettier:fix:all
-# npx eslint .
-
 npx lint-staged
