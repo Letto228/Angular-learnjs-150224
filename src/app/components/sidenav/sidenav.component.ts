@@ -11,7 +11,6 @@ export class SidenavComponent {
     @Output() readonly isSidenavOpenedChange = new EventEmitter<boolean>();
 
     toggleIsSidenavOpened() {
-        // this.isSidenavOpened = !this.isSidenavOpened;
         this.isSidenavOpenedChange.emit(!this.isSidenavOpened);
     }
 }

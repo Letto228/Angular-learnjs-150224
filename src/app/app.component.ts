@@ -15,16 +15,4 @@ export class AppComponent {
     toggleParentIsSidenavOpened() {
         this.isSidenavOpenedParent = !this.isSidenavOpenedParent;
     }
-
-    onInputSend(event: Event) {
-        // eslint-disable-next-line no-console
-        console.log(event);
-    }
-
-    onMenuClick() {
-        // eslint-disable-next-line no-console
-        console.log('Menu click in AppComponent');
-
-        this.toggleParentIsSidenavOpened();
-    }
 }

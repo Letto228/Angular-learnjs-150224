@@ -1,19 +1,6 @@
-<!-- <app-header applicationConfig="{{applicationConfigMock}}"></app-header> -->
-<app-header [applicationConfig]="applicationConfigMock" (menuClick)="onMenuClick()"></app-header>
-<!--
-    <app-header (menuClick)="onMenuClick()">
-        |
-        V
-    HeaderComponent.menuClick.subscribe(($event) => {
-        onMenuClick($event)
-    });
- -->
-<!-- {{applicationConfigMock}} -->
-<!-- <app-sidenav
-    [isSidenavOpened]="isSidenavOpenedParent"
-    (isSidenavOpenedChange)="isSidenavOpenedParent = $event"
-></app-sidenav> -->
-<!-- <app-sidenav [(isSidenavOpened)]="isSidenavOpenedParent"></app-sidenav> -->
-<app-products-list></app-products-list>
+<app-header
+    [applicationConfig]="applicationConfigMock"
+    (menuClick)="toggleParentIsSidenavOpened()"
+></app-header>
 
-<!-- <input (keydown.enter)="onInputSend($event)"> -->
+<app-products-list></app-products-list>
