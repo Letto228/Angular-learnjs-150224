@@ -14,7 +14,7 @@ export class ProductsListComponent {
         console.log('Card click');
     }
 
-    onProductBuy(productID: string) {
+    onProductBuy(productID: string | undefined) {
         // eslint-disable-next-line no-console
         console.log(`product ID to buy: ${productID}`);
     }

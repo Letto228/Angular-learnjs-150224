@@ -13,7 +13,7 @@ import {Product} from 'src/app/shared/products/product.interface';
 })
 export class CardComponent {
     @Input() productCard: Product | null = null;
-    @Output() productBuy = new EventEmitter<string>();
+    @Output() productBuy = new EventEmitter<string | undefined>();
     // user: {name: string} = {name: 'Alex'};
     // user = user;
 
@@ -31,7 +31,7 @@ export class CardComponent {
     }
 
     isStarActive(starIndex: number): boolean {
-        return this.productCard ? this.productCard?.rating >= starIndex : false;
+        return this.productCard ? this.productCard.rating >= starIndex : false;
     }
 
     getProductImgSrc(): string {
