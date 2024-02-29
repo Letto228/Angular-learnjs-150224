@@ -10,6 +10,8 @@ import {productsMock} from 'src/app/shared/products/products.mock';
 export class ProductsListComponent {
     readonly productParent = productsMock[1];
 
+    isProductPurchasedParent = false;
+
     onProductsListBuy(id: string) {
         // eslint-disable-next-line no-console
 
@@ -17,7 +19,6 @@ export class ProductsListComponent {
     }
 
     onCardClick() {
-        // eslint-disable-next-line no-console
-        console.log('Card click');
+        this.isProductPurchasedParent = !this.isProductPurchasedParent;
     }
 }

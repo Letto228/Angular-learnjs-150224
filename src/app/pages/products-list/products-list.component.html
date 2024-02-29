@@ -1,5 +1,6 @@
 <app-card
     [product]="productParent"
+    [isProductPurchased]="isProductPurchasedParent"
     (productPurchased)="onProductsListBuy($event)"
     (click)="onCardClick()"
 ></app-card>

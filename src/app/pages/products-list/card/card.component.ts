@@ -8,12 +8,11 @@ import {Product} from 'src/app/shared/products/product.interface';
 })
 export class CardComponent {
     @Input() product: Product | null = null;
+    @Input() isProductPurchased = false;
 
     @Output() productPurchased = new EventEmitter<string>();
 
-    onProductBuy(event: Event) {
-        event.stopPropagation();
-
+    onProductBuy() {
         this.productPurchased.emit(this.product?._id);
     }
 
