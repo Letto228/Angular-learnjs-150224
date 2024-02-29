@@ -17,7 +17,6 @@ export class ProductsListComponent {
     onCardBuyClick(id: string) {
         // eslint-disable-next-line no-console
         console.log(`Buy click click in ProductList`);
-        // eslint-disable-next-line no-console
         this.goodsInBasket.push(id);
         // eslint-disable-next-line no-console
         console.log(this.goodsInBasket);
