@@ -1,10 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from '../../../shared/products/product.interface';
-// import {productsMock} from '../../../shared/products/products.mock';
-
-// const user: User = {
-
-// }
 
 @Component({
     selector: 'app-card',
@@ -13,23 +8,18 @@ import {Product} from '../../../shared/products/product.interface';
 })
 export class CardComponent {
     @Input() product: Product | null = null;
-    @Output() buyClick = new EventEmitter<MouseEvent>();
-    // user: {name: string} = {name: 'Alex'};
-    // user = user;
+    @Output() buyClick = new EventEmitter<Product | null>();
 
-    // constructor() {
-    //     this.user = null;
-    // }
-
-    onProductBuy(event: MouseEvent) {
+    onProductBuy(event: Event, product: Product | null) {
         event.stopPropagation();
-        this.buyClick.emit(event);
-
-        // eslint-disable-next-line no-console
-        console.log('Buy product');
+        this.buyClick.emit(product);
     }
 
-    // isStarActive(starIndex: number): boolean {
-    //     return this.product?.rating >= starIndex;
-    // }
+    productImage(): string {
+        return this.product?.images[0]?.url || '';
+    }
+
+    isStarActive(starIndex: number): boolean {
+        return this.product ? this.product?.rating >= starIndex : false;
+    }
 }

@@ -7,7 +7,7 @@
         <button mat-icon-button disabled>
             <mat-icon>chevron_left</mat-icon>
         </button>
-        <!--        <img mat-card-image alt="Product photo" [src]="product?.images[0]?.url" />-->
+        <img mat-card-image alt="Product photo" [src]="productImage()" />
         <button mat-icon-button disabled>
             <mat-icon>chevron_right</mat-icon>
         </button>
@@ -16,14 +16,14 @@
         <p>Отзывы: {{ product?.feedbacksCount }}</p>
         <div class="raiting">
             Рейтинг:
-            <!--            <mat-icon [class.star-active]="isStarActive(1)">star</mat-icon>-->
-            <!--            <mat-icon [class.star-active]="isStarActive(2)">star</mat-icon>-->
-            <!--            <mat-icon [class.star-active]="isStarActive(3)">star</mat-icon>-->
-            <!--            <mat-icon [class.star-active]="isStarActive(4)">star</mat-icon>-->
-            <!--            <mat-icon [class.star-active]="isStarActive(5)">star</mat-icon>-->
+            <mat-icon [class.star-active]="isStarActive(1)">star</mat-icon>
+            <mat-icon [class.star-active]="isStarActive(2)">star</mat-icon>
+            <mat-icon [class.star-active]="isStarActive(3)">star</mat-icon>
+            <mat-icon [class.star-active]="isStarActive(4)">star</mat-icon>
+            <mat-icon [class.star-active]="isStarActive(5)">star</mat-icon>
         </div>
     </mat-card-content>
     <mat-card-actions class="mat-card-actions-align-end">
-        <button mat-button (click)="onProductBuy($event)">Buy</button>
+        <button mat-button (click)="onProductBuy($event, product)">Buy</button>
     </mat-card-actions>
 </mat-card>

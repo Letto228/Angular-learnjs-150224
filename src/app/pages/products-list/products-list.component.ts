@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {productsMock} from '../../shared/products/products.mock';
+import {Product} from '../../shared/products/product.interface';
 
 @Component({
     selector: 'app-products-list',
@@ -9,9 +10,9 @@ import {productsMock} from '../../shared/products/products.mock';
 export class ProductsListComponent {
     readonly products = productsMock;
 
-    onBuyClick(event: Event) {
+    onBuyClick(product: Product | null) {
         // eslint-disable-next-line no-console
-        console.log('on buy click in products list', event);
+        console.log('on buy click in products list', product);
     }
 
     onCardClick() {
