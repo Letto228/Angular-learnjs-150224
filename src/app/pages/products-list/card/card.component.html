@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card *ngIf="product" class="card">
     <mat-card-header>
         <mat-card-title>{{ product.name }}</mat-card-title>
         <mat-card-subtitle>{{ product.price }} $</mat-card-subtitle>
@@ -24,6 +24,6 @@
         </div>
     </mat-card-content>
     <mat-card-actions class="mat-card-actions-align-end">
-        <button mat-button (click)="onProductBuy($event)">Buy</button>
+        <button mat-button (click)="productBuy(product._id)">Buy</button>
     </mat-card-actions>
 </mat-card>
