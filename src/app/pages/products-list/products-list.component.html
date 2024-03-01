@@ -1,1 +1,15 @@
-<app-card (click)="onCardClick()"></app-card>
+<app-card
+    [product]="chooseRandomProduct()"
+    (click)="onCardClick()"
+    (addToCart)="addToCart($event)"
+></app-card>
+<app-card
+    [product]="chooseRandomProduct()"
+    (click)="onCardClick()"
+    (addToCart)="addToCart($event)"
+></app-card>
+<app-card
+    [product]="chooseRandomProduct()"
+    (click)="onCardClick()"
+    (addToCart)="addToCart($event)"
+></app-card>
