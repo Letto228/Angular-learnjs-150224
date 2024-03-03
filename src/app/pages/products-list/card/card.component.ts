@@ -9,10 +9,16 @@ import {Product} from 'src/app/shared/products/product.interface';
 export class CardComponent {
     @Input() product: Product | null = null;
 
-    @Output() clickProductBuy = new EventEmitter<string>();
+    @Output() clickProductBuy = new EventEmitter<Product['_id']>();
 
-    productBuy(id: string) {
-        this.clickProductBuy.emit(id);
+    productBuy(event: Event) {
+        event.stopPropagation();
+
+        if (!this.product) {
+            return;
+        }
+
+        this.clickProductBuy.emit(this.product._id);
     }
 
     isStarActive(starIndex: number): boolean {
