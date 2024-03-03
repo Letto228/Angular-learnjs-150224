@@ -1,1 +1,3 @@
-<app-card [product]="product" (isProductBoughtChange)="onCardClick()"></app-card>
+<app-card [product]="product[0]" (isProductBoughtChange)="onCardClick($event)"></app-card>
+<app-card [product]="product[1]" (isProductBoughtChange)="onCardClick($event)"></app-card>
+<app-card [product]="product[2]" (isProductBoughtChange)="onCardClick($event)"></app-card>

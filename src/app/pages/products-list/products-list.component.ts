@@ -7,15 +7,10 @@ import {productsMock} from '../../shared/products/products.mock';
     styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent {
-    isProductBoughtParent = false;
+    readonly product = productsMock;
 
-    readonly product = productsMock[0];
-
-    buyProduct() {
-        this.isProductBoughtParent = !this.isProductBoughtParent;
-    }
-
-    onCardClick() {
-        this.buyProduct();
+    onCardClick($event: string) {
+        // eslint-disable-next-line no-console
+        console.log(`${$event} добавлен в корзину`);
     }
 }
