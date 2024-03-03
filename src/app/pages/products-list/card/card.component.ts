@@ -12,7 +12,10 @@ export class CardComponent {
 
     onProductBuy(event: Event) {
         event.stopPropagation();
-        this.productBuy.emit(this.product?._id);
+
+        if (this.product?._id) {
+            this.productBuy.emit(this.product._id);
+        }
     }
 
     isStarActive(starIndex: number): boolean {
