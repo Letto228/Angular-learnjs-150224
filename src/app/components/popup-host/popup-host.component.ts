@@ -1,49 +1,44 @@
-import {
-  Component,
-  Inject,
-  Input,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core'
-import {MAT_DIALOG_DATA} from '@angular/material/dialog'
+import {Component, Inject, Input, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface IPopupHostConfig {
-  title?: string
-  dialogContent: TemplateRef<unknown | undefined>
+    title?: string;
+    dialogContent: TemplateRef<unknown | undefined>;
 }
 
 @Component({
-  selector: 'app-popup-host',
-  templateUrl: './popup-host.component.html',
-  styleUrls: ['./popup-host.component.css'],
+    selector: 'app-popup-host',
+    templateUrl: './popup-host.component.html',
+    styleUrls: ['./popup-host.component.css'],
 })
 export class PopupHostComponent {
-  isCustomDialogShow = false
+    isCustomDialogShow: boolean | null = null;
 
-  @ViewChild('viewport', {read: ViewContainerRef, static: true})
-  private readonly vcRef!: ViewContainerRef
+    @ViewChild('viewport', {read: ViewContainerRef, static: true})
+    private readonly vcRef!: ViewContainerRef | undefined;
 
-  @Input() set template(template: TemplateRef<unknown | undefined>) {
-    this.isCustomDialogShow = !!template
+    @Input() set template(template: TemplateRef<unknown>) {
+        this.isCustomDialogShow = !!template;
 
-    if (this.isCustomDialogShow) {
-      return
+        this.vcRef?.clear();
+
+        if (template) {
+            this.vcRef?.createEmbeddedView(template);
+            setTimeout(() => {
+                this.vcRef?.clear();
+                this.isCustomDialogShow = null;
+            }, 3000);
+        }
     }
 
-    this.clear()
+    constructor(
+        @Inject(MAT_DIALOG_DATA)
+        public data: IPopupHostConfig,
+    ) {
+        data.title ?? 'Unnamed Dialog';
 
-    this.vcRef.createEmbeddedView(template)
-  }
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public data: IPopupHostConfig
-  ) {
-    data.title ?? 'Unnamed Dialog'
-  }
-
-  clear(): void {
-    this.vcRef?.clear()
-  }
+        if (data && this.isCustomDialogShow === null) {
+            this.isCustomDialogShow = false;
+        }
+    }
 }
