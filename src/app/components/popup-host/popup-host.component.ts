@@ -6,19 +6,20 @@ import {Component, Input, ViewChild, TemplateRef, ViewContainerRef} from '@angul
     styleUrls: ['./popup-host.component.css'],
 })
 export class PopupHostComponent {
+    isTemplate = false;
+
     @Input() set template(templatePopup: TemplateRef<unknown> | null) {
         this.popupContainer?.clear();
 
         if (!templatePopup) {
-            this.popupContainer?.element.nativeElement.parentNode.setAttribute(
-                'class',
-                'popup-host hide',
-            );
+            this.isTemplate = false;
+            // this.popupContainer?.element.nativeElement.parentNode.classList.add('hide');
 
             return;
         }
 
-        this.popupContainer?.element.nativeElement.parentNode.setAttribute('class', 'popup-host');
+        this.isTemplate = true;
+        // this.popupContainer?.element.nativeElement.parentNode.classList.remove('hide');
         this.popupContainer?.createEmbeddedView(templatePopup);
     }
 
