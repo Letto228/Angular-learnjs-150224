@@ -1,0 +1,17 @@
+.custom-popup {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #dadada;
+  border-radius: 22px;
+  max-width: 600px;
+  width: 400px;
+  min-height: 200px;
+  z-index: 10;
+}
+
+.custom-popup.open {
+  display: block;
+}

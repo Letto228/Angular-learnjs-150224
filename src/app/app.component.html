@@ -1,14 +1,16 @@
-<app-header [applicationConfig]="applicationConfigMock" (menuClick)="sidenav.toggle()"></app-header>
+<app-header
+  [applicationConfig]="applicationConfigMock"
+  (menuClick)="sidenav.toggle()"></app-header>
 
 <app-sidenav #sidenav>
-    <ng-template #navigationTemplate>
-        {{ applicationConfigMock.title }}
-        <mat-list role="list">
-            <mat-list-item role="listitem">Item 1</mat-list-item>
-            <mat-list-item role="listitem">Item 2</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-        </mat-list>
-    </ng-template>
+  <ng-template #navigationTemplate>
+    {{ applicationConfigMock.title }}
+    <mat-list role="list">
+      <mat-list-item role="listitem">Item 1</mat-list-item>
+      <mat-list-item role="listitem">Item 2</mat-list-item>
+      <mat-list-item role="listitem">Item 3</mat-list-item>
+    </mat-list>
+  </ng-template>
 </app-sidenav>
 
 <!-- Homework stand -->
@@ -23,11 +25,15 @@
 
 <!-- <app-popup-host [template]="!closeTemplate ? first : null"></app-popup-host> -->
 
-<!-- <ng-template #first>
-    <h2>First</h2>
-    <p>Is first template</p>
+<app-popup-host
+  *ngIf="switchTemplate.value === null"
+  [template]="first"></app-popup-host>
+
+<ng-template #first>
+  <h2>First</h2>
+  <p>Is first template</p>
 </ng-template>
 <ng-template #second>
-    <h2>Second</h2>
-    <p>Is second template</p>
-</ng-template> -->
+  <h2>Second</h2>
+  <p>Is second template</p>
+</ng-template>
