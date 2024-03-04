@@ -8,18 +8,17 @@ import {Component, Input, TemplateRef, ViewChild, ViewContainerRef} from '@angul
 export class PopupHostComponent {
     isOpen = false;
 
-    @Input('template') set template(templateRef: TemplateRef<unknown> | null) {
+    @Input() set template(templateRef: TemplateRef<unknown> | null) {
         this.viewPortContainer?.clear();
+        this.isOpen = !!templateRef;
 
         if (!templateRef) {
-            this.isOpen = false;
             return;
         }
 
         this.viewPortContainer?.createEmbeddedView(templateRef);
-        this.isOpen = true;
     }
 
     @ViewChild('viewport', {read: ViewContainerRef, static: true})
-    private viewPortContainer: ViewContainerRef | undefined;
+    private readonly viewPortContainer: ViewContainerRef | undefined;
 }
