@@ -14,13 +14,8 @@ export class ProductsListComponent {
         console.log('Card click');
     }
 
-    onProductBuy(id?: string) {
-        if (id) {
-            // eslint-disable-next-line no-console
-            console.log('Товар помещен в корзину', id);
-        } else {
-            // eslint-disable-next-line no-console
-            console.log('Товар не найден');
-        }
+    onProductBuy(id: string) {
+        // eslint-disable-next-line no-console
+        console.log('Товар помещен в корзину', id);
     }
 }

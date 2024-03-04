@@ -9,19 +9,22 @@ import {Product} from 'src/app/shared/products/product.interface';
 export class CardComponent {
     @Input() product: Product | null = null;
 
-    @Output() productBuy = new EventEmitter<string | undefined>();
+    @Output() productBuy = new EventEmitter<string>();
 
-    getProductImage(product: Product | null): string {
-        if (product && product.images.length) {
-            return product.images[0].url;
+    getProductImage(): string {
+        if (this.product?.images.length) {
+            return this.product.images[0].url;
         }
 
         return '';
     }
 
-    onProductBuy(event: Event, id?: string) {
+    onProductBuy(event: Event) {
         event.stopPropagation();
-        this.productBuy.emit(id);
+
+        if (this.product) {
+            this.productBuy.emit(this.product._id);
+        }
     }
 
     isStarActive(starIndex: number): boolean {

@@ -7,7 +7,7 @@
         <button mat-icon-button disabled>
             <mat-icon>chevron_left</mat-icon>
         </button>
-        <img mat-card-image alt="Product photo" [src]="getProductImage(product)" />
+        <img mat-card-image alt="Product photo" [src]="getProductImage()" />
         <button mat-icon-button disabled>
             <mat-icon>chevron_right</mat-icon>
         </button>
@@ -24,6 +24,6 @@
         </div>
     </mat-card-content>
     <mat-card-actions class="mat-card-actions-align-end">
-        <button mat-button (click)="onProductBuy($event, product?._id)">Buy</button>
+        <button mat-button (click)="onProductBuy($event)">Buy</button>
     </mat-card-actions>
 </mat-card>
