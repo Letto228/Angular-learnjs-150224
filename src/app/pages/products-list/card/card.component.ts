@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {IProduct} from 'src/app/shared/products/product.interface';
 import {productMock} from 'src/app/shared/products/product.mock';
 
 @Component({
@@ -8,7 +7,7 @@ import {productMock} from 'src/app/shared/products/product.mock';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    readonly product: IProduct = productMock;
+    readonly product = productMock;
 
     onProductBuy(event: Event) {
         event.stopPropagation();
