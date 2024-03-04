@@ -1,8 +1,6 @@
 <app-header [applicationConfig]="applicationConfigMock" (menuClick)="sidenav.toggle()"></app-header>
 
 <app-sidenav #sidenav>
-    <!-- <ng-template #navigationTemplate> -->
-    <!-- <div id="navigation"> -->
     <ng-container ngProjectAs="navigation">
         {{ applicationConfigMock.title }}
         <mat-list role="list">
@@ -12,12 +10,7 @@
         </mat-list>
     </ng-container>
 
-    <ng-container ngProjectAs="test">
-        <h2>Test</h2>
-    </ng-container>
-
     <app-products-list></app-products-list>
-    <!-- </ng-template> -->
 </app-sidenav>
 
 <app-popup-host></app-popup-host>
