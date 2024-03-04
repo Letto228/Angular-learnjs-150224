@@ -1,29 +1,12 @@
 <mat-toolbar color="primary" (click)="onToolbarClick()">
-    <!-- <button (click)="onMenuClick(); $event.stopPropagation()" mat-icon-button aria-label="Example icon-button with menu icon" class="example-icon"> -->
     <button
         mat-icon-button
         aria-label="Example icon-button with menu icon"
         class="example-icon"
         (click)="onMenuClick($event)"
     >
-        <!--
-        <element (click)="onMenuClick($event)">
-            |
-            V
-        element.addEventListener('click', ($event) => {
-            onMenuClick($event); $event.stopPropagation()
-        });
-     -->
         <mat-icon>menu</mat-icon>
     </button>
-    <!-- <img src="{{applicationConfig.shopIconSrc}}" /> -->
-    <!-- <img [src]="applicationConfig.shopIconSrc" style="width: {{logoWidthInPx}}px" /> -->
-    <!-- <img [src]="applicationConfig.shopIconSrc" [style]="'width:' + logoWidthInPx + 'px'" /> -->
-    <!-- <img [src]="applicationConfig.shopIconSrc" [style.width.%]="logoWidthInPx" /> -->
-    <!-- <img [src]="applicationConfig.shopIconSrc" [class.max]="false" /> -->
-
-    <!-- <img class="logo" [src]="applicationConfig && applicationConfig.shopIconSrc" alt="Logo"/> -->
-    <!-- <img class="logo" [src]="applicationConfig ? applicationConfig.shopIconSrc : undefined" alt="Logo"/> -->
     <img alt="Logo" class="logo" [src]="applicationConfig?.shopIconSrc" />
     <span>{{ applicationConfig?.title }}</span>
     <span class="example-spacer"></span>

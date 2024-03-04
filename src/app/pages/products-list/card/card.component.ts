@@ -1,9 +1,5 @@
-import {Component} from '@angular/core';
-import {productsMock} from '../../../shared/products/products.mock';
-
-// const user: User = {
-
-// }
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Product} from 'src/app/shared/products/product.interface';
 
 @Component({
     selector: 'app-card',
@@ -11,19 +7,12 @@ import {productsMock} from '../../../shared/products/products.mock';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    readonly product = productsMock[0];
-    // user: {name: string} = {name: 'Alex'};
-    // user = user;
-
-    // constructor() {
-    //     this.user = null;
-    // }
+    @Input() product!: Product;
+    @Output() choisenProduct = new EventEmitter<Product>();
 
     onProductBuy(event: Event) {
         event.stopPropagation();
-
-        // eslint-disable-next-line no-console
-        console.log('Buy product');
+        this.choisenProduct.emit(this.product);
     }
 
     isStarActive(starIndex: number): boolean {

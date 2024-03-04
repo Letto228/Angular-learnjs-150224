@@ -1,1 +1,3 @@
-<app-card (click)="onCardClick()"></app-card>
+<div *ngFor="let product of productsMock" class="product-container__element">
+    <app-card [product]="product" (choisenProduct)="onProductBuy(product)"></app-card>
+</div>

@@ -11,20 +11,11 @@ export class HeaderComponent {
     // readonly applicationConfig = applicationConfigMock;
     // readonly logoWidthInPx = 100;
 
-    // @Input() applicationConfig: ApplicationConfig | null = null;
-    // @Input() applicationConfig!: ApplicationConfig;
-    // @Input() applicationConfig?: ApplicationConfig;
     @Input() applicationConfig: ApplicationConfig | undefined;
-    // applicationConfig = undefined;
-
-    // @Output() menuClick = new EventEmitter<MouseEvent>();
-    // @Output() menuClick = new EventEmitter<string>();
-    // @Output() menuClick = new EventEmitter<void>();
     @Output() readonly menuClick = new Subject<void>();
 
     onMenuClick(event: MouseEvent) {
         event.stopPropagation();
-
         this.menuClick.next();
 
         // eslint-disable-next-line no-console

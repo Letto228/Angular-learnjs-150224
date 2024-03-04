@@ -1,7 +1,7 @@
 :host {
     width: 300px;
     height: 500px;
-    display: block;
+    display: flex;
 }
 
 .card {
