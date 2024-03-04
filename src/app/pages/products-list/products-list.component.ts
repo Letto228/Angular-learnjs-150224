@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 import {Component} from '@angular/core';
-import {productsMock} from 'src/app/shared/products/products.mock';
+import {productsMock} from '../../shared/products/products.mock';
+import {Product} from '../../shared/products/product.interface';
 
 @Component({
     selector: 'app-products-list',
@@ -8,17 +8,10 @@ import {productsMock} from 'src/app/shared/products/products.mock';
     styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent {
-    readonly productParent = productsMock[1];
+    readonly products = productsMock;
 
-    isProductPurchasedParent = false;
-
-    onProductsListBuy(id: string) {
+    onProductBuy(id: Product['_id']) {
         // eslint-disable-next-line no-console
-
-        console.log('product id:', id);
-    }
-
-    onCardClick() {
-        this.isProductPurchasedParent = !this.isProductPurchasedParent;
+        console.log(id);
     }
 }

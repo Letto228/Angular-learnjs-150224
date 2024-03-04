@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Product} from 'src/app/shared/products/product.interface';
+import {Product} from '../../../shared/products/product.interface';
 
 @Component({
     selector: 'app-card',
@@ -8,15 +8,20 @@ import {Product} from 'src/app/shared/products/product.interface';
 })
 export class CardComponent {
     @Input() product: Product | null = null;
-    @Input() isProductPurchased = false;
 
-    @Output() productPurchased = new EventEmitter<string>();
+    @Output() readonly buy = new EventEmitter<Product['_id']>();
 
-    onProductBuy() {
-        this.productPurchased.emit(this.product?._id);
+    onProductBuy(event: Event) {
+        event.stopPropagation();
+
+        if (!this.product) {
+            return;
+        }
+
+        this.buy.emit(this.product._id);
     }
 
     isStarActive(starIndex: number): boolean {
-        return this.product ? this.product.rating >= starIndex : false;
+        return !!this.product && this.product.rating >= starIndex;
     }
 }

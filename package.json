@@ -9,7 +9,7 @@
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "prettier:fix:all": "prettier --write .",
-        "prepare": "husky install"
+        "prepare": "husky"
     },
     "private": true,
     "dependencies": {
@@ -57,7 +57,7 @@
         "eslint-plugin-rxjs": "^5.0.3",
         "eslint-plugin-rxjs-angular": "^2.0.1",
         "eslint-plugin-unicorn": "^47.0.0",
-        "husky": "^8.0.3",
+        "husky": "^9.0.11",
         "jasmine-core": "~4.6.0",
         "karma": "~6.4.0",
         "karma-chrome-launcher": "~3.2.0",

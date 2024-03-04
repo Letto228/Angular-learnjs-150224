@@ -1,17 +1,45 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {
+    Component,
+    ContentChild,
+    OnInit,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+} from '@angular/core';
+import {MatDrawer} from '@angular/material/sidenav';
 
 @Component({
     selector: 'app-sidenav',
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.component.css'],
 })
-export class SidenavComponent {
-    @Input() isSidenavOpened = false;
+export class SidenavComponent implements OnInit {
+    /* eslint-disable @typescript-eslint/prefer-readonly */
 
-    @Output() readonly isSidenavOpenedChange = new EventEmitter<boolean>();
+    @ViewChild(MatDrawer)
+    private drawer: MatDrawer | undefined;
 
-    toggleIsSidenavOpened() {
-        // this.isSidenavOpened = !this.isSidenavOpened;
-        this.isSidenavOpenedChange.emit(!this.isSidenavOpened);
+    @ViewChild('viewport', {read: ViewContainerRef, static: true})
+    private viewportContainer: ViewContainerRef | undefined;
+
+    @ContentChild('navigationTemplate', {static: true})
+    private navigationTemplate: TemplateRef<unknown> | undefined;
+
+    /* eslint-enable @typescript-eslint/prefer-readonly */
+
+    ngOnInit(): void {
+        this.insertNavigation();
+    }
+
+    toggle() {
+        this.drawer?.toggle();
+    }
+
+    private insertNavigation() {
+        if (!this.navigationTemplate) {
+            return;
+        }
+
+        this.viewportContainer?.createEmbeddedView(this.navigationTemplate);
     }
 }

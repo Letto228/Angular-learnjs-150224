@@ -9,24 +9,26 @@ import {applicationConfigMock} from './shared/application-config/application-con
     interpolation: ['{{', '}}'],
 })
 export class AppComponent {
-    readonly title = 'Angular-learnjs-150224';
     readonly applicationConfigMock = applicationConfigMock;
 
-    isSidenavOpenedParent = false;
+    switchTemplate = false;
+    closeTemplate = true;
 
-    toggleParentIsSidenavOpened() {
-        this.isSidenavOpenedParent = !this.isSidenavOpenedParent;
-    }
-
-    onInputSend(event: Event) {
-        // eslint-disable-next-line no-console
-        console.log(event);
-    }
-
-    onMenuClick() {
-        // eslint-disable-next-line no-console
-        console.log('Menu click in AppComponent');
-
-        this.toggleParentIsSidenavOpened();
+    constructor() {
+        setTimeout(() => {
+            this.switchTemplate = !this.switchTemplate;
+            // or
+            this.closeTemplate = !this.closeTemplate;
+        }, 3000);
+        setTimeout(() => {
+            this.switchTemplate = !this.switchTemplate;
+            // or
+            this.closeTemplate = !this.closeTemplate;
+        }, 6000);
+        setTimeout(() => {
+            this.switchTemplate = !this.switchTemplate;
+            // or
+            this.closeTemplate = !this.closeTemplate;
+        }, 9000);
     }
 }

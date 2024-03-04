@@ -1,6 +1,5 @@
-<app-card
-    [product]="productParent"
-    [isProductPurchased]="isProductPurchasedParent"
-    (productPurchased)="onProductsListBuy($event)"
-    (click)="onCardClick()"
-></app-card>
+<app-card class="card" [product]="products[0]" (buy)="onProductBuy($event)"></app-card>
+<app-card class="card" [product]="products[1]" (buy)="onProductBuy($event)"></app-card>
+<app-card class="card" [product]="products[2]" (buy)="onProductBuy($event)"></app-card>
+<app-card class="card" [product]="products[3]" (buy)="onProductBuy($event)"></app-card>
+<app-card class="card" [product]="products[4]" (buy)="onProductBuy($event)"></app-card>
