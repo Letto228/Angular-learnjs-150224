@@ -14,17 +14,17 @@ export class AppComponent {
 
     constructor() {
         setTimeout(() => {
-            this.switchTemplate = !this.switchTemplate;
+            // this.switchTemplate = !this.switchTemplate;
             // or
             this.closeTemplate = !this.closeTemplate;
         }, 3000);
         setTimeout(() => {
-            this.switchTemplate = !this.switchTemplate;
+            // this.switchTemplate = !this.switchTemplate;
             // or
             this.closeTemplate = !this.closeTemplate;
         }, 6000);
         setTimeout(() => {
-            this.switchTemplate = !this.switchTemplate;
+            // this.switchTemplate = !this.switchTemplate;
             // or
             this.closeTemplate = !this.closeTemplate;
         }, 9000);
