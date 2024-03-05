@@ -1,9 +1,5 @@
-import {Component} from '@angular/core';
-import {productsMock} from '../../../shared/products/products.mock';
-
-// const user: User = {
-
-// }
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {IProduct} from '../../../shared/products/product.interface';
 
 @Component({
     selector: 'app-card',
@@ -11,22 +7,28 @@ import {productsMock} from '../../../shared/products/products.mock';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    readonly product = productsMock[0];
-    // user: {name: string} = {name: 'Alex'};
-    // user = user;
+    @Input({required: true}) product!: IProduct;
+    @Output() itemToCart = new EventEmitter<string>();
+    @Output() itemToFavorite = new EventEmitter<string>();
+    currentSLide = 0;
 
-    // constructor() {
-    //     this.user = null;
-    // }
+    buyProduct(productId: string): void {
+        this.itemToCart.emit(productId);
+    }
 
-    onProductBuy(event: Event) {
-        event.stopPropagation();
-
-        // eslint-disable-next-line no-console
-        console.log('Buy product');
+    buyFavorite(productId: string): void {
+        this.itemToFavorite.emit(productId);
     }
 
     isStarActive(starIndex: number): boolean {
         return this.product.rating >= starIndex;
+    }
+
+    nextSlide(): void {
+        this.currentSLide = ++this.currentSLide % this.product.images.length;
+    }
+
+    prevSlide(): void {
+        this.currentSLide = --this.currentSLide % this.product.images.length;
     }
 }

@@ -1,1 +1,23 @@
-<app-card (click)="onCardClick()"></app-card>
+<app-card
+    [product]="products[1]"
+    (itemToCart)="productToCart($event)"
+    (itemToFavorite)="getFavoriteProduct($event)"
+></app-card>
+
+<app-card
+    [product]="products[2]"
+    (itemToCart)="productToCart($event)"
+    (itemToFavorite)="getFavoriteProduct($event)"
+></app-card>
+
+<app-card
+    [product]="products[3]"
+    (itemToCart)="productToCart($event)"
+    (itemToFavorite)="getFavoriteProduct($event)"
+></app-card>
+
+<app-card
+    [product]="products[4]"
+    (itemToCart)="productToCart($event)"
+    (itemToFavorite)="getFavoriteProduct($event)"
+></app-card>
