@@ -1,0 +1,17 @@
+.product-card {
+    max-width: 370px;
+    padding: 24px 16px;
+}
+.product-card_title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+.product-card_image {
+    background-size: cover;
+    margin-bottom: 16px;
+}
+.product-card_price {
+    font-size: 22px;
+    margin-bottom: 16px;
+}

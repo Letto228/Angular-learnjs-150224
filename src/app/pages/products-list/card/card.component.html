@@ -1,0 +1,39 @@
+<mat-card class="product-card">
+    <mat-card-header>
+        <mat-card-title class="product-card_title">
+            {{ productCard.name }}
+        </mat-card-title>
+    </mat-card-header>
+    <img
+        mat-card-image
+        class="product-card_image p-3"
+        [src]="productCard.images[0].url"
+        [alt]="productCard.images[0].url"
+    />
+
+    <mat-card-content class="product-card_price mt-3">
+        <p>Prices: {{ productCard.price }} $</p>
+    </mat-card-content>
+
+    <mat-card-actions class="d-flex justify-content-between gap-3 mt-4">
+        <button
+            mat-button
+            mat-stroked-button
+            color="accent"
+            class="w-50"
+            (click)="buyFavorite(productCard._id)"
+        >
+            <mat-icon>favorite</mat-icon>
+            Add Favorite
+        </button>
+        <button
+            mat-stroked-button
+            mat-button
+            color="primary"
+            class="w-50"
+            (click)="buyProduct(productCard._id)"
+        >
+            Buy now
+        </button>
+    </mat-card-actions>
+</mat-card>
