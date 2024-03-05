@@ -1,1 +1,5 @@
-<app-card (click)="onCardClick()"></app-card>
+<app-card
+    [product]="productsMock[0]"
+    (click)="onCardClick()"
+    (buyProduct)="buyProduct($event)"
+></app-card>
