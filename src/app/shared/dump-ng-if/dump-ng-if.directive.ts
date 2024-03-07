@@ -1,4 +1,4 @@
-import {Directive, Input, TemplateRef, ViewContainerRef, inject} from '@angular/core';
+import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
 
 @Directive({
     selector: '[appDumpNgIf]',
@@ -18,13 +18,10 @@ export class DumpNgIfDirective<T> {
         }
     }
 
-    // constructor(
-    //     private readonly viewContainerRef: ViewContainerRef,
-    //     private readonly templateRef: TemplateRef<unknown>,
-    // ) {}
-
-    private readonly viewContainerRef = inject(ViewContainerRef);
-    private readonly templateRef = inject(TemplateRef);
+    constructor(
+        private readonly viewContainerRef: ViewContainerRef,
+        private readonly templateRef: TemplateRef<unknown>,
+    ) {}
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     static ngTemplateGuard_appDumpNgIf<T>(
