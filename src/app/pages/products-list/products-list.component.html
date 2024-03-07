@@ -1,1 +1,5 @@
-<app-card (click)="onCardClick()"></app-card>
+<app-card [product]="productParent[0]" (bayProduct)="bayProductItem($event)"></app-card>
+<app-card [product]="productParent[1]" (bayProduct)="bayProductItem($event)"></app-card>
+<app-card [product]="productParent[2]" (bayProduct)="bayProductItem($event)"></app-card>
+<app-card [product]="productParent[3]" (bayProduct)="bayProductItem($event)"></app-card>
+<app-card [product]="productParent[4]" (bayProduct)="bayProductItem($event)"></app-card>
