@@ -7,7 +7,7 @@
         <button mat-icon-button disabled>
             <mat-icon>chevron_left</mat-icon>
         </button>
-        <img mat-card-image alt="Product photo" src="{{ product.images[0].url }}" />
+        <img mat-card-image alt="Product photo" [src]="product.images[0].url" />
         <button mat-icon-button disabled>
             <mat-icon>chevron_right</mat-icon>
         </button>
