@@ -18,9 +18,9 @@ export class CardComponent {
     //     this.user = null;
     // }
     @Input() product: Product | undefined;
-    @Output() placeGoods = new EventEmitter<string>();
+    @Output() placeGoods = new EventEmitter<void>();
 
-    onProductBuy(event: Event) {
+    onProductBuy(event: Event): void {
         event.stopPropagation();
 
         this.placeGoods.emit();
