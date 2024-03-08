@@ -1,7 +1,7 @@
 :host {
-    width: 300px;
     height: 500px;
     display: block;
+    flex: 0 1 300px;
 }
 
 .card {
@@ -17,7 +17,7 @@
     text-align: right;
 }
 
-.raiting {
+.rating {
     display: flex;
     align-items: center;
 }
@@ -27,7 +27,7 @@
     text-shadow: 0 0 2px black;
 }
 
-.galerey {
+.gallery {
     height: 100%;
     min-height: 0;
     display: flex;
@@ -35,7 +35,7 @@
     margin-bottom: 8px;
 }
 
-.galerey img {
+.gallery img {
     width: 100%;
     display: block;
     overflow: hidden;
