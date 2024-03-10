@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {productsMock} from '../../shared/products/products.mock';
 import {Product} from '../../shared/products/product.interface';
+import {LoadDirection} from '../../shared/scroll-with-loading/scroll-with-loading.directive';
 
 @Component({
     selector: 'app-products-list',
@@ -30,5 +31,15 @@ export class ProductsListComponent implements OnInit {
     onProductBuy(id: Product['_id']) {
         // eslint-disable-next-line no-console
         console.log(id);
+    }
+
+    onLoad(direction: LoadDirection): void {
+        if (direction === LoadDirection.Top) {
+            // eslint-disable-next-line no-console
+            console.log('Load data at the top');
+        } else if (direction === LoadDirection.Bottom) {
+            // eslint-disable-next-line no-console
+            console.log('Load data at the bottom');
+        }
     }
 }
