@@ -31,4 +31,17 @@ export class ProductsListComponent implements OnInit {
         // eslint-disable-next-line no-console
         console.log(id);
     }
+
+    loadMore(pos: string): void {
+        let message = '';
+
+        if (pos === 'top') {
+            message = 'Top loading';
+        } else if (pos === 'bottom') {
+            message = 'Bottom loading';
+        }
+
+        // eslint-disable-next-line no-console
+        console.log(message);
+    }
 }

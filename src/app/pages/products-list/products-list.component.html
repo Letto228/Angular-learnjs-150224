@@ -1,15 +1,33 @@
 <!-- <ng-template [appDumpNgIf]="products"> -->
 <ng-template let-productsFromNgIf [ngIf]="products" [ngIfElse]="loaderTemplate">
     <!-- Раскомментировать div при выполнении ДЗ -->
-    <!-- <div appScrollWithLoading class="scroll-container" (loadData)="onLoad($event)"> -->
-
-    <app-card class="card" [product]="productsFromNgIf[0]" (buy)="onProductBuy($event)"></app-card>
-    <app-card class="card" [product]="productsFromNgIf[1]" (buy)="onProductBuy($event)"></app-card>
-    <app-card class="card" [product]="productsFromNgIf[2]" (buy)="onProductBuy($event)"></app-card>
-    <app-card class="card" [product]="productsFromNgIf[3]" (buy)="onProductBuy($event)"></app-card>
-    <app-card class="card" [product]="productsFromNgIf[4]" (buy)="onProductBuy($event)"></app-card>
-
-    <!-- </div> -->
+    <div appScrollWithLoading class="scroll-container" (loadData)="loadMore($event)">
+        <app-card
+            class="card"
+            [product]="productsFromNgIf[0]"
+            (buy)="onProductBuy($event)"
+        ></app-card>
+        <app-card
+            class="card"
+            [product]="productsFromNgIf[1]"
+            (buy)="onProductBuy($event)"
+        ></app-card>
+        <app-card
+            class="card"
+            [product]="productsFromNgIf[2]"
+            (buy)="onProductBuy($event)"
+        ></app-card>
+        <app-card
+            class="card"
+            [product]="productsFromNgIf[3]"
+            (buy)="onProductBuy($event)"
+        ></app-card>
+        <app-card
+            class="card"
+            [product]="productsFromNgIf[4]"
+            (buy)="onProductBuy($event)"
+        ></app-card>
+    </div>
 </ng-template>
 
 <ng-template #loaderTemplate>
