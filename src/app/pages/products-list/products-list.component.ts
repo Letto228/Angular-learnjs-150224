@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {LoadDirection} from 'src/app/shared/application-config/load-directions';
 import {productsMock} from '../../shared/products/products.mock';
 import {Product} from '../../shared/products/product.interface';
 
@@ -16,7 +17,6 @@ export class ProductsListComponent implements OnInit {
     ngOnInit(): void {
         setTimeout(() => {
             this.products = productsMock;
-
             this.changeDetectorRef.markForCheck();
         }, 3000);
 
@@ -30,5 +30,10 @@ export class ProductsListComponent implements OnInit {
     onProductBuy(id: Product['_id']) {
         // eslint-disable-next-line no-console
         console.log(id);
+    }
+
+    onLoad(event: LoadDirection) {
+        // eslint-disable-next-line no-console
+        console.log(event);
     }
 }
