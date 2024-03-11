@@ -13,10 +13,6 @@ export class CardComponent {
 
     @Output() readonly buy = new EventEmitter<Product['_id']>();
 
-    // constructor() {
-    //     console.log('Card create');
-    // }
-
     get productImages(): ProductImage[] | undefined {
         return this.product?.images;
     }

@@ -4,7 +4,6 @@
         <mat-card-subtitle>{{ product?.price }} $</mat-card-subtitle>
     </mat-card-header>
     <div *appCarousel="let img of productImages; let next = next; let back = back" class="galerey">
-        <!-- {{productImages}} -->
         <button mat-icon-button (click)="back()">
             <mat-icon>chevron_left</mat-icon>
         </button>

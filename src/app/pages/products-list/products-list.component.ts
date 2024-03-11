@@ -9,32 +9,16 @@ import {Product} from '../../shared/products/product.interface';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent implements OnInit {
-    private productsStore: Product[] | null = null;
-
-    get products(): Product[] | null {
-        // eslint-disable-next-line no-console
-        console.log('Calculate products');
-
-        return this.productsStore;
-    }
+    products: Product[] | null = null;
 
     constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit(): void {
         setTimeout(() => {
-            this.productsStore = productsMock;
+            this.products = productsMock;
 
             this.changeDetectorRef.markForCheck();
         }, 3000);
-
-        setTimeout(() => {
-            // this.productsStore = productsMock.map(item => ({...item, _id: item._id + 1}));
-            // this.productsStore = productsMock.map(item => ({...item}));
-            this.productsStore = productsMock.map(item => ({...item, feedbacksCount: 10}));
-            // this.productsStore = [...productsMock];
-
-            this.changeDetectorRef.markForCheck();
-        }, 6000);
     }
 
     onProductBuy(id: Product['_id']) {
@@ -43,8 +27,6 @@ export class ProductsListComponent implements OnInit {
     }
 
     trackBy(_index: number, item: Product): Product['_id'] {
-        // return item;
-        // return item.name + item.price;
         return item._id;
     }
 }

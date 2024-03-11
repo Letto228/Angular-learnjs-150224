@@ -10,8 +10,6 @@ export class DumpNgIfDirective<T> {
 
         if (value && !isContainerHasView) {
             const context: DumpNgIfContext<T> = {
-                // value,
-                // name: 'Egor',
                 appDumpNgIf: value,
                 $implicit: value,
             };
