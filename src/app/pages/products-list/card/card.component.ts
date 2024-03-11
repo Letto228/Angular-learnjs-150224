@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from '../../../shared/products/product.interface';
+import {ProductImage} from '../../../shared/products/product-image.interface';
 
 @Component({
     selector: 'app-card',
@@ -11,6 +12,14 @@ export class CardComponent {
     @Input() product: Product | null = null;
 
     @Output() readonly buy = new EventEmitter<Product['_id']>();
+
+    // constructor() {
+    //     console.log('Card create');
+    // }
+
+    get productImages(): ProductImage[] | undefined {
+        return this.product?.images;
+    }
 
     onProductBuy(event: Event) {
         event.stopPropagation();

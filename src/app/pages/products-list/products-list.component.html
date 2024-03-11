@@ -1,35 +1,50 @@
-<!-- <ng-template [appDumpNgIf]="products"> -->
-<ng-template let-productsFromNgIf [ngIf]="products" [ngIfElse]="loaderTemplate">
-    <!-- Раскомментировать div при выполнении ДЗ -->
-    <div appScrollWithLoading class="scroll-container" (loadData)="onLoad($event)">
-        <app-card
-            class="card"
-            [product]="productsFromNgIf[0]"
-            (buy)="onProductBuy($event)"
-        ></app-card>
-        <app-card
-            class="card"
-            [product]="productsFromNgIf[1]"
-            (buy)="onProductBuy($event)"
-        ></app-card>
-        <app-card
-            class="card"
-            [product]="productsFromNgIf[2]"
-            (buy)="onProductBuy($event)"
-        ></app-card>
-        <app-card
-            class="card"
-            [product]="productsFromNgIf[3]"
-            (buy)="onProductBuy($event)"
-        ></app-card>
-        <app-card
-            class="card"
-            [product]="productsFromNgIf[4]"
-            (buy)="onProductBuy($event)"
-        ></app-card>
-    </div>
-</ng-template>
+<!-- <ng-template [appDumpNgIf]="products" let-productsFromNgIf="ngIf" let-userName="name"> -->
+<!-- <ng-template let-productsFromNgIf="ngIf" [ngIf]="products" [ngIfElse]="loaderTemplate"> -->
+<!-- <ng-template let-productsFromNgIf [ngIf]="products" [ngIfElse]="loaderTemplate"> -->
+<!-- {{userName}} -->
+<!-- <div *ngIf="products; else: loaderTemplate; let productsFromNgIf = ngIf" class="scroll-container"> -->
+<!-- <div *ngIf="products; else: loaderTemplate; let productsFromNgIf" class="scroll-container"> -->
+<!-- <div *ngIf="products; else: loaderTemplate; ngIf as productsFromNgIf" class="scroll-container"> -->
+<!-- <div *ngIf="products as productsFromNgIf; else: loaderTemplate; let test = abracadabra" class="scroll-container"> -->
+<!-- <div *appDumpNgIf="products as productsFromNgIf" class="scroll-container"> -->
 
+<div *ngIf="products as productsFromNgIf; else loaderTemplate" class="scroll-container">
+    <app-card
+        *ngFor="let product of productsFromNgIf; trackBy: trackBy"
+        class="card"
+        [product]="product"
+        (buy)="onProductBuy($event)"
+    ></app-card>
+    <!-- <app-card
+        class="card"
+        [product]="productsFromNgIf[0]"
+        (buy)="onProductBuy($event)"
+    ></app-card>
+    <app-card
+        class="card"
+        [product]="productsFromNgIf[1]"
+        (buy)="onProductBuy($event)"
+    ></app-card>
+    <app-card
+        class="card"
+        [product]="productsFromNgIf[2]"
+        (buy)="onProductBuy($event)"
+    ></app-card>
+    <app-card
+        class="card"
+        [product]="productsFromNgIf[3]"
+        (buy)="onProductBuy($event)"
+    ></app-card>
+    <app-card
+        class="card"
+        [product]="productsFromNgIf[4]"
+        (buy)="onProductBuy($event)"
+    ></app-card> -->
+</div>
+<!-- </ng-template> -->
+
+<!-- Its bad -->
+<!-- <ng-template #loaderTemplate [ngIf]="!products"> -->
 <ng-template #loaderTemplate>
     <mat-spinner></mat-spinner>
 </ng-template>

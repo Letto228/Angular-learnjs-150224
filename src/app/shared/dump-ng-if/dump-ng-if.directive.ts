@@ -1,4 +1,5 @@
 import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
+import {DumpNgIfContext} from './dump-ng-if-context.interface';
 
 @Directive({
     selector: '[appDumpNgIf]',
@@ -8,7 +9,14 @@ export class DumpNgIfDirective<T> {
         const isContainerHasView = this.viewContainerRef.length;
 
         if (value && !isContainerHasView) {
-            this.viewContainerRef.createEmbeddedView(this.templateRef);
+            const context: DumpNgIfContext<T> = {
+                // value,
+                // name: 'Egor',
+                appDumpNgIf: value,
+                $implicit: value,
+            };
+
+            this.viewContainerRef.createEmbeddedView(this.templateRef, context);
 
             return;
         }
@@ -20,13 +28,20 @@ export class DumpNgIfDirective<T> {
 
     constructor(
         private readonly viewContainerRef: ViewContainerRef,
-        private readonly templateRef: TemplateRef<unknown>,
+        private readonly templateRef: TemplateRef<DumpNgIfContext<T>>,
     ) {}
+
+    static ngTemplateContextGuard<T>(
+        _directive: DumpNgIfDirective<T>,
+        _context: unknown,
+    ): _context is DumpNgIfContext<T> {
+        return true;
+    }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     static ngTemplateGuard_appDumpNgIf<T>(
         _directive: DumpNgIfDirective<T>,
-        _inputValue: T | undefined | null,
+        _inputValue: unknown,
     ): _inputValue is T {
         return true;
     }

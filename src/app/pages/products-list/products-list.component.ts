@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {productsMock} from '../../shared/products/products.mock';
 import {Product} from '../../shared/products/product.interface';
-import {LoadDirection} from '../../shared/scroll-with-loading/enum/load-direction';
 
 @Component({
     selector: 'app-products-list',
@@ -10,19 +9,29 @@ import {LoadDirection} from '../../shared/scroll-with-loading/enum/load-directio
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent implements OnInit {
-    products: Product[] | null = null;
+    private productsStore: Product[] | null = null;
+
+    get products(): Product[] | null {
+        // eslint-disable-next-line no-console
+        console.log('Calculate products');
+
+        return this.productsStore;
+    }
 
     constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit(): void {
         setTimeout(() => {
-            this.products = productsMock;
+            this.productsStore = productsMock;
 
             this.changeDetectorRef.markForCheck();
         }, 3000);
 
         setTimeout(() => {
-            this.products = productsMock.map(product => ({...product, rating: 5}));
+            // this.productsStore = productsMock.map(item => ({...item, _id: item._id + 1}));
+            // this.productsStore = productsMock.map(item => ({...item}));
+            this.productsStore = productsMock.map(item => ({...item, feedbacksCount: 10}));
+            // this.productsStore = [...productsMock];
 
             this.changeDetectorRef.markForCheck();
         }, 6000);
@@ -33,8 +42,9 @@ export class ProductsListComponent implements OnInit {
         console.log(id);
     }
 
-    onLoad(direction: LoadDirection) {
-        // eslint-disable-next-line no-console
-        console.log(`load ${direction}`);
+    trackBy(_index: number, item: Product): Product['_id'] {
+        // return item;
+        // return item.name + item.price;
+        return item._id;
     }
 }
