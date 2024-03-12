@@ -1,33 +1,16 @@
 <app-header [applicationConfig]="applicationConfigMock" (menuClick)="sidenav.toggle()"></app-header>
 
 <app-sidenav #sidenav>
-    <ng-template #navigationTemplate>
+    <ng-container ngProjectAs="navigation">
         {{ applicationConfigMock.title }}
         <mat-list role="list">
-            <mat-list-item role="listitem">Item 1</mat-list-item>
-            <mat-list-item role="listitem">Item 2</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item appInsertShadow role="listitem">Item 1</mat-list-item>
+            <mat-list-item appInsertShadow role="listitem">Item 2</mat-list-item>
+            <mat-list-item appInsertShadow role="listitem">Item 3</mat-list-item>
         </mat-list>
-    </ng-template>
+    </ng-container>
+
+    <app-products-list></app-products-list>
 </app-sidenav>
 
-<!-- Homework stand -->
-
-<!-- Switch template -->
-
-<!-- <app-popup-host [template]="switchTemplate ? first : second"></app-popup-host> -->
-
-<!-- or -->
-
-<!-- Close template -->
-
-<app-popup-host [template]="!closeTemplate ? first : null"></app-popup-host>
-
-<ng-template #first>
-    <h2>First</h2>
-    <p>Is first template</p>
-</ng-template>
-<ng-template #second>
-    <h2>Second</h2>
-    <p>Is second template</p>
-</ng-template>
+<app-popup-host></app-popup-host>

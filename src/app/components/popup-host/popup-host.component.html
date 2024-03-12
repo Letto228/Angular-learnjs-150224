@@ -1,5 +1,6 @@
-<div class="popup-bg" [class.closed]="!isOpen">
-    <div class="popup-wrapper">
-        <ng-container #popup></ng-container>
+<!-- <div class="popup-host" [class.empty]="template"> -->
+<div class="popup-host" [class.empty]="isViewportClear">
+    <div class="content-wrapper">
+        <ng-container #viewport></ng-container>
     </div>
 </div>

@@ -6,10 +6,11 @@ describe('PopupHostComponent', () => {
     let component: PopupHostComponent;
     let fixture: ComponentFixture<PopupHostComponent>;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [PopupHostComponent],
-        });
+        }).compileComponents();
+
         fixture = TestBed.createComponent(PopupHostComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();

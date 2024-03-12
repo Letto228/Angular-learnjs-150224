@@ -1,4 +1,4 @@
-.popup-bg {
+.popup-host {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -7,19 +7,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
 }
 
-.popup-wrapper {
-    z-index: 2;
-    padding: 20px;
-    height: 70%;
-    width: 40%;
-    background-color: #fff;
-    border-radius: 15px;
+.empty {
+    display: none;
 }
 
-.closed {
-    display: none;
+.content-wrapper {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
 }

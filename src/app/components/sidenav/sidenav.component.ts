@@ -1,45 +1,22 @@
-import {
-    Component,
-    ContentChild,
-    OnInit,
-    TemplateRef,
-    ViewChild,
-    ViewContainerRef,
-} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {MatDrawer} from '@angular/material/sidenav';
 
 @Component({
     selector: 'app-sidenav',
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidenavComponent implements OnInit {
-    /* eslint-disable @typescript-eslint/prefer-readonly */
-
+export class SidenavComponent {
+    // eslint-disable-next-line @typescript-eslint/prefer-readonly
     @ViewChild(MatDrawer)
     private drawer: MatDrawer | undefined;
 
-    @ViewChild('viewport', {read: ViewContainerRef, static: true})
-    private viewportContainer: ViewContainerRef | undefined;
-
-    @ContentChild('navigationTemplate', {static: true})
-    private navigationTemplate: TemplateRef<unknown> | undefined;
-
-    /* eslint-enable @typescript-eslint/prefer-readonly */
-
-    ngOnInit(): void {
-        this.insertNavigation();
-    }
+    constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
     toggle() {
         this.drawer?.toggle();
-    }
 
-    private insertNavigation() {
-        if (!this.navigationTemplate) {
-            return;
-        }
-
-        this.viewportContainer?.createEmbeddedView(this.navigationTemplate);
+        this.changeDetectorRef.markForCheck();
     }
 }

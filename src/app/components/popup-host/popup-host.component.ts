@@ -1,30 +1,62 @@
-import {Component, Input, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+} from '@angular/core';
 
 @Component({
     selector: 'app-popup-host',
     templateUrl: './popup-host.component.html',
     styleUrls: ['./popup-host.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopupHostComponent {
-    isOpen = false;
-
     @Input() set template(template: TemplateRef<unknown> | null) {
-        this.getPopup(template);
+        this.updatePopupContent(template);
     }
 
-    @ViewChild('popup', {read: ViewContainerRef, static: true})
-    private readonly popupViewContainer: ViewContainerRef | undefined;
+    // eslint-disable-next-line @typescript-eslint/prefer-readonly
+    @ViewChild('viewport', {read: ViewContainerRef, static: true})
+    private viewportViewContainer: ViewContainerRef | undefined;
 
-    private getPopup(template: TemplateRef<unknown> | null) {
-        this.popupViewContainer?.clear();
+    get isViewportClear(): boolean {
+        return !this.viewportViewContainer?.length;
+    }
 
-        if (!template) {
-            this.isOpen = false;
+    private updatePopupContent(template: TemplateRef<unknown> | null) {
+        this.viewportViewContainer?.clear();
 
-            return;
+        if (template) {
+            this.viewportViewContainer?.createEmbeddedView(template);
         }
-
-        this.isOpen = true;
-        this.popupViewContainer?.createEmbeddedView(template);
     }
 }
+
+// @Component({
+//     selector: 'app-popup-host',
+//     templateUrl: './popup-host.component.html',
+//     styleUrls: ['./popup-host.component.css'],
+// })
+// export class PopupHostComponent implements OnChanges {
+//     @Input() template: TemplateRef<unknown> | null = null;
+
+//     @ViewChild('viewport', {read: ViewContainerRef, static: true})
+//     private readonly viewportViewContainer?: ViewContainerRef;
+
+//     ngOnChanges({template}: SimpleChanges) {
+//         if (template) {
+//             this.updatePopupContent(this.template);
+//         }
+//     }
+
+//     private updatePopupContent(template: TemplateRef<unknown> | null) {
+//         this.viewportViewContainer?.clear();
+
+//         if (template) {
+//             this.viewportViewContainer?.createEmbeddedView(template);
+//         }
+//     }
+// }
