@@ -39,7 +39,7 @@ export class SidenavComponent implements OnInit {
         if (!this.navigationTemplate) {
             return;
         }
-
+        console.log('sidenav', this.navigationTemplate)
         this.viewportContainer?.createEmbeddedView(this.navigationTemplate);
     }
 }
