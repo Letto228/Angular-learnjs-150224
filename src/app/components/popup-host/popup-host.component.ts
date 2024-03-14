@@ -14,7 +14,7 @@ export class PopupHostComponent {
         this.updateTemplate(templateRef);
     }
 
-    @ViewChild('viewport', {read: ViewContainerRef})
+    @ViewChild('viewport', {read: ViewContainerRef, static: true})
     private readonly viewportContainer: ViewContainerRef | undefined;
 
     private updateTemplate(templateRef: TemplateRef<unknown> | null): void {
