@@ -10,31 +10,25 @@ export class ScrollWithLoadingDirective {
     private readonly borderOffset = 100;
     private isEventEmitted = false;
 
-    @HostListener('scroll', [
-        '$event.srcElement.scrollTop',
-        '$event.srcElement.scrollHeight',
-        '$event.srcElement.clientHeight',
-    ])
-    onScroll(scrollPosition: number, scrollHeight: number, clientHeight: number) {
+    @HostListener('scroll', ['$event.target'])
+    onScroll({scrollTop, clientHeight, scrollHeight}: HTMLElement) {
         const scrollMaxLengthWithoutEvent = scrollHeight - clientHeight - this.borderOffset;
 
-        if (scrollPosition < scrollMaxLengthWithoutEvent && scrollPosition > this.borderOffset) {
+        if (scrollTop < scrollMaxLengthWithoutEvent && scrollTop > this.borderOffset) {
             this.isEventEmitted = false;
 
             return;
         }
 
         if (!this.isEventEmitted) {
-            this.emitLoadDataEvent(scrollPosition, scrollMaxLengthWithoutEvent);
+            this.emitLoadDataEvent(scrollTop, scrollMaxLengthWithoutEvent);
             this.isEventEmitted = true;
         }
     }
 
     private emitLoadDataEvent(scrollPosition: number, scrollMaxLengthWithoutEvent: number) {
-        if (scrollPosition > scrollMaxLengthWithoutEvent) {
-            this.loadData.emit(LoadDirection.Down);
-        } else if (scrollPosition < this.borderOffset) {
-            this.loadData.emit(LoadDirection.Up);
-        }
+        this.loadData.emit(
+            scrollPosition > scrollMaxLengthWithoutEvent ? LoadDirection.Down : LoadDirection.Up,
+        );
     }
 }
