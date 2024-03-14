@@ -1,4 +1,4 @@
-<mat-card class="product d-flex flex-column gap-3 justify-content-between">
+<mat-card *ngIf="product" class="product d-flex flex-column gap-3 justify-content-between">
     <mat-card-header>
         <mat-card-title class="product_title">
             {{ product.name }}
@@ -10,19 +10,19 @@
     </mat-card-header>
 
     <div class="slider d-flex flex-column justify-content-end flex-grow-1">
-        <ng-container *ngFor="let image of product.images; let imageIndex = index" class="">
-            <div *ngIf="imageIndex === currentSLide" class="slider_slide flex-grow-1">
+        <ng-container *ngFor="let image of product.images; let imageIndex = index">
+            <div *ngIf="imageIndex === currentSLideIndex" class="slider_slide flex-grow-1">
                 <img class="slider_image w-100" [src]="image.url" [alt]="image.source" />
             </div>
         </ng-container>
 
         <div class="slider_actions">
-            <button mat-icon-button [disabled]="currentSLide < 1" (click)="prevSlide()">
+            <button mat-icon-button [disabled]="currentSLideIndex < 1" (click)="prevSlide()">
                 <mat-icon>chevron_left</mat-icon>
             </button>
             <button
                 mat-icon-button
-                [disabled]="currentSLide === product.images.length - 1"
+                [disabled]="currentSLideIndex === product.images.length - 1"
                 (click)="nextSlide()"
             >
                 <mat-icon>chevron_right</mat-icon>

@@ -8,8 +8,8 @@ import {IProduct} from '../../shared/products/product.interface';
     styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent {
-    products: IProduct[] = productsMock;
-    productsInFavorite: IProduct[] = [];
+    readonly products: IProduct[] = productsMock;
+    readonly productsInFavorite: string[] = [];
     productToCart(id: string) {
         const product: IProduct = this.products.filter((p: IProduct) => p._id === id)[0];
 
@@ -18,17 +18,18 @@ export class ProductsListComponent {
     }
 
     getFavoriteProduct(id: string): void {
-        // eslint-disable-next-line no-console
-        console.log(id);
-        const index = this.productsInFavorite.map((p: IProduct) => p._id).indexOf(id);
+        const index = this.productsInFavorite.findIndex(favoriteId => favoriteId === id);
+        const productIndex: number = this.products.findIndex(product => product._id === id);
 
         if (index === -1) {
-            this.productsInFavorite.push(this.products.filter((p: IProduct) => p._id === id)[0]);
-        } else {
-            this.productsInFavorite.splice(index, 1);
+            this.productsInFavorite.push(this.products[productIndex]._id);
+
+            // eslint-disable-next-line no-console
+            console.log('My favorite products: ', this.productsInFavorite);
+
+            return;
         }
 
-        // eslint-disable-next-line no-console
-        console.log('My favorite products: ', this.productsInFavorite);
+        this.productsInFavorite.splice(index, 1);
     }
 }

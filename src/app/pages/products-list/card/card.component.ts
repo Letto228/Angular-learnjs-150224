@@ -7,10 +7,10 @@ import {IProduct} from '../../../shared/products/product.interface';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    @Input({required: true}) product!: IProduct;
+    @Input({required: true}) product: IProduct | null = null;
     @Output() itemToCart = new EventEmitter<string>();
     @Output() itemToFavorite = new EventEmitter<string>();
-    currentSLide = 0;
+    currentSLideIndex = 0;
 
     buyProduct(productId: string): void {
         this.itemToCart.emit(productId);
@@ -21,14 +21,44 @@ export class CardComponent {
     }
 
     isStarActive(starIndex: number): boolean {
-        return this.product.rating >= starIndex;
+        if (this.product && this.product.rating) {
+            return this.product.rating >= starIndex;
+        }
+
+        return false;
     }
 
     nextSlide(): void {
-        this.currentSLide = ++this.currentSLide % this.product.images.length;
+        if (this.product) {
+            this.currentSLideIndex = this.calculatingLoopedIndex(
+                1,
+                this.currentSLideIndex,
+                this.product?.images.length,
+            );
+        }
     }
 
     prevSlide(): void {
-        this.currentSLide = --this.currentSLide % this.product.images.length;
+        if (this.product) {
+            this.currentSLideIndex = this.calculatingLoopedIndex(
+                -1,
+                this.currentSLideIndex,
+                this.product.images.length,
+            );
+        }
     }
+
+    private readonly calculatingLoopedIndex = function (
+        increment: -1 | 1,
+        currentIndex: number,
+        arrayLength: number,
+    ): number {
+        const newIndex = currentIndex + increment;
+        const remainderOfDivision = newIndex % arrayLength;
+        const isNegativeRemainderOfDivision = remainderOfDivision < 0;
+
+        return isNegativeRemainderOfDivision
+            ? remainderOfDivision + arrayLength
+            : remainderOfDivision;
+    };
 }
