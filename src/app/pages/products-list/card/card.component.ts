@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from '../../../shared/products/product.interface';
 import {ProductImage} from '../../../shared/products/product-image.interface';

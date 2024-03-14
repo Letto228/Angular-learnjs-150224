@@ -10,7 +10,6 @@ import {Product} from '../../shared/products/product.interface';
 })
 export class ProductsListComponent implements OnInit {
     products: Product[] | null = null;
-
     constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit(): void {
@@ -27,6 +26,10 @@ export class ProductsListComponent implements OnInit {
     }
 
     trackBy(_index: number, item: Product): Product['_id'] {
+        console.log(item);
+
         return item._id;
     }
+
+    protected readonly length = length;
 }
