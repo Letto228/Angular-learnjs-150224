@@ -13,3 +13,9 @@
 .card {
     margin: 10px;
 }
+
+div[appInfiniteScroll] {
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+}

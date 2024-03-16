@@ -9,6 +9,7 @@ import {HeaderModule} from './components/header/header.module';
 import {ProductsListModule} from './pages/products-list/products-list.module';
 import {SidenavModule} from './components/sidenav/sidenav.module';
 import {PopupHostModule} from './components/popup-host/popup-host.module';
+import {InfiniteScrollModule} from './shared/infinite-scroll/infinite-scroll.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -21,6 +22,7 @@ import {PopupHostModule} from './components/popup-host/popup-host.module';
         SidenavModule,
         MatListModule,
         PopupHostModule,
+        InfiniteScrollModule,
     ],
     bootstrap: [AppComponent],
 })

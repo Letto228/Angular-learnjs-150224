@@ -1,1 +1,8 @@
-<app-card class="card" [product]="products[0]" (buy)="onProductBuy($event)"></app-card>
+<div appInfiniteScroll [delay]="100" [borderOffset]="100" (loadData)="onLoadData($event)">
+    <app-card
+        *ngFor="let product of products"
+        class="card"
+        [product]="product"
+        (buy)="onProductBuy($event)"
+    ></app-card>
+</div>
