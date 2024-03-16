@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {LoadDirection} from 'src/app/shared/infinite-scroll/scroll-with-loading.directive';
+import {LoadDirection} from 'src/app/shared/infinite-scroll/scroll-with-loading';
 import {productsMock} from '../../shared/products/products.mock';
 import {Product} from '../../shared/products/product.interface';
 
