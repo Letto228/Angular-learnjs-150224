@@ -1,30 +1,41 @@
 <div *ngIf="products as productsFromNgIf; else loaderTemplate" class="scroll-container">
     <!-- Раскомментрировать для ДЗ -->
-    <!-- <ng-container
+    <ng-container
         *appPagination="
-            let productsGroup of products;
+            let productsGroup of productsFromNgIf;
             chankSize: 4;
             let pageIndexes = pageIndexes;
             let activeIndex = index;
+            let paginationCount = appPaginationCount;
             let next = next;
             let back = back;
             let selectIndex = selectIndex
         "
-    > -->
+    >
+        <div class="cards">
+            <app-card
+                *ngFor="let product of productsGroup; trackBy: trackBy"
+                class="card"
+                [product]="product"
+                (buy)="onProductBuy($event)"
+            ></app-card>
+        </div>
+        <div class="pagination">
+            <span
+                *ngFor="item of paginationCount; let index = index"
+                class="pagination__element"
+                [class.active]="index === activeIndex"
+                (click)="selectIndex(index)"
+            >
+                {{ index + 1 }}
+            </span>
+        </div>
 
-    <div class="cards">
-        <app-card
-            *ngFor="let product of productsFromNgIf; trackBy: trackBy"
-            class="card"
-            [product]="product"
-            (buy)="onProductBuy($event)"
-        ></app-card>
-    </div>
-    <div class="pagination">
-        <!-- Add pagination control -->
-    </div>
-
-    <!-- </ng-container> -->
+        <div class="pagination">
+            <span class="pagination__element" (click)="back()">-</span>
+            <span class="pagination__element" (click)="next()">+</span>
+        </div>
+    </ng-container>
 </div>
 
 <ng-template #loaderTemplate>
