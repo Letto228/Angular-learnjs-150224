@@ -1,9 +1,5 @@
 import {Directive, EventEmitter, HostListener, Output} from '@angular/core';
-
-export enum LoadDirection {
-    Top,
-    Bottom,
-}
+import {LoadDirection} from 'src/app/shared/scroll-with-loading/scroll-with-loading.enum';
 
 @Directive({
     selector: '[appScrollWithLoading]',
@@ -11,17 +7,16 @@ export enum LoadDirection {
 export class ScrollWithLoadingDirective {
     @Output() loadData = new EventEmitter<LoadDirection>();
 
+    borderSize = 100;
+
     private lastScrollTop = true;
     private lastScrollBottom = false;
 
-    @HostListener('scroll', ['$event'])
-    onScroll(event: Event) {
-        const target = event.target as HTMLInputElement;
-        const scrollTop = target.scrollTop;
-        const scrollBottom = target.scrollHeight - scrollTop - target.clientHeight;
-        const targetHeight = target.scrollHeight - target.clientHeight;
+    @HostListener('scroll', ['$event.target'])
+    onScroll({scrollTop, clientHeight, scrollHeight}: HTMLElement) {
+        const scrollBottom = scrollHeight - scrollTop - clientHeight;
 
-        if (targetHeight - scrollBottom <= 100) {
+        if (scrollTop <= this.borderSize) {
             if (!this.lastScrollTop) {
                 this.lastScrollTop = true;
                 this.onLoadData(LoadDirection.Top);
@@ -30,7 +25,7 @@ export class ScrollWithLoadingDirective {
             this.lastScrollTop = false;
         }
 
-        if (targetHeight - scrollTop <= 100) {
+        if (scrollBottom <= this.borderSize) {
             if (!this.lastScrollBottom) {
                 this.lastScrollBottom = true;
                 this.onLoadData(LoadDirection.Bottom);
