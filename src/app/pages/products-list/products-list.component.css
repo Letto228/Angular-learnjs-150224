@@ -24,3 +24,21 @@
 .card {
     margin: 10px;
 }
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.pagination__page-number_active {
+    color: blue;
+}
