@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {productsMock} from '../../shared/products/products.mock';
 import {Product} from '../../shared/products/product.interface';
-import {LoadDirection} from '../../shared/scroll-with-loading/scroll-with-loading.directive';
+import {LoadDirection} from '../../shared/scroll-with-loading/enum/load-directions';
 
 @Component({
     selector: 'app-products-list',
@@ -17,13 +17,11 @@ export class ProductsListComponent implements OnInit {
     ngOnInit(): void {
         setTimeout(() => {
             this.products = productsMock;
-
             this.changeDetectorRef.markForCheck();
         }, 3000);
 
         setTimeout(() => {
             this.products = productsMock.map(product => ({...product, rating: 5}));
-
             this.changeDetectorRef.markForCheck();
         }, 6000);
     }
@@ -37,7 +35,11 @@ export class ProductsListComponent implements OnInit {
         if (direction === LoadDirection.Top) {
             // eslint-disable-next-line no-console
             console.log('Load data at the top');
-        } else if (direction === LoadDirection.Bottom) {
+
+            return;
+        }
+
+        if (direction === LoadDirection.Bottom) {
             // eslint-disable-next-line no-console
             console.log('Load data at the bottom');
         }

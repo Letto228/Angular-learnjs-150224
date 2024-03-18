@@ -1,9 +1,5 @@
 import {Directive, EventEmitter, Output, HostListener} from '@angular/core';
-
-export enum LoadDirection {
-    Top = 'top',
-    Bottom = 'bottom',
-}
+import {LoadDirection} from './enum/load-directions';
 
 @Directive({
     selector: '[appScrollWithLoading]',
@@ -12,18 +8,14 @@ export class ScrollWithLoadingDirective {
     private readonly borderOffset = 100;
     private prevScrollTop = 0;
 
-    @Output() loadData: EventEmitter<LoadDirection> = new EventEmitter<LoadDirection>();
+    @Output() loadData = new EventEmitter<LoadDirection>();
 
-    @HostListener('scroll', ['$event'])
-    onScroll(event: Event) {
-        const targetEl = event.target as HTMLElement;
-        const heightTargetEl = targetEl.scrollHeight;
-        const currentScrollTop = targetEl.scrollTop;
-        const scrollToTop =
-            currentScrollTop <= this.borderOffset && currentScrollTop < this.prevScrollTop;
+    @HostListener('scroll', ['$event.target'])
+    onScroll({scrollTop, scrollHeight, clientHeight}: HTMLElement) {
+        const scrollToTop = scrollTop <= this.borderOffset && scrollTop < this.prevScrollTop;
         const scrollToBottom =
-            currentScrollTop + targetEl.clientHeight + this.borderOffset >= heightTargetEl &&
-            currentScrollTop > this.prevScrollTop;
+            scrollTop + clientHeight + this.borderOffset >= scrollHeight &&
+            scrollTop > this.prevScrollTop;
 
         if (scrollToTop) {
             // eslint-disable-next-line no-console
@@ -37,6 +29,6 @@ export class ScrollWithLoadingDirective {
             this.loadData.emit(LoadDirection.Bottom);
         }
 
-        this.prevScrollTop = currentScrollTop;
+        this.prevScrollTop = scrollTop;
     }
 }
