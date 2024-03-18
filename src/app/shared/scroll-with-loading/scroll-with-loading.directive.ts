@@ -1,5 +1,5 @@
 import {Directive, ElementRef, EventEmitter, HostListener, Output} from '@angular/core';
-import {LoadDirection} from '../application-config/load-directions';
+import {LoadDirection} from './load-directions';
 
 @Directive({
     selector: '[appScrollWithLoading]',
@@ -21,15 +21,11 @@ export class ScrollWithLoadingDirective {
     }
 
     private get scrollDirection(): 'top' | 'bottom' {
-        if (this.lastTopOffset - this.topOffser < 0) {
-            this.lastTopOffset = this.topOffser;
-
-            return 'bottom';
-        }
+        const currentTopOffset = this.lastTopOffset;
 
         this.lastTopOffset = this.topOffser;
 
-        return 'top';
+        return currentTopOffset - this.topOffser < 0 ? 'bottom' : 'top';
     }
 
     private get loadTop(): boolean {
@@ -43,13 +39,11 @@ export class ScrollWithLoadingDirective {
     }
 
     private get loadBottom(): boolean {
-        if (this.bottomOffset < 100 && this.scrollDirection === 'bottom') {
-            this.lastLoad = 'bottom';
+        const loadBottom = !!(this.bottomOffset < 100 && this.scrollDirection === 'bottom');
 
-            return true;
-        }
+        this.lastLoad = loadBottom ? 'bottom' : this.lastLoad;
 
-        return false;
+        return loadBottom;
     }
 
     @Output() loadData = new EventEmitter<LoadDirection>();
@@ -58,11 +52,17 @@ export class ScrollWithLoadingDirective {
     onscroll() {
         if (this.loadBottom) {
             this.loadData.emit(LoadDirection.scrollBottom);
-        } else if (this.loadTop) {
-            this.loadData.emit(LoadDirection.scrollTop);
-        } else {
-            this.loadData.emit(LoadDirection.scrollNone);
+
+            return;
         }
+
+        if (this.loadTop) {
+            this.loadData.emit(LoadDirection.scrollTop);
+
+            return;
+        }
+
+        this.loadData.emit(LoadDirection.scrollNone);
     }
 
     constructor(private readonly elemRef: ElementRef<HTMLElement>) {}

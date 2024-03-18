@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {LoadDirection} from 'src/app/shared/application-config/load-directions';
+
+import {LoadDirection} from 'src/app/shared/scroll-with-loading/load-directions';
 import {productsMock} from '../../shared/products/products.mock';
 import {Product} from '../../shared/products/product.interface';
 
