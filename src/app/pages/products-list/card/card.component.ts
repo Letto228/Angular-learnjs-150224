@@ -30,4 +30,19 @@ export class CardComponent {
     isStarActive(starIndex: number): boolean {
         return !!this.product && this.product.rating >= starIndex;
     }
+
+    // getPrice(price: number | null | undefined): string {
+    //     console.log('Calculate price');
+
+    //     return `${price}$`;
+    // }
+
+    getPrice = getPrice;
+}
+
+function getPrice(price: number | null | undefined): string {
+    // eslint-disable-next-line no-console
+    console.log('Calculate price');
+
+    return `${price}$`;
 }

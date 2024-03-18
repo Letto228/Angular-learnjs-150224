@@ -24,6 +24,44 @@ import {InsertShadowModule} from './shared/insert-shadow/insert-shadow.module';
         PopupHostModule,
         InsertShadowModule,
     ],
+    providers: [
+        // {
+        //     provide: ProductsStoreService, // token
+        //     useClass: ProductsStoreService,
+        // },
+        // ProductsStoreService,
+        // ProductsApiService,
+        // {
+        //     provide: 'UserName',
+        //     useValue: 'Egor Sidorov',
+        // },
+        // {
+        //     provide: 'ProductsStoreService',
+        //     useExisting: ProductsStoreService,
+        //     // useClass: ProductsStoreService,
+        // },
+        // {
+        //     provide: 'ProductsStoreService',
+        //     useValue: ProductsStoreService,
+        // },
+        // {
+        //     provide: 'factory',
+        //     useFactory: () => new ProductsStoreService(),
+        // },
+        // {
+        //     provide: 'factory',
+        //     useFactory: (productsStoreService: ProductsStoreService) => productsStoreService,
+        //     deps: [ProductsStoreService],
+        // },
+        // {
+        //     provide: 'factory',
+        //     useFactory: () => inject(ProductsStoreService),
+        // },
+        // {
+        //     provide: 'factory',
+        //     useFactory: () => 'Egor Sidorov',
+        // },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

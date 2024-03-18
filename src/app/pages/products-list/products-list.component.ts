@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {productsMock} from '../../shared/products/products.mock';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Product} from '../../shared/products/product.interface';
+import {ProductsStoreService} from '../../shared/products/products-store.service';
 
 @Component({
     selector: 'app-products-list',
@@ -9,16 +9,40 @@ import {Product} from '../../shared/products/product.interface';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent implements OnInit {
-    products: Product[] | null = null;
+    // private httpSevice = new HttpSevice();
+    // private readonly productsStoreService = new ProductsStoreService(
+    //     this.httpSevice,
+    //     new ProductsApiService(this.httpSevice)
+    // );
+    // private readonly productsStoreService = inject(ProductsStoreService);
 
-    constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
+    readonly products$ = this.productsStoreService.products$;
+
+    // constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
+
+    // constructor(
+    //     @Inject(ProductsStoreService) private readonly productsStoreService: ProductsStoreService,
+    // ) {}
+    constructor(
+        private readonly productsStoreService: ProductsStoreService,
+        // @Inject('UserName') userName: string,
+        // @Inject('ProductsStoreService') productsStoreServiceString: ProductsStoreService,
+        // @Inject('factory') factory: ProductsStoreService,
+        // @Inject(ElementRef) elementRef: ElementRef<HTMLElement>,
+    ) {
+        // console.log(this.productsStoreService === factory);
+        // this.nativeElement = elementRef.nativeElement;
+    }
+
+    // nativeElement: HTMLElement;
 
     ngOnInit(): void {
-        setTimeout(() => {
-            this.products = productsMock;
+        this.productsStoreService.loadProducts();
+        // setTimeout(() => {
+        //     this.products = productsMock;
 
-            this.changeDetectorRef.markForCheck();
-        }, 3000);
+        //     this.changeDetectorRef.markForCheck();
+        // }, 3000);
     }
 
     onProductBuy(id: Product['_id']) {
