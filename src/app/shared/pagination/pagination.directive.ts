@@ -29,10 +29,6 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
         private readonly template: TemplateRef<IPaginationContext<T>>,
     ) {}
 
-    get shouldShowItems(): boolean {
-        return Boolean(this.appPaginationOf?.length);
-    }
-
     ngOnChanges({appPaginationOf, appPaginationChankSize}: SimpleChanges) {
         if (appPaginationOf || appPaginationChankSize) {
             this.updateView();
@@ -62,8 +58,8 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
     private listenCurrentIndex() {
         this.currentIndex$
             .pipe(
-                filter(() => this.shouldShowItems),
-                map(currentIndex => this.getCurrentContext(currentIndex)),
+                map(currentIndex => this.shouldShowItems() && this.getCurrentContext(currentIndex)),
+                filter(Boolean),
                 takeUntil(this.destroy$),
             )
             .subscribe(context => {
@@ -72,12 +68,21 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
             });
     }
 
-    private getCurrentContext(currentIndex: number): IPaginationContext<T> {
+    private shouldShowItems(
+        this: PaginationDirective<T>,
+    ): this is PaginationDirective<T> & {appPaginationOf: T[]} {
+        return !!this.appPaginationOf?.length;
+    }
+
+    private getCurrentContext(
+        this: PaginationDirective<T> & {appPaginationOf: T[]},
+        currentIndex: number,
+    ): IPaginationContext<T> {
         return {
             $implicit: this.groupedItems[currentIndex],
             index: currentIndex,
             pageIndexes: this.groupedItems.map((_, index) => index),
-            appPaginationOf: this.appPaginationOf as T[],
+            appPaginationOf: this.appPaginationOf,
             next: () => {
                 this.next();
             },
@@ -90,14 +95,14 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
         };
     }
 
-    private next() {
+    private next(this: PaginationDirective<T> & {appPaginationOf: T[]}) {
         const nextIndex = this.currentIndex$.value + 1;
         const newIndex = nextIndex < this.groupedItems.length ? nextIndex : 0;
 
         this.currentIndex$.next(newIndex);
     }
 
-    private back() {
+    private back(this: PaginationDirective<T> & {appPaginationOf: T[]}) {
         const previousIndex = this.currentIndex$.value - 1;
         const newIndex = previousIndex >= 0 ? previousIndex : this.groupedItems.length - 1;
 

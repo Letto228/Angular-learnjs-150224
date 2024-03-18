@@ -20,10 +20,6 @@ export class CarouselDirective<T> implements OnChanges, OnInit, OnDestroy {
     private readonly currentIndex$ = new BehaviorSubject<number>(0);
     private readonly destroy$ = new Subject<void>();
 
-    private get shouldShowItems(): boolean {
-        return !!this.appCarouselOf?.length;
-    }
-
     constructor(
         private readonly templateRef: TemplateRef<CarouselContext<T>>,
         private readonly viewContainerRef: ViewContainerRef,
@@ -45,7 +41,7 @@ export class CarouselDirective<T> implements OnChanges, OnInit, OnDestroy {
     }
 
     private updateView() {
-        if (this.shouldShowItems) {
+        if (this.shouldShowItems()) {
             this.currentIndex$.next(0);
 
             return;
@@ -57,8 +53,8 @@ export class CarouselDirective<T> implements OnChanges, OnInit, OnDestroy {
     private listenCurrentIndex() {
         this.currentIndex$
             .pipe(
-                filter(() => this.shouldShowItems),
-                map(currentIndex => this.getCurrentContext(currentIndex)),
+                map(currentIndex => this.shouldShowItems() && this.getCurrentContext(currentIndex)),
+                filter(Boolean),
                 takeUntil(this.destroy$),
             )
             .subscribe(context => {
@@ -67,13 +63,20 @@ export class CarouselDirective<T> implements OnChanges, OnInit, OnDestroy {
             });
     }
 
-    private getCurrentContext(currentIndex: number): CarouselContext<T> {
-        const appCarouselOf = this.appCarouselOf as T[];
+    private shouldShowItems(
+        this: CarouselDirective<T>,
+    ): this is CarouselDirective<T> & {appCarouselOf: T[]} {
+        return !!this.appCarouselOf?.length;
+    }
 
+    private getCurrentContext(
+        this: CarouselDirective<T> & {appCarouselOf: T[]},
+        currentIndex: number,
+    ): CarouselContext<T> {
         return {
-            $implicit: appCarouselOf[currentIndex],
+            $implicit: this.appCarouselOf[currentIndex],
             index: currentIndex,
-            appCarouselOf,
+            appCarouselOf: this.appCarouselOf,
             next: this.next.bind(this),
             back: () => {
                 this.back();
@@ -81,18 +84,16 @@ export class CarouselDirective<T> implements OnChanges, OnInit, OnDestroy {
         };
     }
 
-    private next() {
+    private next(this: CarouselDirective<T> & {appCarouselOf: T[]}) {
         const nextIndex = this.currentIndex$.value + 1;
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const newIndex = nextIndex < this.appCarouselOf!.length ? nextIndex : 0;
+        const newIndex = nextIndex < this.appCarouselOf.length ? nextIndex : 0;
 
         this.currentIndex$.next(newIndex);
     }
 
-    private back() {
+    private back(this: CarouselDirective<T> & {appCarouselOf: T[]}) {
         const previousIndex = this.currentIndex$.value - 1;
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const lastIndex = this.appCarouselOf!.length - 1;
+        const lastIndex = this.appCarouselOf.length - 1;
         const newIndex = previousIndex < 0 ? lastIndex : previousIndex;
 
         this.currentIndex$.next(newIndex);
