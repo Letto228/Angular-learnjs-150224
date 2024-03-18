@@ -1,8 +1,8 @@
 <div *ngIf="products as productsFromNgIf; else loaderTemplate" class="scroll-container">
     <!-- Раскомментрировать для ДЗ -->
-    <!-- <ng-container
+    <ng-container
         *appPagination="
-            let productsGroup of products;
+            let productsGroup of productsFromNgIf;
             chankSize: 4;
             let pageIndexes = pageIndexes;
             let activeIndex = index;
@@ -10,21 +10,35 @@
             let back = back;
             let selectIndex = selectIndex
         "
-    > -->
-
-    <div class="cards">
-        <app-card
-            *ngFor="let product of productsFromNgIf; trackBy: trackBy"
-            class="card"
-            [product]="product"
-            (buy)="onProductBuy($event)"
-        ></app-card>
-    </div>
-    <div class="pagination">
-        <!-- Add pagination control -->
-    </div>
-
-    <!-- </ng-container> -->
+    >
+        <div class="cards">
+            <app-card
+                *ngFor="let product of productsGroup; trackBy: trackBy"
+                class="card"
+                [product]="product"
+                (buy)="onProductBuy($event)"
+            ></app-card>
+        </div>
+        <div class="pagination">
+            <button mat-icon-button (click)="back()">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            <div class="pagination__page-number-container">
+                <button
+                    *ngFor="let index of pageIndexes"
+                    mat-icon-button
+                    class="pagination__page-number"
+                    [class.pagination__page-number_active]="activeIndex === index"
+                    (click)="selectIndex(index)"
+                >
+                    {{ index + 1 }}
+                </button>
+            </div>
+            <button mat-icon-button (click)="next()">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </div>
+    </ng-container>
 </div>
 
 <ng-template #loaderTemplate>
