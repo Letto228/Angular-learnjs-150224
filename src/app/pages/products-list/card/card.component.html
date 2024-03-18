@@ -1,17 +1,6 @@
-<!-- Bad -->
-<!-- <ng-container *ngIf="observable$ | async"></ng-container> -->
-
 <mat-card class="card">
     <mat-card-header>
         <mat-card-title>{{ product?.name }}</mat-card-title>
-        <!-- <mat-card-subtitle>{{ getPrice(product?.price) }}</mat-card-subtitle> -->
-
-        <!-- <mat-card-subtitle>{{ product?.price | currency : 'RUB' }}</mat-card-subtitle> -->
-        <!-- <mat-card-subtitle>{{ CurrencyPipe.transform(product?.price, 'RUB') }}</mat-card-subtitle> -->
-
-        <!-- <mat-card-subtitle>{{ product?.price | async | currency : 'RUB' }}</mat-card-subtitle> -->
-        <!-- <mat-card-subtitle>{{ CurrencyPipe.transform(AsyncPipe.transform(product?.price), 'RUB') }}</mat-card-subtitle> -->
-
         <mat-card-subtitle>
             {{ product?.price | currency: 'CNY' : 'symbol-narrow' : '1.0-0' }}
         </mat-card-subtitle>

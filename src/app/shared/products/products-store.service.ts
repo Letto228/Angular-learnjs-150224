@@ -16,10 +16,6 @@ export class ProductsStoreService {
     constructor(private readonly productsApiService: ProductsApiService) {}
 
     loadProducts() {
-        // setTimeout(() => {
-        //     this.productsStore$.next(productsMock);
-        // }, 2000);
-
         this.productsApiService.getProducts$().subscribe(products => {
             this.productsStore$.next(products);
         });
