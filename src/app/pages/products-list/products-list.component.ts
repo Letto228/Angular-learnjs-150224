@@ -37,9 +37,14 @@ export class ProductsListComponent implements OnInit {
 
         if (pos === 'top') {
             message = 'Top loading';
-        } else if (pos === 'bottom') {
-            message = 'Bottom loading';
+
+            // eslint-disable-next-line no-console
+            console.log(message);
+
+            return;
         }
+
+        message = 'Bottom loading';
 
         // eslint-disable-next-line no-console
         console.log(message);

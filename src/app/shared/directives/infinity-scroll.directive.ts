@@ -4,21 +4,30 @@ import {Directive, EventEmitter, HostListener, Input, Output} from '@angular/cor
     selector: '[appScrollWithLoading]',
 })
 export class InfinityScrollDirective {
-    @Output() loadData: EventEmitter<string> = new EventEmitter<string>();
+    @Output() loadData = new EventEmitter<string>();
     @Input() threshold = 100;
 
-    @HostListener('scroll', ['$event'])
-    onScrollEvent(event: Event) {
-        const height = (event?.target as HTMLElement).clientHeight;
-        const scrollHeight = (event?.target as HTMLElement).scrollHeight;
-        const scrollY = (event?.target as HTMLElement).scrollTop;
+    private prevScrollTop = 0;
 
-        if (scrollY <= this.threshold && scrollY > 0) {
+    @HostListener('scroll', ['$event.target'])
+    onScrollEvent({scrollTop, scrollHeight, clientHeight}: HTMLElement) {
+        const scrollToTop = scrollTop <= this.threshold && scrollTop < this.prevScrollTop;
+        const scrollToBottom =
+            scrollTop + clientHeight + this.threshold >= scrollHeight &&
+            scrollTop > this.prevScrollTop;
+
+        if (scrollToTop) {
+            // eslint-disable-next-line no-console
+            console.log('Scroll to top');
             this.loadData.emit('top');
         }
 
-        if (scrollY + height + this.threshold >= scrollHeight && scrollY > 0) {
+        if (scrollToBottom) {
+            // eslint-disable-next-line no-console
+            console.log('Scroll to bottom');
             this.loadData.emit('bottom');
         }
+
+        this.prevScrollTop = scrollTop;
     }
 }
