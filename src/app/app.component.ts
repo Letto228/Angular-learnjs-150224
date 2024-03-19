@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
     readonly applicationConfigMock = applicationConfigMock;
 
     switchTemplate = new BehaviorSubject<boolean | null | undefined>(undefined);
-    @ViewChild('first') template1: TemplateRef<unknown> | undefined;
-    @ViewChild('second') template2: TemplateRef<unknown> | undefined;
+    @ViewChild('first', {static: true}) template1: TemplateRef<unknown> | undefined;
+    @ViewChild('second', {static: true}) template2: TemplateRef<unknown> | undefined;
 
     constructor(public dialog: MatDialog) {
         setTimeout(() => {
@@ -35,9 +35,11 @@ export class AppComponent implements OnInit {
         this.switchTemplate.subscribe(() => {
             if (typeof this.switchTemplate.value === 'boolean') {
                 this.openDialog();
-            } else {
-                this.dialog.closeAll();
+
+                return;
             }
+
+            this.dialog.closeAll();
         });
     }
 
