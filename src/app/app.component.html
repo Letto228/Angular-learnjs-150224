@@ -23,11 +23,17 @@
 
 <!-- <app-popup-host [template]="!closeTemplate ? first : null"></app-popup-host> -->
 
-<!-- <ng-template #first>
-    <h2>First</h2>
+<app-popup-host *ngIf="switchTemplate.value === null" [template]="alternative"></app-popup-host>
+
+<ng-template #first>
+    <h2>First template</h2>
     <p>Is first template</p>
 </ng-template>
 <ng-template #second>
-    <h2>Second</h2>
+    <h2>Second template</h2>
     <p>Is second template</p>
-</ng-template> -->
+</ng-template>
+<ng-template #alternative>
+    <h2>Alternative template</h2>
+    <p>Is alternative template</p>
+</ng-template>
