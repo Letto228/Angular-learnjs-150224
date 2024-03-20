@@ -13,22 +13,30 @@
     >
         <div class="cards">
             <app-card
-                *ngFor="let product of [productsGroup]; trackBy: trackBy"
+                *ngFor="let product of productsGroup; trackBy: trackBy"
                 class="card"
                 [product]="product"
                 (buy)="onProductBuy($event)"
             ></app-card>
         </div>
-        <div class="pagi">
+        <div class="pagination">
             <!-- Add pagination control -->
             <button (click)="back()">Назад</button>
+            <div class="pagination__page-number-container">
+                <button
+                    *ngFor="let index of pageIndexes"
+                    mat-icon-button
+                    class="pagination__page-number"
+                    [class.pagination__page-number_active]="activeIndex === index"
+                    (click)="selectIndex(index)"
+                >
+                    {{ index + 1 }}
+                </button>
+            </div>
             <button (click)="next()">Вперед</button>
-
-            <!-- Отображение информации о текущей странице -->
-            <div>Текущая страница: {{ activeIndex + 1 }}</div>
-            <div>Отображено на странице: {{ pageIndexes }}</div>
-            <div>Всего страниц: {{ pageIndexes }}</div>
         </div>
+        <!-- Отображение информации о текущей странице -->
+        <div>Текущая страница: {{ activeIndex + 1 }}</div>
     </ng-container>
 </div>
 
