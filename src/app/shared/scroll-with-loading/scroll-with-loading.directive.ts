@@ -1,25 +1,21 @@
 import {Directive, EventEmitter, HostListener, Output} from '@angular/core';
 import {LoadDirection} from './scroll.interface';
+import {borderOffset} from './constants/border-offset';
 
 @Directive({
     selector: '[appScrollWithLoading]',
 })
 export class ScrollWithLoadingDirective {
-    borderOffset = 100;
     lastScroll = 0;
 
     @Output() readonly loadData = new EventEmitter<LoadDirection>();
 
-    @HostListener('scroll', [
-        '$event.srcElement.scrollHeight',
-        '$event.srcElement.scrollTop',
-        '$event.srcElement.offsetHeight',
-    ])
-    onScroll(scrollHeight: number, scrollTop: number, offsetHeight: number) {
-        const isScrollTop = scrollTop <= this.borderOffset && this.lastScroll > scrollTop;
+    @HostListener('scroll', ['$event.target'])
+    onScroll({scrollTop, clientHeight, scrollHeight}: HTMLElement) {
+        const isScrollToTop = this.lastScroll > scrollTop;
+        const isScrollTop = scrollTop <= borderOffset && isScrollToTop;
         const isScrollBottom =
-            scrollTop >= scrollHeight - offsetHeight - this.borderOffset &&
-            this.lastScroll <= scrollTop;
+            scrollTop >= scrollHeight - clientHeight - borderOffset && !isScrollToTop;
 
         if (isScrollTop) {
             this.loadData.emit(LoadDirection.top);
