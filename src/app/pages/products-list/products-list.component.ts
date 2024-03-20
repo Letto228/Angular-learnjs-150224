@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {LoadDirection} from 'src/app/app.enums';
 import {productsMock} from '../../shared/products/products.mock';
 import {Product} from '../../shared/products/product.interface';
+import {LoadDirection} from '../../shared/app-scroll-with-loading/app-scroll.enums';
 
 @Component({
     selector: 'app-products-list',
