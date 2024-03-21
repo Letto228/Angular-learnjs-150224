@@ -11,13 +11,6 @@ import {ProductsStoreService} from '../../shared/products/products-store.service
 export class ProductsListComponent implements OnInit {
     readonly products$ = this.productsStoreService.products$;
 
-    // for easy
-    name = 'Мышь';
-
-    // for hard
-    readonly propertyName = 'feedbacksCount' as const; // keyof IProduct
-    searchPropertyValue = 2;
-
     constructor(private readonly productsStoreService: ProductsStoreService) {}
 
     ngOnInit(): void {

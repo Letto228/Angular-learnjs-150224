@@ -19,6 +19,7 @@ import {FilterByPropertyModule} from '../../shared/filter-by-property/filter-by-
         PaginationModule,
         FilterByPropertyModule,
     ],
+    // providers: [...],
     exports: [ProductsListComponent],
 })
 export class ProductsListModule {}
