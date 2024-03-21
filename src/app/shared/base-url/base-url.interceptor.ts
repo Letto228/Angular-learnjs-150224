@@ -13,17 +13,5 @@ export class BaseUrlInterceptor implements HttpInterceptor {
         });
 
         return next.handle(newRequest);
-
-        // return next.handle(newRequest).pipe(
-        //     tap({
-        //         next: event => {
-        //             if (event instanceof HttpResponse) {
-        //                 console.log(event);
-        //             }
-        //         },
-        //         error: error => {
-        //         }
-        //     }),
-        // );
     }
 }

@@ -1,19 +1,15 @@
 import {catchError, map, Observable, of, retry} from 'rxjs';
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Product} from './product.interface';
 import {ProductsDto} from './products.dto';
-import {BASE_URL_TOKEN} from '../base-url/base-url.token';
 import {ProductDto} from './product.dto';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ProductsApiService {
-    constructor(
-        private readonly httpClient: HttpClient,
-        @Inject(BASE_URL_TOKEN) private readonly baseUrl: string,
-    ) {}
+    constructor(private readonly httpClient: HttpClient) {}
 
     getProducts$(): Observable<Product[]> {
         // return of({data: {items: productsMock}}).pipe(map(({data}) => data.items));

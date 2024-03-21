@@ -28,25 +28,11 @@ import {BaseUrlInterceptor} from './shared/base-url/base-url.interceptor';
         HttpClientModule,
     ],
     providers: [
-        // ...HttpClientModule.providers,
-        // {
-        //     provide: HttpHandler,
-        //     useClass: ...,
-        // }
-        // {
-        //     provide: BASE_URL_TOKEN,
-        //     useValue: 'https://my-host.javascript.ru/api',
-        // },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: BaseUrlInterceptor,
             multi: true,
         },
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     useClass: CatchErrorInterceptor,
-        //     multi: true,
-        // },
     ],
     bootstrap: [AppComponent],
 })
