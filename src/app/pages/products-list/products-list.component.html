@@ -4,9 +4,9 @@
         *appPagination="
             let productsGroup of productsFromNgIf;
             chankSize: 4;
-            let pageIndexes = pageIndexes;
+            let pageCount = pageCount;
             let activeIndex = index;
-            let paginationCount = appPaginationCount;
+            let paginationCount = pageNumbers;
             let next = next;
             let back = back;
             let selectIndex = selectIndex
@@ -22,12 +22,12 @@
         </div>
         <div class="pagination">
             <span
-                *ngFor="item of paginationCount; let index = index"
+                *ngFor="let item of paginationCount; let index = index"
                 class="pagination__element"
                 [class.active]="index === activeIndex"
                 (click)="selectIndex(index)"
             >
-                {{ index + 1 }}
+                {{ item }}
             </span>
         </div>
 

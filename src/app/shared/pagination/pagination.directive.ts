@@ -21,32 +21,39 @@ export class PaginationDirective<T> implements OnInit, OnChanges, OnDestroy {
     private readonly currentIndex$ = new BehaviorSubject<number>(0);
     private readonly destroy$ = new Subject<void>();
 
-    private get pageIndexes(): number {
+    private get pageCount(): number {
         if (this.appPaginationOf?.length) {
-            return Math.ceil(this.appPaginationOf.length / this.appPaginationChankSize);
+            return this.countPage;
         }
 
         return 0;
     }
 
-    private get appPaginationCount(): number[] {
-        // const paginationCount = new Array<number>(this.pageIndexes);
+    private get countPage(): number {
+        return this.appPaginationOf?.length
+            ? Math.ceil(this.appPaginationOf.length / this.appPaginationChankSize)
+            : 0;
+    }
 
-        // for (let i = 0; i < this.pageIndexes; i++) {
-        //     paginationCount.push(i);
-        // }
+    private get pageNumbers(): number[] {
+        const pageNumbers = new Array(this.pageCount);
 
-        // console.log(paginationCount);
+        if (this.pageCount) {
+            for (let index = 0; index < this.pageCount; index++) {
+                pageNumbers[index] = index + 1;
+            }
+        }
 
-        return new Array(this.pageIndexes);
+        return pageNumbers;
     }
 
     private get currentItems(): T[] {
         const appPaginationOf = this.appPaginationOf as T[];
+        const currentChankStartIndex = this.currentIndex$.value * this.appPaginationChankSize;
 
         return appPaginationOf.slice(
-            this.currentIndex$.value * this.appPaginationChankSize,
-            this.currentIndex$.value * this.appPaginationChankSize + this.appPaginationChankSize,
+            currentChankStartIndex,
+            currentChankStartIndex + this.appPaginationChankSize,
         );
     }
 
@@ -59,8 +66,8 @@ export class PaginationDirective<T> implements OnInit, OnChanges, OnDestroy {
         private readonly viewContainerRef: ViewContainerRef,
     ) {}
 
-    ngOnChanges({appPaginationOf}: SimpleChanges): void {
-        if (appPaginationOf) {
+    ngOnChanges({appPaginationOf, appPaginationChankSize}: SimpleChanges): void {
+        if (appPaginationOf || appPaginationChankSize) {
             this.updateView();
         }
     }
@@ -104,8 +111,8 @@ export class PaginationDirective<T> implements OnInit, OnChanges, OnDestroy {
             $implicit: this.currentItems,
             appPaginationOf,
             appPaginationChankSize: this.appPaginationChankSize,
-            appPaginationCount: this.appPaginationCount,
-            pageIndexes: this.pageIndexes,
+            pageNumbers: this.pageNumbers,
+            pageCount: this.pageCount,
             index: paginationIndex,
             next: () => {
                 this.next();
@@ -119,7 +126,7 @@ export class PaginationDirective<T> implements OnInit, OnChanges, OnDestroy {
 
     private next(): void {
         const nextIndex = this.currentIndex$.value + 1;
-        const newIndex = nextIndex < this.pageIndexes ? nextIndex : 0;
+        const newIndex = nextIndex < this.pageCount ? nextIndex : 0;
 
         this.currentIndex$.next(newIndex);
     }
@@ -127,7 +134,7 @@ export class PaginationDirective<T> implements OnInit, OnChanges, OnDestroy {
     private back(): void {
         const previousIndex = this.currentIndex$.value - 1;
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const lastIndex = this.pageIndexes - 1;
+        const lastIndex = this.pageCount - 1;
         const newIndex = previousIndex < 0 ? lastIndex : previousIndex;
 
         this.currentIndex$.next(newIndex);
