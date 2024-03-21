@@ -36,5 +36,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
     width: 100%;
+}
+
+.pagination__element {
+    padding: 3px;
+    color: #ffffff;
+    background-color: #00000075;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    line-height: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #000;
 }
