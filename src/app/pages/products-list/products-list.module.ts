@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {ProductsListComponent} from './products-list.component';
 import {CardModule} from './card/card.module';
 import {PaginationModule} from '../../shared/pagination/pagination.module';
+import {ProductsFilterModule} from '../../shared/filter/products-filter.module';
 
 @NgModule({
     declarations: [ProductsListComponent],
@@ -16,6 +17,7 @@ import {PaginationModule} from '../../shared/pagination/pagination.module';
         MatButtonModule,
         MatIconModule,
         PaginationModule,
+        ProductsFilterModule,
     ],
     exports: [ProductsListComponent],
 })
