@@ -34,8 +34,8 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
         private readonly viewContainerRef: ViewContainerRef,
     ) {}
 
-    ngOnChanges({appPaginationOf}: SimpleChanges): void {
-        if (appPaginationOf) {
+    ngOnChanges({appPaginationOf, appPaginationChankSize}: SimpleChanges): void {
+        if (appPaginationOf || appPaginationChankSize) {
             this.updateView();
         }
     }

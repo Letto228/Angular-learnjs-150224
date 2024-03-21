@@ -26,10 +26,9 @@ export class ProductsListComponent implements OnInit {
     }
 
     trackBy(_index: number, item: Product): Product['_id'] {
+        // eslint-disable-next-line no-console
         console.log(item);
 
         return item._id;
     }
-
-    protected readonly length = length;
 }
