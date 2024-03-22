@@ -22,7 +22,7 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
     private groupedItems: T[][] = []; // массив постраничных массив карточек
 
     private readonly currentIndex$ = new BehaviorSubject<number>(0);
-    private subscribtion!: Subscription;
+    private subscribtion: Subscription | null = null;
 
     constructor(
         private readonly viewContainer: ViewContainerRef,
@@ -36,18 +36,15 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscribtion = this.currentIndex$.subscribe(currentIndex => {
-            if (this.appPaginationOf && this.appPaginationOf.length) {
-                const context = this.getContext(currentIndex);
+        this.getSubscriptionByInx();
+    }
 
-                this.viewContainer.clear();
-                this.viewContainer.createEmbeddedView(this.template, context);
-            }
-        });
+    private areItemsThere() {
+        return Boolean(this.appPaginationOf?.length);
     }
 
     private update() {
-        if (!(this.appPaginationOf && this.appPaginationOf.length)) {
+        if (!this.areItemsThere()) {
             this.viewContainer.clear();
 
             return;
@@ -55,6 +52,17 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
 
         this.groupedItems = chunk(this.appPaginationOf, this.appPaginationChankSize);
         this.currentIndex$.next(0);
+    }
+
+    private getSubscriptionByInx() {
+        this.subscribtion = this.currentIndex$.subscribe(currentIndex => {
+            if (this.areItemsThere()) {
+                const context = this.getContext(currentIndex);
+
+                this.viewContainer.clear();
+                this.viewContainer.createEmbeddedView(this.template, context);
+            }
+        });
     }
 
     private getContext(currentIndex: number): IPaginationContext<T> {
@@ -94,6 +102,6 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscribtion.unsubscribe();
+        this.subscribtion?.unsubscribe();
     }
 }
