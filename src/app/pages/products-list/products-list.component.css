@@ -34,7 +34,22 @@
 
 .pagination {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 70%;
+}
+
+.pagination__btn {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pagination__btn:hover {
+    background-color: #efefef;
+}
+
+.pagination__number_active {
+    font-weight: 800;
 }
