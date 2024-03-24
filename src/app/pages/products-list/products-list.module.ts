@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {FilterByPropertyModule} from 'src/app/shared/filter-by-property/filter-by-property.module';
 import {ProductsListComponent} from './products-list.component';
 import {CardModule} from './card/card.module';
 import {PaginationModule} from '../../shared/pagination/pagination.module';
@@ -16,6 +17,7 @@ import {PaginationModule} from '../../shared/pagination/pagination.module';
         MatButtonModule,
         MatIconModule,
         PaginationModule,
+        FilterByPropertyModule,
     ],
     exports: [ProductsListComponent],
 })
