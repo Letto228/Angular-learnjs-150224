@@ -2,9 +2,11 @@
     <ng-container
         *appPagination="
             let productsGroup of products;
-            let pageIndex = pageIndex;
+            let pageIndexes = pageIndexes;
+            let activeIndex = index;
             let next = next;
             let back = back;
+            let selectIndex = selectIndex;
             chunkSize: directivePrefixChunkSizeValue
         "
     >
@@ -20,7 +22,16 @@
             <button mat-icon-button (click)="back()">
                 <mat-icon>chevron_left</mat-icon>
             </button>
-            {{ pageIndex }}
+
+            <button
+                *ngFor="let pageIndex of pageIndexes"
+                mat-raised-button
+                [disabled]="pageIndex === activeIndex"
+                (click)="selectIndex(pageIndex)"
+            >
+                {{ pageIndex + 1 }}
+            </button>
+
             <button mat-icon-button (click)="next()">
                 <mat-icon>chevron_right</mat-icon>
             </button>

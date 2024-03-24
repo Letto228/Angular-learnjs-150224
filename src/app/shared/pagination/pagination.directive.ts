@@ -10,6 +10,7 @@ import {
     ViewContainerRef,
 } from '@angular/core';
 import {BehaviorSubject, filter, map, Subject, takeUntil} from 'rxjs';
+import {chunk} from 'lodash';
 import {PaginationInterface} from './pagination.interface';
 
 @Directive({
@@ -22,10 +23,10 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
     private readonly currentIndex$ = new BehaviorSubject<number>(0);
     private readonly destroy$ = new Subject<void>();
 
-    private elementsOnPages: T[][] = [];
+    private groupedItems: T[][] = [];
 
     private get shouldShowPagination(): boolean {
-        return !!this.elementsOnPages?.length;
+        return !!this.appPaginationOf?.length;
     }
 
     constructor(
@@ -33,14 +34,13 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
         private readonly viewContainerRef: ViewContainerRef,
     ) {}
 
-    ngOnChanges({appPaginationOf}: SimpleChanges): void {
-        if (appPaginationOf) {
+    ngOnChanges({appPaginationOf, appPaginationChunkSize}: SimpleChanges): void {
+        if (appPaginationOf || appPaginationChunkSize) {
             this.updateView();
         }
     }
 
     ngOnInit(): void {
-        this.elementsOnPages = this.paginateElements();
         this.listenCurrentIndex();
     }
 
@@ -49,21 +49,25 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    @HostListener('window:keydown', ['$event'])
-    keydown(event: KeyboardEvent) {
-        if (event.key === 'ArrowLeft') {
-            this.back();
-        }
+    @HostListener('window:keydown.arrowRight', ['$event'])
+    onNextPage() {
+        this.next();
+    }
 
-        if (event.key === 'ArrowRight') {
-            this.next();
-        }
+    @HostListener('window:keydown.arrowLeft', ['$event'])
+    onPrevPage() {
+        this.back();
     }
 
     private updateView() {
+        if (!this.shouldShowPagination) {
+            this.viewContainerRef.clear();
+
+            return;
+        }
+
+        this.groupedItems = chunk(this.appPaginationOf, this.appPaginationChunkSize);
         this.currentIndex$.next(0);
-        this.elementsOnPages = [];
-        this.viewContainerRef.clear();
     }
 
     private listenCurrentIndex() {
@@ -81,44 +85,38 @@ export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
 
     private getCurrentContext(currentIndex: number): PaginationInterface<T> {
         return {
-            $implicit: this.elementsOnPages[currentIndex],
-            pageIndex: currentIndex + 1,
-            appPaginationOf: this.elementsOnPages,
+            index: currentIndex,
+            $implicit: this.groupedItems[currentIndex],
+            pageIndexes: this.groupedItems.map((group, index) => index),
+            appPaginationOf: this.appPaginationOf as T[],
             next: () => {
                 this.next();
             },
             back: () => {
                 this.back();
             },
+            selectIndex: (index: number) => {
+                this.selectIndex(index);
+            },
         };
     }
 
     private next() {
         const nextIndex = this.currentIndex$.value + 1;
-        const newIndex = nextIndex < this.elementsOnPages.length ? nextIndex : 0;
+        const newIndex = nextIndex < this.groupedItems.length ? nextIndex : 0;
 
         this.currentIndex$.next(newIndex);
     }
 
     private back() {
         const previousIndex = this.currentIndex$.value - 1;
-        const lastIndex = this.elementsOnPages.length - 1;
+        const lastIndex = this.groupedItems.length - 1;
         const newIndex = previousIndex < 0 ? lastIndex : previousIndex;
 
         this.currentIndex$.next(newIndex);
     }
 
-    private paginateElements(): T[][] {
-        if (!this.appPaginationOf) {
-            return [];
-        }
-
-        const pages = [];
-
-        while (this.appPaginationOf.length > 0) {
-            pages.push(this.appPaginationOf.splice(0, this.appPaginationChunkSize));
-        }
-
-        return pages;
+    private selectIndex(index: number): void {
+        this.currentIndex$.next(index);
     }
 }

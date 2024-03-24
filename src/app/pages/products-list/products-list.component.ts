@@ -10,7 +10,7 @@ import {Product} from '../../shared/products/product.interface';
 })
 export class ProductsListComponent implements OnInit {
     products: Product[] | null = null;
-    readonly directivePrefixChunkSizeValue: number = 8;
+    readonly directivePrefixChunkSizeValue = 4;
 
     constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
