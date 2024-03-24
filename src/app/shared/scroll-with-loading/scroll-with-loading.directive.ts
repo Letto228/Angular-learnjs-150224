@@ -16,23 +16,19 @@ export class ScrollWithLoadingDirective {
     onScroll({scrollTop, clientHeight, scrollHeight}: HTMLElement) {
         const scrollBottom = scrollHeight - scrollTop - clientHeight;
 
-        if (scrollTop <= this.borderSize) {
-            if (!this.lastScrollTop) {
-                this.lastScrollTop = true;
-                this.onLoadData(LoadDirection.Top);
-            }
-        } else {
-            this.lastScrollTop = false;
+        const isTopIntersection = scrollTop <= this.borderSize;
+        const isBottomIntersection = scrollBottom <= this.borderSize;
+
+        if (isTopIntersection && !this.lastScrollTop) {
+            this.onLoadData(LoadDirection.Top);
         }
 
-        if (scrollBottom <= this.borderSize) {
-            if (!this.lastScrollBottom) {
-                this.lastScrollBottom = true;
-                this.onLoadData(LoadDirection.Bottom);
-            }
-        } else {
-            this.lastScrollBottom = false;
+        if (isBottomIntersection && !this.lastScrollBottom) {
+            this.onLoadData(LoadDirection.Bottom);
         }
+
+        this.lastScrollBottom = isBottomIntersection;
+        this.lastScrollTop = isTopIntersection;
     }
 
     onLoadData(direction: LoadDirection) {
