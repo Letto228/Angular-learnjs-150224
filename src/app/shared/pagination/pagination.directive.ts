@@ -21,19 +21,7 @@ export class PaginationDirective<T> implements OnInit, OnChanges, OnDestroy {
     private readonly currentIndex$ = new BehaviorSubject<number>(0);
     private readonly destroy$ = new Subject<void>();
 
-    private get pageCount(): number {
-        if (this.appPaginationOf?.length) {
-            return this.countPage;
-        }
-
-        return 0;
-    }
-
-    private get countPage(): number {
-        return this.appPaginationOf?.length
-            ? Math.ceil(this.appPaginationOf.length / this.appPaginationChankSize)
-            : 0;
-    }
+    private pageCount = 0;
 
     private get pageNumbers(): number[] {
         const pageNumbers = new Array(this.pageCount);
@@ -69,6 +57,9 @@ export class PaginationDirective<T> implements OnInit, OnChanges, OnDestroy {
     ngOnChanges({appPaginationOf, appPaginationChankSize}: SimpleChanges): void {
         if (appPaginationOf || appPaginationChankSize) {
             this.updateView();
+            this.pageCount = this.appPaginationOf?.length
+                ? Math.ceil(this.appPaginationOf.length / this.appPaginationChankSize)
+                : 0;
         }
     }
 
