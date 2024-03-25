@@ -7,6 +7,7 @@ import {ProductsListComponent} from './products-list.component';
 import {CardModule} from './card/card.module';
 import {PaginationModule} from '../../shared/pagination/pagination.module';
 import {FilterByPropertyModule} from '../../shared/filter-by-property/filter-by-property.module';
+import {ProductsListRouting} from './products-list-routing.module';
 
 @NgModule({
     declarations: [ProductsListComponent],
@@ -18,6 +19,7 @@ import {FilterByPropertyModule} from '../../shared/filter-by-property/filter-by-
         MatIconModule,
         PaginationModule,
         FilterByPropertyModule,
+        ProductsListRouting,
     ],
     exports: [ProductsListComponent],
 })

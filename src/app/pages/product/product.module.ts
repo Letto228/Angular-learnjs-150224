@@ -8,6 +8,7 @@ import {CarouselModule} from '../../shared/carousel/carousel.module';
 import {ProductComponent} from './product.component';
 import {TypeModule} from './type/type.module';
 import {DescriptionModule} from './description/description.module';
+import {ProductRouting} from './product-routing.module';
 
 @NgModule({
     declarations: [ProductComponent],
@@ -20,6 +21,7 @@ import {DescriptionModule} from './description/description.module';
         MatTabsModule,
         TypeModule,
         DescriptionModule,
+        ProductRouting,
     ],
     exports: [ProductComponent],
 })
