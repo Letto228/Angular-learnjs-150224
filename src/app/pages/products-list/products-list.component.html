@@ -12,19 +12,41 @@
         "
     > -->
 
-    <div class="cards">
-        <app-card
-            *ngFor="let product of productsFromNgIf; trackBy: trackBy"
-            class="card"
-            [product]="product"
-            (buy)="onProductBuy($event)"
-        ></app-card>
-    </div>
-    <div class="pagination">
-        <!-- Add pagination control -->
-    </div>
+    <ng-container
+        *appPagination="
+            let productsGroup of products;
+            chankSize: 4;
+            let pageIndexes = pageIndexes;
+            let activeIndex = activeIndex;
+            let next = next;
+            let back = back;
+            let selectIndex = selectIndex;
+            let shouldShowPagination = shouldShowPagination
+        "
+    >
+        <div class="cards">
+            <app-card
+                *ngFor="let product of productsGroup; trackBy: trackBy"
+                class="card"
+                [product]="product"
+                (buy)="onProductBuy($event)"
+            ></app-card>
+        </div>
 
-    <!-- </ng-container> -->
+        <div class="pagination-info">{{ activeIndex }} of {{ pageIndexes.length }} pages</div>
+
+        <div *ngIf="shouldShowPagination" class="pagination">
+            <button [disabled]="activeIndex === 1" (click)="back()">&lt;</button>
+            <button
+                *ngFor="let pageIndex of pageIndexes"
+                [disabled]="activeIndex === pageIndex"
+                (click)="selectIndex(pageIndex)"
+            >
+                {{ pageIndex }}
+            </button>
+            <button [disabled]="activeIndex === pageIndexes.length" (click)="next()">&gt;</button>
+        </div>
+    </ng-container>
 </div>
 
 <ng-template #loaderTemplate>
