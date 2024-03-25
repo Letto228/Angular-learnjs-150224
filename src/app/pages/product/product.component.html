@@ -16,21 +16,8 @@
     <div>
         <h1>{{ product.name }}</h1>
         <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-            <!-- <a mat-tab-link [routerLink]="'/product/' + product._id + '/description'">description</a> -->
-            <a
-                mat-tab-link
-                queryParamsHandling="preserve"
-                [routerLink]="['/product', product._id, 'description']"
-                [queryParams]="{price: 200, window: 200}"
-            >
-                description
-            </a>
-            <!-- queryParamsHandling = '' - полное перезатирание -->
-            <!-- queryParamsHandling = 'merge' - сохранение существуещих параметров и проставление указанных -->
-            <!-- queryParamsHandling = 'preserve' - полное сохранение параметров url -->
-
-            <!-- <a mat-tab-link routerLink="./type">type</a> -->
-            <a mat-tab-link (click)="onTypeNavigate()">type</a>
+            <a mat-tab-link routerLink="./description">description</a>
+            <a mat-tab-link routerLink="./type">type</a>
         </nav>
         <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 

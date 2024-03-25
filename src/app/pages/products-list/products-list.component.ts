@@ -29,11 +29,4 @@ export class ProductsListComponent implements OnInit {
     trackBy(_index: number, item: Product): Product['_id'] {
         return item._id;
     }
-
-    onNavigateToProduct() {
-        // this.router.navigate(['product', 'id']);
-        // this.router.navigate(['product/id']);
-
-        this.router.navigateByUrl('product/id');
-    }
 }

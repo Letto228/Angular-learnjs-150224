@@ -13,14 +13,10 @@ const routes: Routes = [
         path: 'products-list',
         loadChildren: () =>
             import('./pages/products-list/products-list.module').then(m => m.ProductsListModule),
-        // component: ProductsListComponent,
-        // redirectTo: 'product/id',
-        // pathMatch: 'prefix',
     },
     {
         path: 'product/:productId',
         loadChildren: () => import('./pages/product/product.module').then(m => m.ProductModule),
-        // component: ProductComponent,
     },
     {
         path: '**',
@@ -36,22 +32,3 @@ const routes: Routes = [
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
-/**
- * url === http://localhost:4200/product/:id
- * urlSegments === product/:id
- *
- * current url segments: ['product', ':id']
- *
- * search indexes: 0 -> 1 -> 2 -> 3 -> ...
- */
-
-/**
- *      ___________________undefined ___________________
- *     |                  /           \                  \
- *     |                 /             \                  \
- *    ['']     ['products-list']   ['product', ':id']     ['**']
- *                      __________/   /              \
- *                     /             /                \
- *                  ['']        ['description']       ['type']
- */
