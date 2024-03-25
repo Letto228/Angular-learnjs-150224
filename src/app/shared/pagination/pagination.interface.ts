@@ -1,13 +1,10 @@
-import {Product} from 'src/app/shared/products/product.interface';
-
-export interface PaginationContext {
-    $implicit: Product[];
-    appPaginationOf: Product[];
-    pageIndexes: number;
-    pageIndexesArray: number[];
-    page: number;
-    shouldShowPagination: boolean;
+export interface PaginationContext<T> {
+    $implicit: T[];
+    appPaginationOf: T[];
+    pageIndexes: number[];
+    activeIndex: number;
     next: () => void;
     back: () => void;
-    go: (pageIndex: number) => void;
+    selectIndex: (pageIndex: number) => void;
+    shouldShowPagination: boolean;
 }

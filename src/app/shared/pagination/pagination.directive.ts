@@ -10,38 +10,34 @@ import {
 } from '@angular/core';
 import {BehaviorSubject, Subject, filter, map, takeUntil} from 'rxjs';
 import {PaginationContext} from 'src/app/shared/pagination/pagination.interface';
-import {Product} from 'src/app/shared/products/product.interface';
 
 @Directive({
     selector: '[appPagination]',
 })
-export class PaginationDirective implements OnChanges, OnInit, OnDestroy {
-    @Input() appPaginationOf: Product[] | null | undefined;
+export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
+    @Input() appPaginationOf: T[] | null | undefined;
+    @Input() appPaginationChankSize = 4;
 
-    chankSize = 4;
-
-    private readonly currentPage$ = new BehaviorSubject<number>(1);
+    private readonly activeIndex$ = new BehaviorSubject<number>(1);
     private readonly destroy$ = new Subject<void>();
+    private pagesCount = 1;
+    private paginationGroup: T[] = [];
 
     private get shouldShowItems(): boolean {
         return !!this.appPaginationOf?.length;
     }
 
     private get shouldShowPagination(): boolean {
-        return !!this.appPaginationOf && this.appPaginationOf.length > this.chankSize;
+        return !!this.appPaginationOf && this.appPaginationOf.length > this.appPaginationChankSize;
     }
 
-    private get pageIndexes(): number {
-        return this.appPaginationOf ? Math.ceil(this.appPaginationOf.length / this.chankSize) : 1;
-    }
-
-    private get pageIndexesArray(): number[] {
-        return Array.from(new Array(this.pageIndexes).keys());
+    private get pageIndexes(): number[] {
+        return Array.from(new Array(this.pagesCount).keys(), index => index + 1);
     }
 
     constructor(
-        private readonly templateRef: TemplateRef<PaginationContext>,
         private readonly viewContainerRef: ViewContainerRef,
+        private readonly templateRef: TemplateRef<PaginationContext<T>>,
     ) {}
 
     ngOnChanges({appPaginationOf}: SimpleChanges): void {
@@ -51,7 +47,7 @@ export class PaginationDirective implements OnChanges, OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.listenCurrentPage();
+        this.listenActivePage();
     }
 
     ngOnDestroy() {
@@ -61,7 +57,9 @@ export class PaginationDirective implements OnChanges, OnInit, OnDestroy {
 
     private updateView(): void {
         if (this.shouldShowItems) {
-            this.currentPage$.next(1);
+            this.pagesCount = Math.ceil(this.appPaginationOf!.length / this.appPaginationChankSize);
+
+            this.activeIndex$.next(1);
 
             return;
         }
@@ -69,11 +67,11 @@ export class PaginationDirective implements OnChanges, OnInit, OnDestroy {
         this.viewContainerRef.clear();
     }
 
-    private listenCurrentPage() {
-        this.currentPage$
+    private listenActivePage() {
+        this.activeIndex$
             .pipe(
                 filter(() => this.shouldShowItems),
-                map(currentPage => this.getCurrentContext(currentPage)),
+                map(activeIndex => this.getCurrentContext(activeIndex)),
                 takeUntil(this.destroy$),
             )
             .subscribe(context => {
@@ -82,57 +80,58 @@ export class PaginationDirective implements OnChanges, OnInit, OnDestroy {
             });
     }
 
-    private getCurrentContext(currentPage: number): PaginationContext {
-        const appPaginationOf = this.appPaginationOf as Product[];
+    private getCurrentContext(activeIndex: number): PaginationContext<T> {
+        const appPaginationOf = this.appPaginationOf as T[];
 
-        const firstIndexOfGroup = currentPage * this.chankSize - this.chankSize;
-        const lastIndexOfGroup = currentPage * this.chankSize;
-
-        const paginationGroup = appPaginationOf.slice(firstIndexOfGroup, lastIndexOfGroup);
+        this.updatePaginationGroup(appPaginationOf, activeIndex);
 
         return {
-            $implicit: paginationGroup,
+            $implicit: this.paginationGroup,
             pageIndexes: this.pageIndexes,
-            pageIndexesArray: this.pageIndexesArray,
-            page: currentPage,
+            activeIndex,
             appPaginationOf,
             next: () => this.next(),
             back: () => this.back(),
-            go: pageIndex => this.go(pageIndex),
+            selectIndex: pageIndex => this.selectIndex(pageIndex),
             shouldShowPagination: this.shouldShowPagination,
         };
     }
 
-    private next(): void {
-        const nextPage = this.currentPage$.value + 1;
+    private updatePaginationGroup(appPaginationOf: T[], activeIndex: number): void {
+        const lastIndexOfGroup = activeIndex * this.appPaginationChankSize;
+        const firstIndexOfGroup = lastIndexOfGroup - this.appPaginationChankSize;
 
-        this.currentPage$.next(nextPage);
+        this.paginationGroup = appPaginationOf.slice(firstIndexOfGroup, lastIndexOfGroup);
+    }
+
+    private next(): void {
+        const nextPage = this.activeIndex$.value + 1;
+
+        this.activeIndex$.next(nextPage);
     }
 
     private back(): void {
-        const previousPage = this.currentPage$.value - 1;
+        const previousPage = this.activeIndex$.value - 1;
 
-        this.currentPage$.next(previousPage);
+        this.activeIndex$.next(previousPage);
     }
 
-    private go(pageIndex: number): void {
-        const selectedPage = pageIndex + 1;
-
-        this.currentPage$.next(selectedPage);
+    private selectIndex(pageIndex: number): void {
+        this.activeIndex$.next(pageIndex);
     }
 
-    static ngTemplateContextGuard(
-        _directive: PaginationDirective,
+    static ngTemplateContextGuard<T>(
+        _directive: PaginationDirective<T>,
         _context: unknown,
-    ): _context is PaginationContext {
+    ): _context is PaginationContext<T> {
         return true;
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    static ngTemplateGuard_appPaginationOf(
-        _directive: PaginationDirective,
+    static ngTemplateGuard_appPaginationOf<T>(
+        _directive: PaginationDirective<T>,
         _inputValue: unknown,
-    ): _inputValue is Product[] {
+    ): _inputValue is T[] {
         return true;
     }
 }

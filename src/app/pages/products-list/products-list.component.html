@@ -15,13 +15,13 @@
     <ng-container
         *appPagination="
             let productsGroup of products;
+            chankSize: 4;
             let pageIndexes = pageIndexes;
-            let pageIndexesArray = pageIndexesArray;
-            let shouldShowPagination = shouldShowPagination;
-            let page = page;
+            let activeIndex = activeIndex;
             let next = next;
             let back = back;
-            let go = go
+            let selectIndex = selectIndex;
+            let shouldShowPagination = shouldShowPagination
         "
     >
         <div class="cards">
@@ -33,18 +33,18 @@
             ></app-card>
         </div>
 
-        <div class="pagination-info">{{ page }} of {{ pageIndexes }} pages</div>
+        <div class="pagination-info">{{ activeIndex }} of {{ pageIndexes.length }} pages</div>
 
         <div *ngIf="shouldShowPagination" class="pagination">
-            <button [disabled]="page === 1" (click)="back()">&lt;</button>
+            <button [disabled]="activeIndex === 1" (click)="back()">&lt;</button>
             <button
-                *ngFor="let pageIndex of pageIndexesArray"
-                [disabled]="page === pageIndex + 1"
-                (click)="go(pageIndex)"
+                *ngFor="let pageIndex of pageIndexes"
+                [disabled]="activeIndex === pageIndex"
+                (click)="selectIndex(pageIndex)"
             >
-                {{ pageIndex + 1 }}
+                {{ pageIndex }}
             </button>
-            <button [disabled]="page === pageIndexes" (click)="next()">&gt;</button>
+            <button [disabled]="activeIndex === pageIndexes.length" (click)="next()">&gt;</button>
         </div>
     </ng-container>
 </div>
