@@ -44,7 +44,7 @@ export const productsMock: Product[] = [
                 source: '5bda26616bbc24ecc6329a1b3b9f60027d2e9e4e96fd60b0ad0c57ef1d813204.jpg',
             },
         ],
-        name: '9.6" Планшет Dexp Ursus S290 32 ГБ 3G черный',
+        name: '9.6 Планшет Dexp Ursus S290 32 ГБ 3G черный',
         price: 86,
         rating: 5,
     },
