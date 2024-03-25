@@ -7,16 +7,17 @@ import {LoadDirection} from './load-directions';
 export class ScrollWithLoadingDirective {
     private lastTopOffset = 0;
     private lastLoad: 'top' | 'bottom' | '' = '';
+    private eventTargetElement!: HTMLElement;
 
     private get topOffser(): number {
-        return this.elemRef.nativeElement.scrollTop;
+        return this.eventTargetElement.scrollTop;
     }
 
     private get bottomOffset(): number {
         return (
-            this.elemRef.nativeElement.scrollHeight -
+            this.eventTargetElement.scrollHeight -
             this.topOffser -
-            this.elemRef.nativeElement.clientHeight
+            this.eventTargetElement.clientHeight
         );
     }
 
@@ -29,7 +30,12 @@ export class ScrollWithLoadingDirective {
     }
 
     private get loadTop(): boolean {
-        if (this.elemRef.nativeElement.scrollTop < 100 && this.scrollDirection === 'top') {
+        const topOffsetLoadLimit = 100;
+
+        if (
+            this.eventTargetElement.scrollTop < topOffsetLoadLimit &&
+            this.scrollDirection === 'top'
+        ) {
             this.lastLoad = 'top';
 
             return true;
@@ -48,8 +54,12 @@ export class ScrollWithLoadingDirective {
 
     @Output() loadData = new EventEmitter<LoadDirection>();
 
-    @HostListener('scroll')
-    onscroll() {
+    @HostListener('scroll', ['$event.target'])
+    onscroll(target: HTMLElement) {
+        if (this.eventTargetElement !== target) {
+            this.eventTargetElement = target;
+        }
+
         if (this.loadBottom) {
             this.loadData.emit(LoadDirection.scrollBottom);
 
