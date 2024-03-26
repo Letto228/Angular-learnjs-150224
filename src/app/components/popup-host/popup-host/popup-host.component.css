@@ -1,0 +1,29 @@
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.popupActive {
+    display: block;
+}
+
+.overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 900;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
