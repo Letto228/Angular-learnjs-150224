@@ -31,4 +31,9 @@ export class ProductsListComponent implements OnInit {
         // eslint-disable-next-line no-console
         console.log(id);
     }
+
+    onLoad(scroll: string) {
+        // eslint-disable-next-line no-console
+        console.log('Scroll to', scroll);
+    }
 }
