@@ -1,14 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProductsListComponent} from './products-list.component';
+import {productsListMatcher} from './products-list-url-matcher';
 
 const routes: Routes = [
+    // {
+    //     path: '',
+    //     component: ProductsListComponent,
+    // },
+    // {
+    //     path: ':subCategoryId',
+    //     component: ProductsListComponent,
+    // },
     {
-        path: '',
-        component: ProductsListComponent,
-    },
-    {
-        path: ':subCategoryId',
+        matcher: productsListMatcher,
         component: ProductsListComponent,
     },
 ];
