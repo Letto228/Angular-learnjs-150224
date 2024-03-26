@@ -11,16 +11,13 @@ export class PopupHostComponent {
     @Input() set template(template: TemplateRef<unknown> | null) {
         this.templateViewContainer?.clear();
 
-        if (template !== null) {
-            this.popupActive = true;
-            this.templateViewContainer?.createEmbeddedView(template);
-        }
+        this.popupActive = !!template;
 
-        if (template === null) {
-            this.popupActive = false;
+        if (template) {
+            this.templateViewContainer?.createEmbeddedView(template);
         }
     }
 
-    @ViewChild('popup_template', {read: ViewContainerRef, static: false})
+    @ViewChild('popup_template', {read: ViewContainerRef})
     private readonly templateViewContainer: ViewContainerRef | undefined;
 }
