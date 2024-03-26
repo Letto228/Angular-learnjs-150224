@@ -15,8 +15,8 @@ export class ProductsListComponent implements OnInit {
     name = 'Мышь';
 
     // for hard
-    readonly propertyName = 'feedbacksCount' as const; // keyof IProduct
-    searchPropertyValue = 2;
+    readonly propertyName = 'name' as const; // keyof IProduct
+    searchPropertyValue = 'Планшет';
 
     constructor(private readonly productsStoreService: ProductsStoreService) {}
 
