@@ -9,18 +9,18 @@ export class FilterByPropertyPipe implements PipeTransform {
         propertyName: keyof T,
         searchValue: unknown,
     ): T[] | undefined | null {
-        if (!Array.isArray(items) || !propertyName || typeof searchValue === 'undefined') {
+        if (!items?.length || typeof searchValue === 'undefined' || searchValue === null) {
             return items;
         }
 
         return items.filter(item => {
-            if (typeof item[propertyName] === 'string') {
-                return (item[propertyName] as string)
-                    .toLowerCase()
-                    .includes((searchValue as string).toLowerCase());
+            const itemValue = item[propertyName];
+
+            if (typeof itemValue === 'string') {
+                return itemValue.toLowerCase().includes(String(searchValue).toLowerCase());
             }
 
-            return item[propertyName] === searchValue;
+            return itemValue === searchValue;
         });
     }
 }
