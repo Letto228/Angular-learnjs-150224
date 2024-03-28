@@ -3,6 +3,13 @@
 }
 
 .logo {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.logo__icon {
     width: 30px;
-    margin: 8px;
+    height: 30px;
+    margin: 0 4px;
 }

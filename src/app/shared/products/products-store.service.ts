@@ -18,13 +18,15 @@ export class ProductsStoreService {
 
     constructor(private readonly productsApiService: ProductsApiService) {}
 
-    loadProducts() {
+    loadProducts(subcategoryId?: string | null) {
         if (this.activeLoadProductsSubscription) {
             this.activeLoadProductsSubscription.unsubscribe();
         }
 
+        this.productsStore$.next(null);
+
         this.activeLoadProductsSubscription = this.productsApiService
-            .getProducts$()
+            .getProducts$(subcategoryId)
             .subscribe(products => {
                 this.productsStore$.next(products);
 
