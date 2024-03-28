@@ -1,12 +1,3 @@
-<!-- <app-counter-input [formControl]="counterFormControl"></app-counter-input> -->
-<!-- <app-counter-input [ngModel]="counter" (ngModelChange)="onInputChange($event)"></app-counter-input> -->
-<!-- <app-counter-input [class.red]="ngModelVar.touched" #ngModelVar="ngModel" [(ngModel)]="counter"></app-counter-input> -->
-<app-counter-input #ngModelVar="ngModel" [(ngModel)]="counter"></app-counter-input>
-
-{{ ngModelVar.value }}
-<!-- {{ngModelVar.touched}} -->
-<!-- {{ngModelVar.valueChanges | async}} -->
-
 <div *ngIf="products$ | async as products; else loaderTemplate" class="scroll-container">
     <ng-container
         *appPagination="
