@@ -17,7 +17,17 @@ const routes: Routes = [
     {
         path: 'product/:productId',
         loadChildren: () => import('./pages/product/product.module').then(m => m.ProductModule),
+        // canActivate: [CanActivateGuardService], // OLD
+        // canActivate: [(...args) => inject(CanActivateGuardService).canActivate(...args)], // NEW
+        // canActivate: [canActivateGuard],
+        // canDeactivate: [canDeactivateGuard],
+        // canLoad: [],
+        // canMatch: [canMatchGuard],
     },
+    // {
+    //     path: 'product/:productId',
+    //     component: NotFoundComponent,
+    // },
     {
         path: '**',
         component: NotFoundComponent,
@@ -26,6 +36,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        // RouterModule.forRoot(routes, {preloadingStrategy: NoPreloading}),
         RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}),
         NotFoundModule,
     ],

@@ -10,19 +10,23 @@ const routes: Routes = [
     {
         path: '',
         component: ProductComponent,
+        // canActivateChild: [],
         children: [
             {
                 path: '',
                 redirectTo: 'description',
                 pathMatch: 'full',
+                // canActivate: [],
             },
             {
                 path: 'description',
                 component: DescriptionComponent,
+                // canActivate: [],
             },
             {
                 path: 'type',
                 component: TypeComponent,
+                // canActivate: [],
             },
         ],
     },

@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProductsListComponent} from './products-list.component';
 import {productsListMatcher} from './products-list-url-matcher';
+// import {productsResolver} from '../../shared/test-guards/products.resolver';
 
 const routes: Routes = [
     // {
@@ -15,6 +16,9 @@ const routes: Routes = [
     {
         matcher: productsListMatcher,
         component: ProductsListComponent,
+        // resolve: {
+        //     productsStore: productsResolver,
+        // },
     },
 ];
 

@@ -42,3 +42,11 @@
 .pagination__page-number_active {
     color: blue;
 }
+
+.red {
+    color: red;
+}
+
+app-counter-input.ng-touched {
+    color: red;
+}
