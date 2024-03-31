@@ -1,62 +1,45 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    Input,
-    TemplateRef,
-    ViewChild,
-    ViewContainerRef,
-} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
+import {Subject, takeUntil, tap} from 'rxjs';
+import {PopupService} from '../../shared/popup/popup.service';
+import {PopupData} from '../../shared/popup/popup.interface';
 
 @Component({
     selector: 'app-popup-host',
     templateUrl: './popup-host.component.html',
     styleUrls: ['./popup-host.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PopupHostComponent {
-    @Input() set template(template: TemplateRef<unknown> | null) {
-        this.updatePopupContent(template);
+export class PopupHostComponent implements OnInit, OnDestroy {
+    protected template: TemplateRef<unknown> | null = null;
+    protected context: unknown = null;
+    private readonly destroy$ = new Subject<void>();
+
+    constructor(readonly popupService: PopupService) {}
+
+    ngOnInit(): void {
+        this.popupService.template$
+            .pipe(
+                tap((data: PopupData | null) => {
+                    if (data === null) {
+                        this.template = null;
+                        this.context = null;
+
+                        return;
+                    }
+
+                    this.template = data.template;
+                    this.context = data.context;
+                }),
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
     }
 
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly
-    @ViewChild('viewport', {read: ViewContainerRef, static: true})
-    private viewportViewContainer: ViewContainerRef | undefined;
-
-    get isViewportClear(): boolean {
-        return !this.viewportViewContainer?.length;
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
-    private updatePopupContent(template: TemplateRef<unknown> | null) {
-        this.viewportViewContainer?.clear();
-
-        if (template) {
-            this.viewportViewContainer?.createEmbeddedView(template);
-        }
+    closePopup() {
+        this.popupService.closePopup();
     }
 }
-
-// @Component({
-//     selector: 'app-popup-host',
-//     templateUrl: './popup-host.component.html',
-//     styleUrls: ['./popup-host.component.css'],
-// })
-// export class PopupHostComponent implements OnChanges {
-//     @Input() template: TemplateRef<unknown> | null = null;
-
-//     @ViewChild('viewport', {read: ViewContainerRef, static: true})
-//     private readonly viewportViewContainer?: ViewContainerRef;
-
-//     ngOnChanges({template}: SimpleChanges) {
-//         if (template) {
-//             this.updatePopupContent(this.template);
-//         }
-//     }
-
-//     private updatePopupContent(template: TemplateRef<unknown> | null) {
-//         this.viewportViewContainer?.clear();
-
-//         if (template) {
-//             this.viewportViewContainer?.createEmbeddedView(template);
-//         }
-//     }
-// }
