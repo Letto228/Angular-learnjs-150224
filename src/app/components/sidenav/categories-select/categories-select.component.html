@@ -10,7 +10,6 @@
             <button
                 *ngFor="let subCategory of category.subCategories"
                 mat-button
-                hideToggle
                 class="sub-catigory"
                 [routerLink]="'/category/' + subCategory._id"
             >
