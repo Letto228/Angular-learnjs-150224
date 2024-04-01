@@ -1,0 +1,26 @@
+<form class="filter">
+    <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input ngModel matInput />
+    </mat-form-field>
+
+    <div *ngIf="brands; else loaderTemplateRef" class="checkbox-container">
+        <mat-checkbox *ngFor="let brand of brands; let index = index">
+            {{ brand }}
+        </mat-checkbox>
+    </div>
+    <div class="price-range">
+        <div>
+            Min
+            <app-counter-input></app-counter-input>
+        </div>
+        <div>
+            Max
+            <app-counter-input></app-counter-input>
+        </div>
+    </div>
+</form>
+
+<ng-template #loaderTemplateRef>
+    <mat-spinner diameter="60" class="loader"></mat-spinner>
+</ng-template>

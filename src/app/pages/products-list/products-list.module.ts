@@ -9,6 +9,9 @@ import {PaginationModule} from '../../shared/pagination/pagination.module';
 import {FilterByPropertyModule} from '../../shared/filter-by-property/filter-by-property.module';
 import {ProductsListRouting} from './products-list-routing.module';
 
+import {FilterModule} from './filter/reactive/filter.module';
+// import {FilterModule} from './filter/template-driven/filter.module';
+
 @NgModule({
     declarations: [ProductsListComponent],
     imports: [
@@ -20,6 +23,7 @@ import {ProductsListRouting} from './products-list-routing.module';
         PaginationModule,
         FilterByPropertyModule,
         ProductsListRouting,
+        FilterModule,
     ],
     exports: [ProductsListComponent],
 })

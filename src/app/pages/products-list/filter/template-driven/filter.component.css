@@ -1,0 +1,27 @@
+:host {
+    display: block;
+    width: 250px;
+}
+
+.filter {
+    position: sticky;
+    top: 10px;
+}
+
+.price-range {
+    display: flex;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 10px 20px;
+    margin-bottom: 10px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.loader {
+    margin: 20px auto;
+    width: 60px;
+}
