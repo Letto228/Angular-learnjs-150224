@@ -6,6 +6,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {FormsModule} from '@angular/forms';
 import {FilterComponent} from './filter.component';
 import {CounterInputModule} from '../../../../shared/counter-input/counter-input.module';
+import {ValidatorsModule} from '../../../../shared/test-validators/directives/validators.module';
 
 @NgModule({
     declarations: [FilterComponent],
@@ -16,6 +17,7 @@ import {CounterInputModule} from '../../../../shared/counter-input/counter-input
         MatProgressSpinnerModule,
         CounterInputModule,
         FormsModule,
+        ValidatorsModule,
     ],
     exports: [FilterComponent],
 })

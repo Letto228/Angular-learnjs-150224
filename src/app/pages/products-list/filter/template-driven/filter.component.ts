@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {IProductsFilter} from '../products-filter.interface';
+import {ProductsFilter} from '../products-filter.interface';
 
 @Component({
     selector: 'app-filter',
@@ -10,5 +10,21 @@ import {IProductsFilter} from '../products-filter.interface';
 export class FilterComponent {
     @Input() brands: string[] | null = null;
 
-    @Output() changeFilter = new EventEmitter<IProductsFilter>();
+    @Output() changeFilter = new EventEmitter<ProductsFilter>();
+
+    onLogFormValue(formValue: {
+        name: string;
+        brands: Record<string, boolean>;
+        priceRange: {min: number; max: number};
+    }) {
+        const sanitizedBrands = this.brands?.length
+            ? this.brands.filter(brand => formValue.brands[brand])
+            : [];
+
+        // eslint-disable-next-line no-console
+        console.log({
+            ...formValue,
+            brands: sanitizedBrands,
+        });
+    }
 }

@@ -1,4 +1,4 @@
-export interface IProductsFilterForm {
+export interface ProductsFilterForm {
     name: string | null;
     brands: Array<boolean | null>;
     priceRange: {

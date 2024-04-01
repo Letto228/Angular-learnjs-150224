@@ -1,4 +1,4 @@
-export interface IProductsFilter {
+export interface ProductsFilter {
     name: string;
     brands: string[];
     priceRange: {
