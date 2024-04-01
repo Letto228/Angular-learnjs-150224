@@ -1,14 +1,8 @@
 <form [formGroup]="form">
     <mat-form-field appearance="fill">
         <mat-label>Search</mat-label>
-        <!-- <input matInput [formControl]="nameControl" /> -->
         <input matInput formControlName="name" />
-        <!-- <input matInput [formControl]="form.get('name')"/> -->
     </mat-form-field>
-
-    <!-- {{this.nameControl.errors?.['isStringValidator'] | json}} -->
-    <!-- {{this.nameControl.errors | json}} -->
-    <!-- {{(error$ | async) | json}} -->
 
     <div *ngIf="brands; else loaderTemplateRef" formArrayName="brands" class="checkbox-container">
         <mat-checkbox *ngFor="let brand of brands; let index = index" [formControlName]="index">

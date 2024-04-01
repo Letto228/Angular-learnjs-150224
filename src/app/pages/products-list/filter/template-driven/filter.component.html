@@ -1,14 +1,10 @@
 <form #ngForm="ngForm" class="filter" (ngSubmit)="onLogFormValue(ngForm.value)">
     <mat-form-field appearance="fill">
         <mat-label>Search</mat-label>
-        <!-- <input #ngModel="ngModel" ngModel matInput appIsStringAsyncValidator [minlength]="3" required /> -->
         <input matInput ngModel name="name" />
     </mat-form-field>
 
-    <!-- {{ngModel.errors | json}} -->
-
     <div *ngIf="brands; else loaderTemplateRef" ngModelGroup="brands" class="checkbox-container">
-        <!-- <mat-checkbox *ngFor="let brand of brands; let index = index" [ngModel]="false" [name]="index.toString()"> -->
         <mat-checkbox
             *ngFor="let brand of brands; let index = index"
             [ngModel]="false"
@@ -29,9 +25,6 @@
     </div>
 
     <button type="submit">Submit</button>
-    <!-- <button type="button" (click)="onLogFormValue(ngForm.value)">
-        Submit
-    </button> -->
 </form>
 
 <ng-template #loaderTemplateRef>

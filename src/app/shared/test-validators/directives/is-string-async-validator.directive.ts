@@ -20,24 +20,11 @@ import {Observable, map, tap, timer} from 'rxjs';
 })
 export class IsStringAsyncValidatorDirective implements AsyncValidator {
     private readonly changeDetectorRef = inject(ChangeDetectorRef);
-    // private readonly service = inject(Service);
     private readonly service = {
         checkControlValue(controlValue: string): Observable<boolean> {
             return timer(3000).pipe(map(() => !!Number(controlValue)));
         },
     };
-
-    // validate(
-    //     this: {
-    //         service: {checkControlValue(controlValue: string): Observable<boolean>};
-    //         changeDetectorRef: ChangeDetectorRef;
-    //     },
-    //     control: AbstractControl,
-    // ): Observable<ValidationErrors | null> {
-    //     // return isStringAsyncValidator.bind(this)(control);
-    //     // return isStringAsyncValidator.apply(this, [control]);
-    //     return isStringAsyncValidator.call(this, control);
-    // }
 
     validate(control: AbstractControl): Observable<ValidationErrors | null> {
         return this.service.checkControlValue(control.value).pipe(
