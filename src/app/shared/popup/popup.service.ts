@@ -6,13 +6,15 @@ import {PopupData} from './popup.interface';
     providedIn: 'root',
 })
 export class PopupService {
-    template$ = new BehaviorSubject<PopupData | null>(null);
+    private readonly templateStore = new BehaviorSubject<PopupData | null>(null);
+
+    readonly template$ = this.templateStore.asObservable();
 
     openPopup(template: TemplateRef<unknown>, context: unknown = null) {
-        this.template$.next({template, context});
+        this.templateStore.next({template, context});
     }
 
     closePopup() {
-        this.template$.next(null);
+        this.templateStore.next(null);
     }
 }

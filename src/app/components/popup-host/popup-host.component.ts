@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
-import {Subject, takeUntil, tap} from 'rxjs';
+import {Subject, takeUntil} from 'rxjs';
 import {PopupService} from '../../shared/popup/popup.service';
 import {PopupData} from '../../shared/popup/popup.interface';
 
@@ -9,29 +9,14 @@ import {PopupData} from '../../shared/popup/popup.interface';
     styleUrls: ['./popup-host.component.css'],
 })
 export class PopupHostComponent implements OnInit, OnDestroy {
-    protected template: TemplateRef<unknown> | null = null;
-    protected context: unknown = null;
+    template: TemplateRef<unknown> | null = null;
+    context: unknown = null;
     private readonly destroy$ = new Subject<void>();
 
     constructor(readonly popupService: PopupService) {}
 
     ngOnInit(): void {
-        this.popupService.template$
-            .pipe(
-                tap((data: PopupData | null) => {
-                    if (data === null) {
-                        this.template = null;
-                        this.context = null;
-
-                        return;
-                    }
-
-                    this.template = data.template;
-                    this.context = data.context;
-                }),
-                takeUntil(this.destroy$),
-            )
-            .subscribe();
+        this.initTemplateSubscription();
     }
 
     ngOnDestroy(): void {
@@ -41,5 +26,21 @@ export class PopupHostComponent implements OnInit, OnDestroy {
 
     closePopup() {
         this.popupService.closePopup();
+    }
+
+    initTemplateSubscription(): void {
+        this.popupService.template$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data: PopupData | null) => {
+                if (data === null) {
+                    this.template = null;
+                    this.context = null;
+
+                    return;
+                }
+
+                this.template = data.template;
+                this.context = data.context;
+            });
     }
 }

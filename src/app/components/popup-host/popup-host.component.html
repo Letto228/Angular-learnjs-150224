@@ -3,6 +3,9 @@
         <button mat-icon-button color="warn" class="closePopup" (click)="closePopup()">
             <mat-icon>close</mat-icon>
         </button>
-        <ng-container [ngTemplateOutlet]="template"></ng-container>
+        <ng-container
+            [ngTemplateOutlet]="template"
+            [ngTemplateOutletContext]="context"
+        ></ng-container>
     </div>
 </div>
