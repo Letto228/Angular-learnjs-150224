@@ -11,7 +11,7 @@
                 *ngFor="let subCategory of category.subCategories"
                 mat-button
                 class="sub-catigory"
-                [routerLink]="'/category/' + subCategory._id"
+                [routerLink]="'/products-list/' + subCategory._id"
             >
                 {{ subCategory.name }}
             </button>

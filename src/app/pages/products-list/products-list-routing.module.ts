@@ -4,6 +4,10 @@ import {ProductsListComponent} from './products-list.component';
 
 const routes: Routes = [
     {
+        path: ':subCategoryId',
+        component: ProductsListComponent,
+    },
+    {
         path: '',
         component: ProductsListComponent,
     },

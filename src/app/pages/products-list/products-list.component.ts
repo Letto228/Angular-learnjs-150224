@@ -12,7 +12,7 @@ import {ProductsStoreService} from '../../shared/products/products-store.service
 })
 export class ProductsListComponent {
     readonly products$ = this.activatedRoute.paramMap.pipe(
-        map(paramMap => paramMap.get('subCategory')),
+        map(paramMap => paramMap.get('subCategoryId')),
         tap(subCategory => {
             this.productsStoreService.loadProducts(subCategory);
         }),
