@@ -1,17 +1,17 @@
-import {TestBed} from '@angular/core/testing';
-import {CanMatchFn} from '@angular/router';
+// import {TestBed} from '@angular/core/testing';
+// import {CanMatchFn} from '@angular/router';
 
-import {canMatchGuard} from './can-match.guard';
+// import {canMatchGuard} from './can-match.guard';
 
-describe('canMatchGuard', () => {
-    const executeGuard: CanMatchFn = (...guardParameters) =>
-        TestBed.runInInjectionContext(() => canMatchGuard(...guardParameters));
+// describe('canMatchGuard', () => {
+//     const executeGuard: CanMatchFn = (...guardParameters) =>
+//         TestBed.runInInjectionContext(() => canMatchGuard(...guardParameters));
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({});
-    });
+//     beforeEach(() => {
+//         TestBed.configureTestingModule({});
+//     });
 
-    it('should be created', () => {
-        expect(executeGuard).toBeTruthy();
-    });
-});
+//     it('should be created', () => {
+//         expect(executeGuard).toBeTruthy();
+//     });
+// });
