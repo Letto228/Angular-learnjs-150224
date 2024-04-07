@@ -11,9 +11,8 @@ import {
     inject,
 } from '@angular/core';
 import {FormBuilder, FormControl} from '@angular/forms';
-import {Observable, Subject, debounceTime, map, takeUntil} from 'rxjs';
+import {Subject, debounceTime, map, takeUntil} from 'rxjs';
 import {ProductsFilter} from '../products-filter.interface';
-import {ProductsFilterForm} from '../products-filter-form.interface';
 
 @Component({
     selector: 'app-filter',
@@ -24,16 +23,7 @@ import {ProductsFilterForm} from '../products-filter-form.interface';
 export class FilterComponent implements OnChanges, OnInit, OnDestroy {
     @Input() brands: string[] | null = null;
     @Input() initialFilter: ProductsFilter | null = null;
-
-    // Output by EventEmitter
-    // ------------------------
     @Output() changeFilter = new EventEmitter<ProductsFilter>();
-    // ------------------------
-    //
-    // Output by stream
-    // ------------------------
-    // @Output() readonly changeFilter: Observable<ProductsFilter>;
-    // ------------------------
 
     private readonly destroy$ = new Subject<void>();
     private readonly formBuilder = inject(FormBuilder);
@@ -47,15 +37,6 @@ export class FilterComponent implements OnChanges, OnInit, OnDestroy {
         }),
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-    constructor() {
-        // Output by stream
-        // ------------------------
-        // Необходимо делать это в конструкторе, т.к. при создании потока нужна уже созданная форма (form)
-        // this.changeFilter = this.getFilterStream$();
-        // ------------------------
-    }
-
     ngOnChanges({brands}: SimpleChanges): void {
         if (brands) {
             this.updateBrandsControl();
@@ -63,20 +44,14 @@ export class FilterComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // Output by EventEmitter
-        // ------------------------
-        this.listenFormChange();
-        // ------------------------
-        this.updateInitialFormValue();
+        this.emitChangeFilter();
+        this.setInitialFormValue();
     }
 
-    // Output by EventEmitter
-    // ------------------------
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
     }
-    // ------------------------
 
     private updateBrandsControl() {
         const savedBrands = this.initialFilter?.brands || [];
@@ -90,49 +65,28 @@ export class FilterComponent implements OnChanges, OnInit, OnDestroy {
         this.form.setControl('brands', brandsFormArray);
     }
 
-    // Output by EventEmitter
-    // ------------------------
-    private listenFormChange() {
-        const changeFormValue$ = this.form.valueChanges as Observable<ProductsFilterForm>;
-
-        changeFormValue$
+    private emitChangeFilter() {
+        this.form.valueChanges
             .pipe(
-                debounceTime(300),
                 map(formValue => ({
                     ...formValue,
                     brands: this.getSelectedBrands(formValue.brands as boolean[]),
                 })),
+                debounceTime(300),
                 takeUntil(this.destroy$),
             )
             .subscribe(filter => {
                 this.changeFilter.emit(filter as ProductsFilter);
             });
     }
-    // ------------------------
 
-    private getSelectedBrands(brandSelection: boolean[]): ProductsFilter['brands'] {
+    private getSelectedBrands(brandSelection: boolean[]): string[] {
         return this.brands ? this.brands.filter((_brand, index) => brandSelection[index]) : [];
     }
 
-    private updateInitialFormValue() {
+    private setInitialFormValue() {
         const {name, priceRange} = this.initialFilter || {};
 
         this.form.patchValue({name, priceRange});
     }
-
-    // Output by stream
-    // ------------------------
-    // private getFilterStream$(): Observable<ProductsFilter> {
-    //     return this.form.valueChanges.pipe(
-    //         map(
-    //             ({brands, name, ...otherValues}) =>
-    //                 ({
-    //                     ...otherValues,
-    //                     name,
-    //                     brands: this.getSelectedBrands(brands as boolean[]),
-    //                 } as ProductsFilter),
-    //         ),
-    //     );
-    // }
-    // ------------------------
 }
