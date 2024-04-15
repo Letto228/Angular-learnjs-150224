@@ -1,5 +1,8 @@
 <div class="popup-host" [class.empty]="isViewportClear">
     <div class="content-wrapper">
-        <ng-container #viewport></ng-container>
+        <button mat-button color="warn" class="popup-host__close-button" (click)="closePopup()">
+            ×
+        </button>
+        <ng-container *ngTemplateOutlet="popupTemplate; context: popupContext"></ng-container>
     </div>
 </div>
