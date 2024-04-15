@@ -16,7 +16,14 @@
 }
 
 .content-wrapper {
+    position: relative;
     padding: 20px;
     border-radius: 8px;
     background-color: #fff;
+}
+
+.popup-host__close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
