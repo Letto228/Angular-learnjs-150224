@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {map} from 'rxjs';
 import {Product} from '../../shared/products/product.interface';
 import {ProductsStoreService} from '../../shared/products/products-store.service';
 
@@ -11,14 +12,21 @@ import {ProductsStoreService} from '../../shared/products/products-store.service
 })
 export class ProductsListComponent implements OnInit {
     readonly products$ = this.productsStoreService.products$;
+    private subcategory = '';
 
     constructor(
         private readonly productsStoreService: ProductsStoreService,
         private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute,
     ) {}
 
     ngOnInit(): void {
-        this.productsStoreService.loadProducts();
+        this.activatedRoute.paramMap
+            .pipe(map(paramsMap => paramsMap.get('subcategory')))
+            .subscribe(subcategory => {
+                this.subcategory = subcategory || '';
+                this.productsStoreService.loadProducts(this.subcategory);
+            });
     }
 
     onProductBuy(id: Product['_id']) {
